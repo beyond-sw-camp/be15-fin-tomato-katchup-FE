@@ -72,9 +72,6 @@ function navigate(target) {
 .logo-button img {
   height: 220px;
   -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
 }
 
 .nav-menu {
@@ -89,39 +86,6 @@ function navigate(target) {
   font-size: var(--tmt-font-size-lg);
   font-weight: var(--tmt-font-weight-semibold);
   cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  text-align: center;
-  background-color: black;
-  padding: 8px 0;
-  border-radius: 4px;
-  width: 100px;
-  min-width: 120px;
-  z-index: 20;
-}
-.dropdown-menu button {
-  all: unset;
-  display: block;
-  width: 100%;
-  padding: 12px 0;
-  font-size: 1rem;
-  text-align: center;
-  color: #d4c56f;
-  cursor: pointer;
-}
-.dropdown-menu button:hover {
-  background-color: #333;
-}
-.dropdown:hover .dropdown-menu {
-  display: block;
 }
 </style>
 
