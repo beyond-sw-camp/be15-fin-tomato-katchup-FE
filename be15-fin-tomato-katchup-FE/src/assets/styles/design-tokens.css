@@ -1,0 +1,82 @@
+:root {
+  /* === Colors === */
+  /* 기본 색상 */
+  --tmt-color-background: #F4F7FA;
+  --tmt-color-header-text: #FF5894;
+  --tmt-color-click: #00274A;
+  --tmt-color-dropdown: #9197B3;
+
+  --tmt-color-gray-light: #EAEAEA;
+  --tmt-color-gray-medium: #BFBFBF;
+  --tmt-color-gray-dark: #828282;
+
+  /*  파이프라인 색상 */
+  --tmt-color-planning: #FFD586;
+  --tmt-color-list-up: #FFA486;
+  --tmt-color-proposal: #F2A1DB;
+  --tmt-color-quotation: #FF787D;
+  --tmt-color-negotiation: #83D4FF;
+  --tmt-color-contract: #D57EEB;
+  --tmt-color-aftercare: #A18CD1;
+
+  /* 요청, 완료, 거절, 보류 */
+  --tmt-color-request: #3E7BFF;
+  --tmt-color-complete: #2ECE36;
+  --tmt-color-reject: #FF6D6D;
+  --tmt-color-on-hold: #FFD000;
+
+  /* 버튼 색상 */
+  --tmt-color-btn-yellow: #FFD000;
+  --tmt-color-btn-sky: #A3D8FF;
+  --tmt-color-btn-blue: #BAC9FF;
+  --tmt-color-btn-gray: #A8C1DA;
+
+  /* 그래프 색상 */
+  --tmt-color-gender-male: #A2C9F4;
+  --tmt-color-gender-female: #F6A6B2;
+  --tmt-color-graph-bar: #5F38E9;
+  --tmt-color-graph-line: #328E6F;
+
+  /* === Font Family === */
+  --tmt-font-family-default: 'Pretendard', sans-serif;
+
+  /* === Font Sizes === */
+  --tmt-font-size-sm: 16px;
+  --tmt-font-size-md: 18px;
+  --tmt-font-size-lg: 20px;
+
+  /* === Font Weights === */
+  --tmt-font-weight-regular: 400;
+  --tmt-font-weight-medium: 500;
+  --tmt-font-weight-semibold: 600;
+  --tmt-font-weight-bold: 700;
+
+  /* === 조합 === */
+  --tmt-body-regular-sm: var(--tmt-font-size-sm) / var(--tmt-font-weight-regular);
+  --tmt-body-medium-sm: var(--tmt-font-size-sm) / var(--tmt-font-weight-medium);
+  --tmt-body-semibold-sm: var(--tmt-font-size-sm) / var(--tmt-font-weight-semibold);
+
+  --tmt-body-regular-md: var(--tmt-font-size-md) / var(--tmt-font-weight-regular);
+  --tmt-body-medium-md: var(--tmt-font-size-md) / var(--tmt-font-weight-medium);
+  --tmt-body-semibold-md: var(--tmt-font-size-md) / var(--tmt-font-weight-semibold);
+
+  --tmt-body-regular-lg: var(--tmt-font-size-lg) / var(--tmt-font-weight-regular);
+  --tmt-body-medium-lg: var(--tmt-font-size-lg) / var(--tmt-font-weight-medium);
+  --tmt-body-semibold-lg: var(--tmt-font-size-lg) / var(--tmt-font-weight-semibold);
+
+  /* === Button === */
+  /* === 버튼 === */
+  --tmt-btn-width: 461px;
+  --tmt-btn-height: 56px;
+  --tmt-btn-font-size: 20px;
+  --tmt-btn-radius: 4px;
+  --tmt-btn-bg: #FFD586;
+
+  /* === 폼 입력 크기 === */
+  --tmt-input-height: 44px;
+
+  /* === 그림자 효과 === */
+  --inner-shdow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --drop-shdow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
