@@ -1,5 +1,64 @@
-@import './design-tokens.css';
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Pretendard", sans-serif;
+
+  /* Color tokens */
+  --color-background: #F4F7FA;
+  --color-header-text: #FF5894;
+  --color-click: #00274A;
+  --color-dropdown: #9197B3;
+
+  --color-gray-light: #EAEAEA;
+  --color-gray-medium: #BFBFBF;
+  --color-gray-dark: #828282;
+
+  --color-badge-black: #5C5C5C;
+
+  --color-pipeline-chance: #FFD586;
+  --color-pipeline-list-up: #FFA486;
+  --color-pipeline-proposal: #F2A1DB;
+  --color-pipeline-quotation: #FF787D;
+  --color-pipeline-negotiation: #83D4FF;
+  --color-pipeline-contract: #D57EEB;
+  --color-pipeline-aftercare: #A18CD1;
+
+  --color-request: #3E7BFF;
+  --color-complete: #2ECE36;
+  --color-reject: #FF6D6D;
+  --color-onhold: #FFD000;
+
+  --color-btn-yellow: #FFD000;
+  --color-btn-sky: #A3D8FF;
+  --color-btn-blue: #BAC9FF;
+  --color-btn-gray: #A8C1DA;
+
+  --color-gender-male: #A2C9F4;
+  --color-gender-female: #F6A6B2;
+  --color-graph-bar: #5F38E9;
+  --color-graph-line: #328E6F;
+
+  /* Font size tokens */
+  --text-sm: 16px;
+  --text-md: 18px;
+  --text-lg: 20px;
+  --text-btn: 20px;
+
+  /* Font weight tokens */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Spacing tokens */
+  --spacing-btn-width: 461px;
+  --spacing-btn-height: 56px;
+  --spacing-input-height: 44px;
+  --spacing-btn-radius: 4px;
+
+  /* Box shadow tokens */
+  --box-shadow-inner: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --box-shadow-drop: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
