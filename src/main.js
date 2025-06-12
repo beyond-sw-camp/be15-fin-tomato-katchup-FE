@@ -14,6 +14,13 @@ async function bootstrap() {
   app.use(router)
   app.use(Toast)
 
+  // if(import.meta.env.NODE_ENV === 'deployment'){
+    console.log("!!!!!");
+    const { worker } = await import('@/mocks/api/browser.js')
+    await worker.start()
+
+  // }
+
   app.mount('#app')
 }
 
