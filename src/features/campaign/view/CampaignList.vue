@@ -1,36 +1,62 @@
-<script setup>
-import { ref, onMounted } from 'vue'
-import api from '@/plugin/axios.js'
-
-const campaigns = ref([])
-const isLoading = ref(true)
-
-onMounted(async () => {
-  try {
-    const response = await api.get(`/campaign`, {
-      params: { page: 1, size: 10 }
-    })
-    campaigns.value = response.data.data
-  } catch (error) {
-    console.error('API 호출 실패:', error)
-  } finally {
-    isLoading.value = false
-  }
-})
-</script>
-
 <template>
-  <div>
-    <h2>Campaign List</h2>
-    <div v-if="isLoading">Loading...</div>
-    <ul v-else>
-      <li v-for="campaign in campaigns" :key="campaign.id">
-        {{ campaign.title }} ({{ campaign.clientCompany }})
-      </li>
-    </ul>
-  </div>
+    <div class="container">
+        <div class="header">
+            <div>(검색결과: {{ total }}건)</div>
+        </div>
+        <PipelineCard :campaigns="campaigns" :pipelineSteps="pipelineSteps" />
+
+        <div class="pagination">
+            <button @click="prevPage" :disabled="page === 1">이전</button>
+            <span>Page {{ page }}</span>
+            <button @click="nextPage" :disabled="page >= totalPages">다음</button>
+        </div>
+    </div>
 </template>
 
-<style scoped>
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+import { getCampaignList } from '@/features/campaign/api.js';
+import PipelineCard from '@/features/campaign/components/PipelineCard.vue';
 
-</style>
+const campaigns = ref([]);
+const page = ref(1);
+const size = ref(10);
+const total = ref(0);
+
+const pipelineSteps = [
+    { key: 'chance', label: '기획' },
+    { key: 'listUp', label: '리스트업' },
+    { key: 'proposal', label: '제안' },
+    { key: 'negotiation', label: '협상' },
+];
+
+const totalPages = computed(() => Math.ceil(total.value / size.value));
+
+const fetchCampaigns = async () => {
+    const res = await getCampaignList(page.value, size.value);
+    campaigns.value = res.data.data;
+    total.value = res.data.total;
+};
+
+onMounted(async () => {
+    await fetchCampaigns();
+});
+
+const prevPage = () => {
+    if (page.value > 1) {
+        page.value--;
+        fetchCampaigns();
+    }
+};
+
+const nextPage = () => {
+    if (page.value < totalPages.value) {
+        page.value++;
+        fetchCampaigns();
+    }
+};
+
+const formatPrice = (price) => price.toLocaleString();
+</script>
+
+<style scoped></style>
