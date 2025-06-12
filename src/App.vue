@@ -1,8 +1,8 @@
 <script setup>
-import Header from '@/components/layout/Header.vue';
-import { useRoute } from 'vue-router';
+import Header from '@/components/layout/Header.vue'
+import { useRoute } from 'vue-router'
 
-const route = useRoute();
+const route = useRoute()
 </script>
 
 <template>
