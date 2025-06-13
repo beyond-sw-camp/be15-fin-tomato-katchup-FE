@@ -40,14 +40,15 @@
       />
       <div class="flex-1">
         <div class="flex items-center gap-1 text-base font-medium mb-1">
-          <img :src="youtubeIcon" class="w-[18px] h-[18px]" alt="youtube" />
+          <Icon icon="logos:youtube-icon" class="w-7 h-6" />
           <span class="font-bold text-[color:var(--color-click)]">{{ name }}</span>
         </div>
         <div class="text-sm text-[color:var(--color-gray-dark)] mb-1">
           {{ subscribers }}
         </div>
         <div class="flex items-center gap-1 text-base font-medium mb-1">
-          <img :src="instagramIcon" class="w-[18px] h-[18px]" alt="instagram" />
+<!--          <img :src="instagramIcon" class="w-[18px] h-[18px]" alt="instagram" />-->
+          <Icon icon="skill-icons:instagram" class="w-7 h-6" />
           <span class="font-bold">{{ instagram }}</span>
         </div>
         <div class="text-sm text-[color:var(--color-gray-dark)] mb-2">
@@ -64,7 +65,8 @@
 
     <!-- 작성자 정보 -->
     <div class="flex items-center gap-1 text-sm text-[color:var(--color-gray-dark)] mt-auto pl-[2px]">
-      <img :src="userIcon" class="w-5 h-5" alt="owner icon" />
+<!--      <img :src="userIcon" class="w-5 h-5" alt="owner icon" />-->
+      <Icon icon="tdesign:user" class="w-4 h-4" />
       <span>{{ ownerName }}</span>
     </div>
   </div>
@@ -74,8 +76,8 @@
 import { ref } from 'vue'
 import youtubeIcon from '@/assets/icons/youtube.png'
 import instagramIcon from '@/assets/icons/instagram.jpg'
-import userIcon from '@/assets/icons/user.svg'
 import defaultThumbnail from '@/assets/icons/logo.png'
+import { Icon } from '@iconify/vue';
 
 // Props
 const props = defineProps({
