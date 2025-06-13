@@ -52,28 +52,38 @@
                     </div>
                 </div>
             </div>
-            <div class="campaign-info text-md text-gray-dark">
-                <span class="client-company mr-2">{{ campaign.clientCompany }}</span>
-                <span class="bar mx-2">|</span>
-                <span class="client-name mx-2"
-                    >{{ campaign.clientManagerName }} {{ campaign.clientManagerPosition }}</span
+            <div class="campaign-info text-md text-gray-dark flex flex-wrap">
+                <span class="client-company mr-2 flex items-center"
+                    ><Icon icon="mdi:account-check" width="24" height="24" class="mr-2" />{{
+                        campaign.clientCompany
+                    }}
+                    {{ campaign.clientManagerName }} {{ campaign.clientManagerPosition }}</span
                 >
                 <span class="bar mx-2">|</span>
-                <span class="client-name mx-2">{{ formatPrice(campaign.price) }}</span>
-                <span class="bar mx-2">|</span>
-                <span class="campaign-term mx-2"
-                    >{{ campaign.startDate }} ~ {{ campaign.endDate }}</span
+                <span class="client-name mx-2 flex items-center"
+                    ><Icon icon="mdi:coins" width="24" height="24" class="mr-2" />{{
+                        formatPrice(campaign.price)
+                    }}</span
                 >
                 <span class="bar mx-2">|</span>
-                <span class="username ml-2">
-                    {{ campaign.username }} {{ campaign.userPosition }}</span
+                <span class="campaign-term mx-2 flex items-center">
+                    <Icon icon="mdi:calendar-blank" width="24" height="24" class="mr-2" />{{
+                        campaign.startDate
+                    }}
+                    ~ {{ campaign.endDate }}</span
                 >
-                <!--                {{ campaign.clientCompany }}{{ campaign.clientManagerName }} ({{-->
-                <!--                    campaign.clientManagerRole-->
-                <!--                }})<br />-->
-                <!--                ₩{{ formatPrice(campaign.price) }}<br />-->
-                <!--                기간: {{ campaign.startDate }} ~ {{ campaign.endDate }}-->
-                <div class="produce-name">{{ campaign.productName }}</div>
+                <span class="bar mx-2">|</span>
+                <span class="username ml-2 flex items-center">
+                    <Icon icon="mdi:person-box" width="24" height="24" class="mr-2" />{{
+                        campaign.username
+                    }}
+                    {{ campaign.userPosition }}</span
+                >
+                <div class="produce-name w-full flex items-center">
+                    <Icon icon="ant-design:product-filled" width="24" height="24" class="mr-2" />{{
+                        campaign.productName
+                    }}
+                </div>
             </div>
         </div>
     </div>
@@ -81,7 +91,7 @@
 
 <script setup>
 import CampaignBadge from '@/components/common/CampaignBadge.vue';
-
+import { Icon } from '@iconify/vue';
 const { campaigns } = defineProps({
     campaigns: {
         type: Array,
