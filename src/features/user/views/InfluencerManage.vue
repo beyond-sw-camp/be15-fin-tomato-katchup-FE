@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import InfluencerCard from '@/components/common/InfluencerCard.vue'
+import InfluencerFormModal from '../components/InfluencerFormModal.vue'
 import { getMockInfluencers } from '@/features/user/api.js'
 
 const influencers = ref([])
@@ -34,10 +35,14 @@ onMounted(async () => {
         :ownerName="card.ownerName"
         :thumbnail="card.thumbnail"
       />
-      <div class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer">
+      <div
+        class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
+        @click="openModal"
+      >
         +
       </div>
     </div>
+    <InfluencerFormModal v-if="isModalOpen" @close="closeModal" />
   </div>
 </template>
 
