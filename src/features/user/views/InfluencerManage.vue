@@ -21,7 +21,7 @@ onMounted(async () => {
 
 <template>
   <div class="p-6">
-    <h2 class="text-lg font-bold mb-5">인플루언서 - 관리</h2>
+    <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
     <div class="flex flex-wrap gap-5 items-stretch">
       <InfluencerCard
         v-for="card in influencers"
@@ -34,8 +34,7 @@ onMounted(async () => {
         :ownerName="card.ownerName"
         :thumbnail="card.thumbnail"
       />
-      <div class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
-        @click="openModal">
+      <div class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer">
         +
       </div>
     </div>
