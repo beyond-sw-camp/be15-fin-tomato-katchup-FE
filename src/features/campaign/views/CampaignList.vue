@@ -1,9 +1,18 @@
 <template>
     <div class="container">
-        <div class="header">
-            <div>(검색결과: {{ total }}건)</div>
+        <div class="header mb-4">
+            <div class="flex justify-between items-center">
+                <span>(검색결과: {{ total }}건)</span>
+                <button
+                    class="px-4 py-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition"
+                >
+                    등록
+                </button>
+            </div>
+            <div class="w-full h-px bg-gray-300 my-4"></div>
         </div>
-        <PipelineCard :campaigns="campaigns" :pipelineSteps="pipelineSteps" />
+
+        <PipelineCard :campaigns="campaigns" />
 
         <div class="pagination">
             <button @click="prevPage" :disabled="page === 1">이전</button>
@@ -22,13 +31,6 @@ const campaigns = ref([]);
 const page = ref(1);
 const size = ref(10);
 const total = ref(0);
-
-const pipelineSteps = [
-    { key: 'chance', label: '기획' },
-    { key: 'listUp', label: '리스트업' },
-    { key: 'proposal', label: '제안' },
-    { key: 'negotiation', label: '협상' },
-];
 
 const totalPages = computed(() => Math.ceil(total.value / size.value));
 
@@ -55,8 +57,6 @@ const nextPage = () => {
         fetchCampaigns();
     }
 };
-
-const formatPrice = (price) => price.toLocaleString();
 </script>
 
 <style scoped></style>

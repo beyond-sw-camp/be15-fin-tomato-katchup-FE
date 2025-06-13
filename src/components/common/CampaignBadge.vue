@@ -5,15 +5,15 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue'
+import { computed, defineProps } from 'vue';
 
 const { status, label } = defineProps({
     status: { type: String, required: true },
     label: { type: String, required: true },
-})
+});
 
 const badgeClass = computed(() => {
-    const base = 'inline-block px-3 py-1 rounded-lg text-white text-sm font-medium'
+    const base = 'inline-block px-3 py-1 rounded-badge text-white text-sm font-semibold mr-2';
 
     const colorMap = {
         진행중: 'bg-request',
@@ -21,8 +21,8 @@ const badgeClass = computed(() => {
         보류: 'bg-onhold',
         거절: 'bg-reject',
         default: 'bg-badge-black',
-    }
+    };
 
-    return `${base} ${colorMap[status] ?? colorMap.default}`
-})
+    return `${base} ${colorMap[status] ?? colorMap.default}`;
+});
 </script>
