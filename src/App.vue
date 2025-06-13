@@ -6,10 +6,10 @@ const route = useRoute()
 </script>
 
 <template>
-  <div id="app">
+  <div class="w-full min-h-screen bg-background flex flex-col font-sans">
     <Header />
-    <div class="layout">
-      <router-view class="router-content" />
+    <div class="flex flex-1 flex-col p-16">
+      <router-view class="flex-1 w-full" />
     </div>
   </div>
 </template>
@@ -19,27 +19,5 @@ const route = useRoute()
 
 * {
   font-family: 'Pretendard Variable', sans-serif;
-}
-
-#app {
-  width: 100%;
-  min-height: 100vh;
-  background-color: var(--tmt-color-background);
-  display: flex;
-  flex-direction: column;
-}
-
-.layout {
-  flex: 1;
-  padding: 64px 32px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  margin: 64px;
-}
-
-.router-content {
-  flex: 1;
-  width: 100%;
 }
 </style>
