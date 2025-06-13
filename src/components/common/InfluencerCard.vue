@@ -74,8 +74,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import youtubeIcon from '@/assets/icons/youtube.png'
-import instagramIcon from '@/assets/icons/instagram.jpg'
+// import youtubeIcon from '@/assets/icons/youtube.png'
+// import instagramIcon from '@/assets/icons/instagram.jpg'
 import defaultThumbnail from '@/assets/icons/logo.png'
 import { Icon } from '@iconify/vue';
 
