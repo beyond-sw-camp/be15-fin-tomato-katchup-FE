@@ -7,6 +7,7 @@ import { chatRoutes } from '@/features/chat/router'
 import { contractRoutes } from '@/features/contract/router'
 import { dashboardRoutes } from '@/features/dashboard/router'
 import { userRoutes } from '@/features/user/router'
+import { myPageRoutes } from '@/features/mypage/router.js';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -19,6 +20,7 @@ const router = createRouter({
     ...contractRoutes,
     ...dashboardRoutes,
     ...userRoutes,
+    ...myPageRoutes,
     // 아래로 쭉 추가해주세요
   ],
   scrollBehavior() {
