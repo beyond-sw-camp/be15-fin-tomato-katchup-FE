@@ -16,7 +16,7 @@
         </div>
 
         <!-- 등록 버튼 -->
-        <button class="bg-[var(--color-btn-gray)] text-black text-sm font-medium py-2 px-4 rounded hover:bg-[var(--color-gray-light)] transition">
+        <button class="bg-[var(--color-btn-gray)] text-white text-sm font-medium py-1 px-4 rounded hover:bg-[var(--color-gray-light)] transition">
           등록
         </button>
       </div>
