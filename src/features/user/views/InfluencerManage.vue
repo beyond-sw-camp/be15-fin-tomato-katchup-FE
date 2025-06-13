@@ -4,6 +4,14 @@ import InfluencerCard from '@/components/common/InfluencerCard.vue'
 import { getMockInfluencers } from '@/features/user/api.js'
 
 const influencers = ref([])
+const isModalOpen = ref(false)
+
+const openModal = () => {
+  isModalOpen.value = true
+}
+const closeModal = () => {
+  isModalOpen.value = false
+}
 
 onMounted(async () => {
   const { data } = await getMockInfluencers()
@@ -12,9 +20,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="wrapper">
-    <h2 class="title">인플루언서 - 관리</h2>
-    <div class="card-list">
+  <div class="p-6">
+    <h2 class="text-lg font-bold mb-5">인플루언서 - 관리</h2>
+    <div class="flex flex-wrap gap-5 items-stretch">
       <InfluencerCard
         v-for="card in influencers"
         :key="card.id"
@@ -26,48 +34,17 @@ onMounted(async () => {
         :ownerName="card.ownerName"
         :thumbnail="card.thumbnail"
       />
-      <div class="add-card">+</div>
+      <div class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
+        @click="openModal">
+        +
+      </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.wrapper {
-  padding: 24px;
-}
-
-.title {
-  font-size: var(--tmt-font-size-lg);
-  font-weight: var(--tmt-font-weight-bold);
-  margin-bottom: 20px;
-}
-
-.card-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: stretch;
-}
-
-.add-card {
-  width: 405px;
-  min-height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--tmt-color-gray-light);
-  border-radius: 12px;
-  background-color: white;
-  font-size: 32px;
-  color: var(--tmt-color-gray-medium);
-  cursor: pointer;
-}
-
-.tag-line {
-  font-size: var(--tmt-font-size-sm);
-  line-height: 1.5;
-  white-space: normal;
-  word-break: break-word;
-  margin-top: 4px;
-}
+<style>
+/*.tag-line {
+  @apply text-sm leading-[1.5] whitespace-normal break-words mt-1;
+  color: #000;
+}*/
 </style>
