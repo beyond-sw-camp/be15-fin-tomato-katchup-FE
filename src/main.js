@@ -6,6 +6,7 @@ import router from './router';
 import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 import './assets/styles/tailwind.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 async function bootstrap() {
     const app = createApp(App);
