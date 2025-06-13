@@ -6,7 +6,7 @@
       <!-- 유튜브 / 인스타 연동 -->
       <div class="flex flex-col gap-3 mb-6">
         <!-- 유튜브 -->
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-start">
           <div class="w-[85%]">
             <label class="text-sm font-medium mb-1 block">유튜브명</label>
             <input
@@ -35,7 +35,7 @@
         </div>
 
         <!-- 인스타그램 -->
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-start">
           <div class="w-[85%]">
             <label class="text-sm font-medium mb-1 block">인스타그램 아이디</label>
             <input
