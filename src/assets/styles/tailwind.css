@@ -67,7 +67,7 @@
 
 @layer components {
   .container {
-    @apply px-4 py-5 rounded-2xl;
+    @apply px-4 py-5 rounded-2xl bg-white;
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
 }
