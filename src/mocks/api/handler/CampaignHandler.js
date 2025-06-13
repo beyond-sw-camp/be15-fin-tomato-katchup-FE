@@ -1,24 +1,37 @@
 import { http, HttpResponse } from 'msw';
 
-const campaignList = Array.from({ length: 50 }, (_, index) => ({
-    id: index + 1,
-    status: '진행중',
-    title: `Campaign ${index + 1}`,
-    clientCompany: `Company ${index + 1}`,
-    clientManagerName: `김동영 ${index + 1}`,
-    clientManagerRole: '팀장',
-    price: index * 1000,
-    startDate: new Date().getFullYear() + index,
-    endDate: new Date().getFullYear() + index + 30,
-    username: '정재현',
-    productName: `Product ${index + 1}`,
-    pipeLine: {
-        chance: { date: new Date().getFullYear() + index + 2 },
-        listUp: { date: new Date().getFullYear() + index + 3 },
-        proposal: { date: new Date().getFullYear() + index + 4 },
-        negotiation: { date: new Date().getFullYear() + index + 5 },
-    },
-}));
+const formatDate = (date) => {
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    return `${yyyy}.${mm}.${dd}`;
+};
+
+const campaignList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index); // 기준 연도 설정
+
+    return {
+        id: index + 1,
+        status: '진행중',
+        title: `Campaign ${index + 1}`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: `김동영${index + 1}`,
+        clientManagerPosition: '팀장',
+        price: index * 1000,
+        startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
+        username: '정재현',
+        userPosition: '과장',
+        productName: `Product ${index + 1}`,
+        pipeLine: {
+            chance: { date: formatDate(new Date(baseDate.getFullYear(), 2, 20)) },
+            listUp: { date: formatDate(new Date(baseDate.getFullYear(), 2, 23)) },
+            proposal: { date: formatDate(new Date(baseDate.getFullYear(), 2, 25)) },
+            negotiation: { date: formatDate(new Date(baseDate.getFullYear(), 2, 27)) },
+        },
+    };
+});
 
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
