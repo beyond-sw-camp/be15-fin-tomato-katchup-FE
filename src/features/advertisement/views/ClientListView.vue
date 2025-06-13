@@ -5,10 +5,24 @@
 
     <!-- 본문 영역 -->
     <div class="flex flex-col flex-1 container bg-white">
-      <div class="mt-6 mb-4 text-lg font-bold text-black ml-4">
-        고객사 목록
-        <span class="text-sm font-normal text-gray-medium">(검색 결과: {{ totalCount }}건)</span>
+
+      <!-- 제목 + 등록 버튼 -->
+      <div class="flex items-center justify-between mt-6 mb-4 px-4">
+        <div class="text-lg font-bold text-black">
+          고객사 목록
+          <span class="text-sm font-normal text-gray-medium">
+            (검색 결과: {{ totalCount }}건)
+          </span>
+        </div>
+
+        <!-- 등록 버튼 -->
+        <button class="bg-[var(--color-btn-gray)] text-black text-sm font-medium py-2 px-4 rounded hover:bg-[var(--color-gray-light)] transition">
+          등록
+        </button>
       </div>
+
+      <!-- 회색 구분선 -->
+      <div class="h-[1px] bg-gray-200 mb-6 mx-4"></div>
 
       <!-- 카드 리스트 -->
       <div class="grid grid-cols-2 gap-x-6 gap-y-6 px-4">
