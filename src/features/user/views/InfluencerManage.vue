@@ -34,6 +34,19 @@ onMounted(async () => {
   const { data } = await getMockInfluencers()
   influencers.value = data.data
 })
+
+const saveInfluencer = (updated) => {
+  const index = influencers.value.findIndex((i) => i.id === updated.id)
+
+  if (index !== -1) {
+    // 수정
+    influencers.value[index] = updated
+  } else {
+    // 신규 추가
+    influencers.value.push(updated)
+  }
+}
+
 </script>
 
 <template>
@@ -70,6 +83,7 @@ onMounted(async () => {
       v-if="isModalOpen"
       :initialData="selectedInfluencer"
       @close="closeModal"
+      @save="saveInfluencer"
     />
   </div>
 </template>

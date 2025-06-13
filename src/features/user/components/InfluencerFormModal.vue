@@ -145,7 +145,7 @@ import { ref, watch, onMounted } from 'vue'
 const props = defineProps({
   initialData: Object
 })
-
+const emit = defineEmits(['close', 'save'])
 const form = ref({
   youtubeName: '',
   instagramId: '',
@@ -154,6 +154,22 @@ const form = ref({
   region: '',
   fee: ''
 })
+const handleSave = () => {
+  const data = {
+    id: props.initialData?.id ?? Date.now(), // 수정이면 기존 id, 아니면 새로 생성
+    name: form.value.youtubeName,
+    instagram: form.value.instagramId,
+    gender: form.value.gender,
+    region: form.value.region,
+    fee: form.value.fee,
+    ownerName: form.value.manager,
+    tags: selectedTags.value,
+    thumbnail: '/src/assets/icons/logo.png' // 기본 이미지 또는 실제 구현된 이미지
+  }
+
+  emit('save', data)
+  emit('close')
+}
 
 onMounted(() => {
   if (props.initialData) {
@@ -163,8 +179,13 @@ onMounted(() => {
     form.value.manager = props.initialData.ownerName || ''
     form.value.region = props.initialData.region || ''
     form.value.fee = props.initialData.fee || ''
+
+    // 🔥 태그 복원 추가
+    selectedTags.value = props.initialData.tags?.slice() || []
+    availableTags.value = allTags.filter(tag => !selectedTags.value.includes(tag))
   }
 })
+
 
 const youtubeToggle = ref(false)
 const instagramToggle = ref(false)
