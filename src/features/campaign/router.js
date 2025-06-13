@@ -7,4 +7,13 @@ export const campaignRoutes = [
             layout: 'none',
         },
     },
+
+    {
+        path: '/sales/proposal',
+        name: 'proposalList',
+        component: () => import('@/features/campaign/views/ProposalList.vue'),
+        meta: {
+            layout: 'noe',
+        },
+    },
 ];
