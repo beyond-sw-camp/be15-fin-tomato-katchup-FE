@@ -109,7 +109,7 @@ function selectSubMenu(menu, subMenu) {
         </div>
 
         <!-- 유저 패널 -->
-        <div class="flex items-center gap-10 mr-5">
+        <div class="flex items-center gap-10 mr-5 cursor-pointer" @click="router.push('/mypage')" >
           <div class="flex items-center gap-3">
             <img class="w-10 h-10 rounded-full" src="@/assets/icons/profile.png" alt="프로필" />
             <div class="flex flex-col text-sm">
@@ -137,7 +137,7 @@ function selectSubMenu(menu, subMenu) {
           :key="subLabel"
           @click="selectSubMenu(hoveredMenu || selectedMenu, subLabel)"
           :class="[
-              'transition-colors duration-200 hover:text-header-text',
+              'transition-colors duration-200 hover:text-header-text' ,
               'w-max',
               selectedSubMenu === subLabel ? 'text-header-text' : 'text-gray-light'
           ]"
