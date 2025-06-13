@@ -41,7 +41,7 @@
         <div class="text-sm text-gray-dark mb-1">{{ subscribers }}</div>
         <div class="flex items-center gap-1 text-base font-medium mb-1">
           <img :src="instagramIcon" class="w-[18px] h-[18px]" alt="instagram" />
-          <span class="font-bold">@{{ instagram }}</span>
+          <span class="font-bold">{{ instagram }}</span>
         </div>
         <div class="text-sm text-gray-dark mb-2">{{ instaFollowers }}</div>
 
