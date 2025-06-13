@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import InfluencerCard from '@/components/common/InfluencerCard.vue'
 import InfluencerFormModal from '../components/InfluencerFormModal.vue'
+import CommonFiltering from "@/components/layout/CommonFiltering.vue";
 import { getMockInfluencers } from '@/features/user/api.js'
 
 const influencers = ref([])
@@ -50,40 +51,46 @@ const saveInfluencer = (updated) => {
 </script>
 
 <template>
-  <div class="p-6">
-    <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
-    <div class="flex flex-wrap gap-5 items-stretch">
-      <!-- 카드 반복 -->
-      <InfluencerCard
-        v-for="card in influencers"
-        :key="card.id"
-        :id="card.id"
-        :name="card.name"
-        :subscribers="card.subscriberCount"
-        :instagram="card.instagram"
-        :instaFollowers="card.instaFollowers"
-        :tags="card.tags"
-        :ownerName="card.ownerName"
-        :thumbnail="card.thumbnail"
-        @edit="openModalWithData"
-        @delete="deleteInfluencer"
-      />
+  <div class="w-full min-h-screen bg-background flex font-sans">
+    <!-- ✅ 왼쪽 필터 사이드바 -->
+    <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
 
-      <!-- + 버튼 -->
-      <div
-        class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
-        @click="openModal"
-      >
-        +
+    <!-- ✅ 오른쪽 인플루언서 카드 및 모달 영역 -->
+    <div class="flex-1 p-6">
+      <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
+
+      <div class="flex flex-wrap gap-5 items-stretch">
+        <InfluencerCard
+          v-for="card in influencers"
+          :key="card.id"
+          :id="card.id"
+          :name="card.name"
+          :subscribers="card.subscriberCount"
+          :instagram="card.instagram"
+          :instaFollowers="card.instaFollowers"
+          :tags="card.tags"
+          :ownerName="card.ownerName"
+          :thumbnail="card.thumbnail"
+          @edit="openModalWithData"
+          @delete="deleteInfluencer"
+        />
+
+        <!-- + 버튼 -->
+        <div
+          class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
+          @click="openModal"
+        >
+          +
+        </div>
       </div>
-    </div>
 
-    <!-- 모달 연결 -->
-    <InfluencerFormModal
-      v-if="isModalOpen"
-      :initialData="selectedInfluencer"
-      @close="closeModal"
-      @save="saveInfluencer"
-    />
+      <!-- 모달 -->
+      <InfluencerFormModal
+        v-if="isModalOpen"
+        :initialData="selectedInfluencer"
+        @close="closeModal"
+        @save="saveInfluencer"
+      />
+    </div>
   </div>
 </template>
