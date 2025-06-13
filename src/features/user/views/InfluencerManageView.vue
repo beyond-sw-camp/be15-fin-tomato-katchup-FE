@@ -52,13 +52,10 @@ const saveInfluencer = (updated) => {
 
 <template>
   <div class="w-full min-h-screen bg-background flex font-sans">
-    <!-- ✅ 왼쪽 필터 사이드바 -->
-    <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
+      <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
 
-    <!-- ✅ 오른쪽 인플루언서 카드 및 모달 영역 -->
-    <div class="flex-1 p-6">
+      <div class="container">
       <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
-
       <div class="flex flex-wrap gap-5 items-stretch">
         <InfluencerCard
           v-for="card in influencers"
