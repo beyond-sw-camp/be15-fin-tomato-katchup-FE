@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from 'vue';
 import InfluencerCard from '@/components/common/InfluencerCard.vue'
 import CommonFiltering from '@/components/layout/CommonFiltering.vue';
-import Category from '@/features/influencer/components/Category.vue';
+import InfluencerCategory from '@/features/influencer/components/InfluencerCategory.vue';
 import PagingBar from '@/components/common/PagingBar.vue';
 
 const influencerList = ref([])
@@ -66,7 +66,7 @@ const paginatedList = computed(() => {
         </div>
         <div class="blue-line"></div>
 
-        <Category @update:selected="selectedCategory = $event" />
+        <InfluencerCategory @update:selected="selectedCategory = $event" />
 
         <div class="flex flex-1 p-3 ml-4 mr-10 justify-between">
           <h4>프로필</h4>
