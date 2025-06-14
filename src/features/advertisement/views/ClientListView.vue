@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full px-8 pt-6 gap-8">
+  <div class="w-full min-h-screen bg-background flex font-sans">
     <!-- 사이드바 -->
     <CommonFiltering />
 
