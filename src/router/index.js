@@ -5,7 +5,6 @@ import { calendarRoutes } from '@/features/calendar/router'
 import { campaignRoutes } from '@/features/campaign/router'
 import { chatRoutes } from '@/features/chat/router'
 import { contractRoutes } from '@/features/contract/router'
-import { dashboardRoutes } from '@/features/dashboard/router'
 import { userRoutes } from '@/features/user/router'
 import { influencerRoutes } from '@/features/influencer/router.js';
 import { myPageRoutes } from '@/features/mypage/router.js';
@@ -19,11 +18,9 @@ const router = createRouter({
     ...campaignRoutes,
     ...chatRoutes,
     ...contractRoutes,
-    ...dashboardRoutes,
     ...userRoutes,
     ...influencerRoutes,
     ...myPageRoutes,
-    // 아래로 쭉 추가해주세요
   ],
   scrollBehavior() {
     return { left: 0, top: 0 }

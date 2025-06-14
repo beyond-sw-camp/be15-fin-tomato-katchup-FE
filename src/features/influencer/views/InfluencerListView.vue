@@ -56,8 +56,15 @@ const paginatedList = computed(() => {
       <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
 
       <div class="container">
-        <h1 class="text-2xl font-bold mb-3">인플루언서</h1>
-        <hr class="border-t-3 border-btn-blue my-8" />
+        <div class="page-header">
+          <div class="page-title">
+            인플루언서
+            <span class="cnt-search">
+              (검색 결과: {{ totalCount }}건)
+            </span>
+          </div>
+        </div>
+        <div class="blue-line"></div>
 
         <Category @update:selected="selectedCategory = $event" />
 
