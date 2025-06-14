@@ -40,7 +40,35 @@ const influencerList = [
     tags: ['Entertainment', 'LifeStyle', 'Food', 'Pet', 'Family & kids', 'Animation', 'Gaming', 'Professional', 'Fashion & Beauty'],
     ownerName: '윤채영',
     thumbnail: '/src/assets/images/yeodano.png'
-  }
+  },
+  {
+    id: 4,
+    name: '숏박스',
+    subscribers: '339만명',
+    instagram: '@shortbox.official',
+    instaFollowers: '2.8만명',
+    targetGender: 'male',
+    targetAgeGroup: '18-24',
+    tags: [
+      'Entertainment', 'LifeStyle'
+    ],
+    ownerName: '조현승',
+    thumbnail: '/src/assets/images/shortbox.png'
+  },
+  {
+    id: 5,
+    name: '기우쌤',
+    subscribers: '160만명',
+    instagram: '@kiu_design_',
+    instaFollowers: '44.7만명',
+    targetGender: 'female',
+    targetAgeGroup: '18-24',
+    tags: [
+      'Professional', 'Fashion & Beauty'
+    ],
+    ownerName: '조현승',
+    thumbnail: '/src/assets/images/kiu.png'
+  },
 ]
 
 const InfluencerHandler = [
