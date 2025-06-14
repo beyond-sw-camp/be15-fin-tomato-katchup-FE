@@ -4,6 +4,7 @@ import InfluencerCard from '@/components/common/InfluencerCard.vue'
 import InfluencerFormModal from '../components/InfluencerFormModal.vue'
 import CommonFiltering from "@/components/layout/CommonFiltering.vue";
 import { getMockInfluencers } from '@/features/user/api.js'
+import InfluencerManagementCard from "@/components/common/InfluencerManagementCard.vue";
 
 const influencers = ref([])
 const isModalOpen = ref(false)
@@ -57,7 +58,7 @@ const saveInfluencer = (updated) => {
       <div class="container">
         <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
         <div class="flex flex-wrap gap-5 items-stretch">
-          <InfluencerCard
+          <InfluencerManagementCard
             v-for="card in influencers"
             :key="card.id"
             :id="card.id"
