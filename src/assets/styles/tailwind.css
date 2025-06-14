@@ -106,5 +106,16 @@
   .cnt-search {
     @apply text-sm font-normal text-gray-medium
   }
+
+  /* === FORM === */
+  /* 폼 라벨 */
+  .input-form-label {
+    @apply text-sm text-gray-dark font-semibold
+  }
+
+  /* 폼 input box*/
+  .input-form-box {
+    @apply w-full px-3 py-2 rounded-sm border border-gray-dark hover:border-black focus:border-black;
+  }
 }
 
