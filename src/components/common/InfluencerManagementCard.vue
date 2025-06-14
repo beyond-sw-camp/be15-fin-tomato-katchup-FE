@@ -74,7 +74,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import defaultThumbnail from '@/assets/icons/logo.png'
+import defaultThumbnail from '@/assets/images/logo.png'
 import { Icon } from '@iconify/vue';
 
 // Props
