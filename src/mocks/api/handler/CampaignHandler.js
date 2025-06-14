@@ -9,6 +9,81 @@ const formatDate = (date) => {
 
 const baseDate = new Date();
 
+const pipelineList = [
+    {
+        pipelineStep: 'chance',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 계약',
+        createdAt: '2025-06-05',
+    },
+    {
+        pipelineStep: 'listUp',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 리스트업',
+        createdAt: '2025-06-06',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+    },
+    {
+        pipelineStep: 'proposal',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 제안',
+        createdAt: '2025-06-06',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        startAt: '2025-06-12',
+        endAt: '2025-06-17',
+        username: '차은우',
+    },
+    {
+        pipelineStep: 'quotation',
+        title: ' XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (1차)',
+        createdAt: '2025-06-07',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        adPrice: 9600000,
+    },
+    {
+        pipelineStep: 'quotation',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차) 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)',
+        createdAt: '2025-06-08',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        adPrice: 9300000,
+    },
+    {
+        pipelineStep: 'quotation',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차) 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)',
+        createdAt: '2025-06-08',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        adPrice: 9300000,
+    },
+    {
+        pipelineStep: 'quotation',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차) 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)',
+        createdAt: '2025-06-08',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        adPrice: 9300000,
+    },
+    {
+        pipelineStep: 'sales',
+        title: ' 상품 이름 정보',
+        createdAt: '2025-06-09',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        adPrice: 9300000,
+    },
+    {
+        pipelineStep: 'contract',
+        title: 'XYZ 패션 브랜드 시즌 프로모션 계약',
+        createdAt: '2025-06-11',
+        clientCompany: 'XYZ 패션',
+        ClientManagerName: '송강',
+        startAt: '2025-06-12',
+        endAt: '2025-06-17',
+        username: '차은우',
+        adPrice: 9300000,
+    },
+];
 const campaignDetail = {
     id: 1,
     status: '진행중',
@@ -86,6 +161,15 @@ const CampaignHandler = [
             {
                 data: campaignDetail,
             },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/campaign/history/:id', async () => {
+        return HttpResponse.json(
+            { data: pipelineList },
             {
                 status: 200,
                 headers: { 'Cache-Control': 'no-store' },

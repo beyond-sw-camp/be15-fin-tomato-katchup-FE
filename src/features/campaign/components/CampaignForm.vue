@@ -1,11 +1,14 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, nextTick } from 'vue';
 
 const props = defineProps({
     modelValue: Object,
     isEditing: Boolean,
 });
 const emit = defineEmits(['update:modelValue', 'submit', 'cancel']);
+
+const popupWidth = 500;
+const popupHeight = 600;
 
 const form = computed({
     get: () => props.modelValue,
@@ -28,7 +31,23 @@ const parseNumberInput = (e, key) => {
     form.value[key] = raw ? parseInt(raw, 10) : 0;
 };
 
-// FormGroups 기반으로 관리
+function openPostcodeSearch() {
+    new daum.Postcode({
+        oncomplete: function (data) {
+            const selectedAddress = data.roadAddress || data.jibunAddress;
+            form.value.address = selectedAddress;
+            nextTick(() => {
+                const detailInput = document.getElementById('detailAddress');
+                detailInput?.focus();
+            });
+        },
+    }).open({
+        left: window.screen.width / 2 - popupWidth / 2,
+        top: window.screen.height / 2 - popupHeight / 2,
+    });
+}
+
+// FormGroups
 const groups = [
     {
         type: 'horizontal',
@@ -72,7 +91,7 @@ const groups = [
             },
             { key: 'startDate', label: '시작일', type: 'input', inputType: 'date' },
             { key: 'endDate', label: '종료일', type: 'input', inputType: 'date' },
-            { key: 'address', label: '주소', type: 'input', inputType: 'text' },
+            { key: 'address', label: '주소 검색', type: 'address-search' },
             { key: 'addressDetail', label: '상세 주소', type: 'input', inputType: 'text' },
             { key: 'username', label: '담당자', type: 'input', inputType: 'text' },
             { key: 'awarenessPath', label: '인지 경로', type: 'input', inputType: 'text' },
@@ -84,9 +103,7 @@ const groups = [
 
 <template>
     <form @submit.prevent="emit('submit')" class="grid grid-cols-1 gap-4">
-        <!-- FormGroup 렌더링 -->
         <template v-for="(group, index) in groups" :key="index">
-            <!-- 수평 그룹 -->
             <div v-if="group.type === 'horizontal'" class="flex items-center gap-4">
                 <template v-for="field in group.fields" :key="field.key">
                     <div :class="field.width || 'flex-1'">
@@ -112,7 +129,6 @@ const groups = [
                             </option>
                         </select>
 
-                        <!-- 일반 string -->
                         <input
                             v-else
                             type="text"
@@ -129,16 +145,33 @@ const groups = [
                     <div>
                         <label class="input-form-label">{{ field.label }}</label>
 
-                        <!-- textarea -->
+                        <div v-if="field.type === 'address-search'">
+                            <div class="flex gap-2">
+                                <input
+                                    type="text"
+                                    v-model="form[field.key]"
+                                    readonly
+                                    class="input-form-box flex-1 bg-gray-100"
+                                />
+                                <button
+                                    type="button"
+                                    class="border bg-gray-300 rounded px-3 py-1 text-sm shadow hover:brightness-95 active:brightness-90 transition"
+                                    @click="openPostcodeSearch"
+                                    v-if="isEditing"
+                                >
+                                    검색
+                                </button>
+                            </div>
+                        </div>
+
                         <textarea
-                            v-if="field.type === 'textarea'"
+                            v-else-if="field.type === 'textarea'"
                             v-model="form[field.key]"
                             :readonly="!isEditing"
                             rows="3"
                             class="input-form-box"
                         />
 
-                        <!-- number -->
                         <input
                             v-else-if="field.inputType === 'number'"
                             type="text"
@@ -148,7 +181,6 @@ const groups = [
                             class="input-form-box"
                         />
 
-                        <!-- select -->
                         <select
                             v-else-if="field.type === 'select'"
                             v-model="form[field.key]"
@@ -159,7 +191,7 @@ const groups = [
                                 {{ option }}
                             </option>
                         </select>
-                        <!-- date -->
+
                         <input
                             v-else-if="field.inputType === 'date'"
                             type="date"
@@ -168,7 +200,6 @@ const groups = [
                             class="input-form-box"
                         />
 
-                        <!-- 일반 string -->
                         <input
                             v-else
                             type="text"
@@ -177,7 +208,6 @@ const groups = [
                             class="input-form-box"
                         />
 
-                        <!-- 이익금액 표시 -->
                         <div v-if="field.key === 'expectedProfitMargin'" class="mt-4">
                             <label class="input-form-label">예상 이익 금액</label>
                             <input

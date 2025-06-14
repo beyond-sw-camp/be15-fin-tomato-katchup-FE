@@ -1,14 +1,16 @@
 <script setup>
 import { reactive, ref, onMounted } from 'vue';
-import { getCampaignDetail } from '@/features/campaign/api.js';
+import { getCampaignDetail, getCampaignHistory } from '@/features/campaign/api.js';
 import { Icon } from '@iconify/vue';
 import { useRoute, useRouter } from 'vue-router';
 import CampaignForm from '@/features/campaign/components/CampaignForm.vue';
 import PipelineDiagram from '@/features/campaign/components/PipelineDiagram.vue';
+import CampaignHistory from '@/features/campaign/components/CampaignHistory.vue';
 
 const route = useRoute();
 const router = useRouter();
 const campaignDetail = ref(null);
+const campaignHistory = ref(null);
 const form = reactive({});
 const isEditing = ref(false);
 
@@ -18,7 +20,15 @@ const fetchCampaignDetail = async () => {
     Object.assign(form, campaignDetail.value);
 };
 
-onMounted(fetchCampaignDetail);
+const fetchCampaignHistory = async () => {
+    const res = await getCampaignHistory(route.params.campaignId);
+    campaignHistory.value = res.data.data;
+};
+
+onMounted(() => {
+    fetchCampaignDetail();
+    fetchCampaignHistory();
+});
 
 const save = () => {
     console.log('저장할 값:', form);
@@ -62,7 +72,7 @@ const cancel = () => {
             </div>
 
             <div class="w-1/2 bg-gray-50 p-4 rounded shadow">
-                <p class="text-gray-400 text-center">우측 확장 영역</p>
+                <CampaignHistory v-if="campaignHistory" :campaignHistory="campaignHistory" />
             </div>
         </div>
     </div>
