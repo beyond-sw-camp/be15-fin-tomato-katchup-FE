@@ -5,6 +5,7 @@ import CommonFiltering from "@/components/layout/CommonFiltering.vue";
 import { getMockInfluencers } from '@/features/user/api.js'
 import InfluencerManagementCard from "@/components/common/InfluencerManagementCard.vue";
 import PagingBar from '@/components/common/PagingBar.vue';
+import { Icon } from '@iconify/vue';
 
 const influencers = ref([])
 const isModalOpen = ref(false)
@@ -74,29 +75,30 @@ const saveInfluencer = (updated) => {
         </div>
         <div class="blue-line"></div>
 
-        <div class="grid grid-cols-2 gap-8">
-          <InfluencerManagementCard
-            v-for="card in influencers"
-            :key="card.id"
-            :id="card.id"
-            :name="card.name"
-            :subscribers="card.subscribers"
-            :instagram="card.instagram"
-            :instaFollowers="card.instaFollowers"
-            :tags="card.tags"
-            :ownerName="card.ownerName"
-            :thumbnail="card.thumbnail"
-            @edit="openModalWithData"
-            @delete="deleteInfluencer"
-          />
-
-        <div
-          class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
-          @click="openModal"
-        >
-          +
+        <div class="px-10">
+          <div class="grid grid-cols-2 gap-8">
+            <InfluencerManagementCard
+              v-for="card in influencers"
+              :key="card.id"
+              :id="card.id"
+              :name="card.name"
+              :subscribers="card.subscribers"
+              :instagram="card.instagram"
+              :instaFollowers="card.instaFollowers"
+              :tags="card.tags"
+              :ownerName="card.ownerName"
+              :thumbnail="card.thumbnail"
+              @edit="openModalWithData"
+              @delete="deleteInfluencer"
+            />
+            <div
+              class="w-[480px] min-h-[240px] flex items-center justify-center border border-gray-dark rounded-xl bg-white cursor-pointer"
+              @click="openModal"
+            >
+              <Icon icon="mynaui:plus-solid" width="50" height="50" />
+            </div>
+          </div>
         </div>
-      </div>
 
       <InfluencerFormModal
         v-if="isModalOpen"
@@ -112,6 +114,6 @@ const saveInfluencer = (updated) => {
             @update:currentPage="(val) => currentPage = val"
           />
         </div>
-    </div>
+      </div>
   </div>
 </template>
