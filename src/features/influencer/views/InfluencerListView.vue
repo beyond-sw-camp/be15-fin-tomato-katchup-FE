@@ -54,7 +54,6 @@ const paginatedList = computed(() => {
 <template>
   <div class="w-full min-h-screen bg-background flex font-sans">
       <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
-
       <div class="container">
         <div class="page-header">
           <div class="page-title">
@@ -68,14 +67,14 @@ const paginatedList = computed(() => {
 
         <InfluencerCategory @update:selected="selectedCategory = $event" />
 
-        <div class="flex flex-1 p-3 ml-4 mr-10 justify-between">
-          <h4>프로필</h4>
-          <h4>유튜브명</h4>
-          <h4>인스타 아이디</h4>
-          <h4>유튜브 구독자 수</h4>
-          <h4>인스타 팔로워 수</h4>
-          <h4>타깃 성별</h4>
-          <h4>타깃 연령대</h4>
+        <div class="flex flex-1 py-5 ml-5 mr-4 justify-between text-gray-medium text-sm">
+          <span>프로필</span>
+          <span>유튜브명</span>
+          <span>인스타 아이디</span>
+          <span>유튜브 구독자 수</span>
+          <span>인스타 팔로워 수</span>
+          <span>타깃 성별</span>
+          <span>타깃 연령대</span>
         </div>
 
         <div v-for="influencer in paginatedList" :key="influencer.id">
