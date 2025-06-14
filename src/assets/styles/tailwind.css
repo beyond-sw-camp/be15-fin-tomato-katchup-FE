@@ -67,7 +67,44 @@
 
 @layer components {
   .container {
-    @apply px-4 py-5 rounded-2xl bg-white;
+    @apply px-12 py-8 rounded-2xl bg-white flex-1 ml-8;
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
+
+  .cardLists {
+    @apply w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200
+  }
+
+  /* === 버튼 === */
+  /* 등록 버튼*/
+  .btn-create {
+    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+  }
+
+  /* 삭제 버튼 */
+  .btn-delete {
+    @apply px-4 py-2 bg-gray-medium text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+  }
+
+  /* === 페이지 상단 타이틀 === */
+  /* 페이지 상단 감싸는 div */
+  .page-header {
+    @apply flex items-center justify-between mt-6 mb-5
+  }
+
+  /* 페이지 제목 */
+  .page-title {
+    @apply text-lg font-bold text-black
+  }
+
+  /* 페이지 제목 밑에 선 */
+  .blue-line {
+    @apply h-[2.5px] bg-btn-blue mb-10 w-full
+  }
+
+  /* 페이지 제목 옆에 검색 결과 개수 */
+  .cnt-search {
+    @apply text-sm font-normal text-gray-medium
+  }
 }
+

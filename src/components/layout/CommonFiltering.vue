@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky top-10 mt-10 w-[304px] h-[630px] bg-white rounded-2xl shadow-md p-6">
+  <div class="sticky top-10 w-[304px] h-[630px] bg-white rounded-2xl shadow-md p-6">
     <p class="text text-md font-semibold mb-4 mt-5">검색조건</p>
 
     <div class="relative">
@@ -45,6 +45,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>

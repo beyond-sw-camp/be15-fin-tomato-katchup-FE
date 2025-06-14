@@ -1,16 +1,15 @@
 <template>
     <div class="container">
-        <div class="header mb-4">
-            <div class="flex justify-between items-center">
-                <span>(검색결과: {{ total }}건)</span>
-                <button
-                    class="px-4 py-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition"
-                >
-                    등록
-                </button>
+        <div class="page-header">
+            <div class="page-title">
+                파이프라인
+                <span class="cnt-search">
+                    (검색결과: {{ total }}건)
+                </span>
             </div>
-            <div class="w-full h-px bg-gray-300 my-4"></div>
+          <button class="btn-create">등록</button>
         </div>
+        <div class="blue-line"></div>
 
         <PipelineCard :campaigns="campaigns" />
 

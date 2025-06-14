@@ -19,7 +19,7 @@ const menuMap = {
   campaign: {
     label: '캠페인',
     routes: {
-      '파이프라인': '/campaign/pipeline'
+      '파이프라인': '/campaign'
     }
   },
   sales: {
@@ -82,7 +82,7 @@ function selectSubMenu(menu, subMenu) {
       <div class="flex justify-between items-center h-[90px]">
         <!-- 로고 -->
         <button class="ml-10 cursor-pointer" @click="router.push('/')">
-          <img src="@/assets/icons/logo.png" alt="logo" class="h-[220px] select-none" />
+          <img src="@/assets/images/logo.png" alt="logo" class="h-[220px] select-none" />
         </button>
 
         <!-- 메뉴 -->
@@ -110,8 +110,8 @@ function selectSubMenu(menu, subMenu) {
 
         <!-- 유저 패널 -->
         <div class="flex items-center gap-10 mr-5">
-          <div class="flex items-center gap-3">
-            <img class="w-10 h-10 rounded-full" src="@/assets/icons/profile.png" alt="프로필" />
+          <div class="flex items-center gap-3 cursor-pointer"  @click="router.push('/mypage')">
+            <img class="w-10 h-10 rounded-full" src="@/assets/images/profile.png" alt="프로필" />
             <div class="flex flex-col text-sm">
               <div class="font-bold text-black">차은우</div>
               <div class="text-xs text-black">팀장</div>
@@ -129,7 +129,7 @@ function selectSubMenu(menu, subMenu) {
     <!-- 드롭다운 -->
     <div
       v-if="hoveredMenu || selectedMenu"
-      class="absolute top-[90px] left-0 w-full bg-white border-t border-gray-medium py-5 px-[310px] text-md z-[999]"
+      class="absolute top-[90px] left-0 w-full bg-white border-t border-gray-medium py-5 px-[310px] text-md"
     >
       <div class="flex flex-row gap-20">
         <button
@@ -137,9 +137,9 @@ function selectSubMenu(menu, subMenu) {
           :key="subLabel"
           @click="selectSubMenu(hoveredMenu || selectedMenu, subLabel)"
           :class="[
-              'transition-colors duration-200 hover:text-header-text',
+              'transition-colors duration-200 hover:text-header-text' ,
               'w-max',
-              selectedSubMenu === subLabel ? 'text-header-text' : 'text-gray-light'
+              selectedSubMenu === subLabel ? 'text-header-text' : 'text-gray-medium'
           ]"
         >
           {{ subLabel }}
