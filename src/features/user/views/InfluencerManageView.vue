@@ -72,7 +72,6 @@ const saveInfluencer = (updated) => {
           @delete="deleteInfluencer"
         />
 
-        <!-- + 버튼 -->
         <div
           class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
           @click="openModal"
@@ -81,7 +80,6 @@ const saveInfluencer = (updated) => {
         </div>
       </div>
 
-      <!-- 모달 -->
       <InfluencerFormModal
         v-if="isModalOpen"
         :initialData="selectedInfluencer"
