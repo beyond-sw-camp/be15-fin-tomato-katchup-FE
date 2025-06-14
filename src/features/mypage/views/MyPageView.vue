@@ -236,7 +236,7 @@ const cancelEdit = () => {
                                     <input
                                         type="date"
                                         v-model="form.birth"
-                                        class="border px-2 py-1 text-sm rounded w-[120px]"
+                                        class="border px-2 py-1 text-sm rounded w-[130px]"
                                     />
                                     <button
                                         class="text-xs text-blue-600"
