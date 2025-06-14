@@ -8,7 +8,7 @@ const route = useRoute()
 <template>
   <div class="w-full min-h-screen bg-background flex flex-col font-sans">
     <Header />
-    <div class="flex flex-1 flex-col p-16">
+    <div class="flex flex-1 flex-col p-16 mt-10">
       <router-view class="flex-1 w-full" />
     </div>
   </div>
