@@ -55,22 +55,22 @@ const saveInfluencer = (updated) => {
       <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
 
       <div class="container">
-      <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
-      <div class="flex flex-wrap gap-5 items-stretch">
-        <InfluencerCard
-          v-for="card in influencers"
-          :key="card.id"
-          :id="card.id"
-          :name="card.name"
-          :subscribers="card.subscribers"
-          :instagram="card.instagram"
-          :instaFollowers="card.instaFollowers"
-          :tags="card.tags"
-          :ownerName="card.ownerName"
-          :thumbnail="card.thumbnail"
-          @edit="openModalWithData"
-          @delete="deleteInfluencer"
-        />
+        <h2 class="text-lg font-semibold mb-5">인플루언서 - 관리</h2>
+        <div class="flex flex-wrap gap-5 items-stretch">
+          <InfluencerCard
+            v-for="card in influencers"
+            :key="card.id"
+            :id="card.id"
+            :name="card.name"
+            :subscribers="card.subscribers"
+            :instagram="card.instagram"
+            :instaFollowers="card.instaFollowers"
+            :tags="card.tags"
+            :ownerName="card.ownerName"
+            :thumbnail="card.thumbnail"
+            @edit="openModalWithData"
+            @delete="deleteInfluencer"
+          />
 
         <div
           class="w-[405px] min-h-[240px] flex items-center justify-center border border-gray-200 rounded-xl bg-white text-[32px] text-gray-400 cursor-pointer"
