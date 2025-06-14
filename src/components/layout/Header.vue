@@ -19,7 +19,7 @@ const menuMap = {
   campaign: {
     label: '캠페인',
     routes: {
-      '파이프라인': '/campaign/pipeline'
+      '파이프라인': '/campaign'
     }
   },
   sales: {
