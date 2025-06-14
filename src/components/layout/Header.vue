@@ -129,7 +129,7 @@ function selectSubMenu(menu, subMenu) {
     <!-- 드롭다운 -->
     <div
       v-if="hoveredMenu || selectedMenu"
-      class="absolute top-[90px] left-0 w-full bg-white border-t border-gray-medium py-5 px-[310px] text-md z-[999]"
+      class="absolute top-[90px] left-0 w-full bg-white border-t border-gray-medium py-5 px-[310px] text-md"
     >
       <div class="flex flex-row gap-20">
         <button

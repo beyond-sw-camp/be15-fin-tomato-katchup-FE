@@ -2,7 +2,7 @@ import InfluencerManageView from '@/features/user/views/InfluencerManageView.vue
 
 export const userRoutes = [
   {
-    path: '/user/influencer',
+    path: '/management/influencer',
     name: 'InfluencerManage',
     component: InfluencerManageView,
   },

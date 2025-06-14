@@ -99,6 +99,7 @@ const toggleDropdown = () => {
 const emit = defineEmits(['edit', 'delete'])
 
 const handleEdit = () => {
+  showDropdown.value = false
   emit('edit', {
     id: props.id,
     name: props.name,
