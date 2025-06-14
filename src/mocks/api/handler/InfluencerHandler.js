@@ -7,13 +7,15 @@ const influencerList = [
     subscribers: '400만명',
     instagram: '@gmovie',
     instaFollowers: '76만명',
+    targetGender: 'male',
+    targetAgeGroup: '18-24',
     tags: [
       'Entertainment', 'LifeStyle', 'Food', 'Animation',
       'Pet', 'Family & kids', 'Fashion & Beauty',
       'Professional', 'Gaming'
     ],
     ownerName: '오유경',
-    thumbnail: '/src/assets/icons/logo.png'
+    thumbnail: '/src/assets/images/gmovie.png'
   },
   {
     id: 2,
@@ -21,9 +23,23 @@ const influencerList = [
     subscribers: '1200만명',
     instagram: '정보없음',
     instaFollowers: '',
+    targetGender: 'female',
+    targetAgeGroup: '18-24',
     tags: ['Entertainment', 'LifeStyle', 'Food', 'Family & kids', 'Professional'],
     ownerName: '이승재',
-    thumbnail: '/src/assets/icons/logo.png'
+    thumbnail: '/src/assets/images/tzuyang.png'
+  },
+  {
+    id: 3,
+    name: '여단오_yeodano',
+    subscribers: '30.4만명',
+    instagram: '@dano_day',
+    instaFollowers: '8.1만명',
+    targetGender: 'female',
+    targetAgeGroup: '18-24',
+    tags: ['Entertainment', 'LifeStyle', 'Food', 'Pet', 'Family & kids', 'Animation', 'Gaming', 'Professional', 'Fashion & Beauty'],
+    ownerName: '윤채영',
+    thumbnail: '/src/assets/images/yeodano.png'
   }
 ]
 

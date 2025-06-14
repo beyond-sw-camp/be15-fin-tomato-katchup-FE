@@ -180,7 +180,6 @@ onMounted(() => {
     form.value.region = props.initialData.region || ''
     form.value.fee = props.initialData.fee || ''
 
-    // 🔥 태그 복원 추가
     selectedTags.value = props.initialData.tags?.slice() || []
     availableTags.value = allTags.filter(tag => !selectedTags.value.includes(tag))
   }
