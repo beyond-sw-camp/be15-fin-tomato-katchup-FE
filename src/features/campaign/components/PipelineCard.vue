@@ -3,40 +3,15 @@
         <div
             v-for="campaign in campaigns"
             :key="campaign.id"
-            class="campaign-card border-1 border-solid border-gray-medium mb-[16px] px-4 py-1"
+            @click="gotoDetail(campaign.id)"
+            class="campaign-card border-1 border-solid border-gray-medium mb-[16px] px-4 py-1 hover:bg-dropdown/10 active:bg-dropdown/15"
         >
             <div class="campaign-header mb-2">
                 <CampaignBadge :label="campaign.status" status="default" />
                 <span class="campaign-title text-lg font-medium">{{ campaign.title }}</span>
             </div>
             <div class="pipeline flex items-center w-full mb-1">
-                <template v-for="(step, index) in pipelineSteps" :key="step.key">
-                    <div class="step flex-1">
-                        <div
-                            :class="[
-                                'pipeline-box w-full text-center p-2 rounded-lg text-white h-[60px]',
-                                index <= getLastPipelineIndex(campaign.pipeLine)
-                                    ? step.colorVar
-                                    : 'bg-gray-300',
-                            ]"
-                        >
-                            <div class="step-label font-semibold">{{ step.label }}</div>
-                            <div class="step-date text-sm">
-                                {{ campaign.pipeLine?.[step.key]?.date || '-' }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div
-                        v-if="index < pipelineSteps.length - 1"
-                        :class="[
-                            `connector w-3 h-3`,
-                            index <= getLastPipelineIndex(campaign.pipeLine)
-                                ? step.colorVar
-                                : 'bg-gray-300',
-                        ]"
-                    ></div>
-                </template>
+                <PipelineDiagram :diagramInfo="campaign.pipeLine" />
                 <div class="flex items-center gap-2 min-h-[60px]">
                     <span class="success-rate font-medium ml-8">성공 확률</span>
                     <div
@@ -92,12 +67,16 @@
 <script setup>
 import CampaignBadge from '@/components/common/CampaignBadge.vue';
 import { Icon } from '@iconify/vue';
+import { useRouter } from 'vue-router';
+import PipelineDiagram from '@/features/campaign/components/PipelineDiagram.vue';
 const { campaigns } = defineProps({
     campaigns: {
         type: Array,
         required: true,
     },
 });
+
+const router = useRouter();
 
 const getLastPipelineIndex = (pipeLine) => {
     const keys = Object.keys(pipeLine || {});
@@ -120,6 +99,10 @@ const pipelineSteps = [
     { key: 'contract', label: '계약', colorVar: 'bg-pipeline-contract' },
     { key: 'aftercare', label: '사후관리', colorVar: 'bg-pipeline-aftercare' },
 ];
+
+const gotoDetail = async (campaignId) => {
+    await router.push(`/campaign/${campaignId}`);
+};
 
 const formatPrice = (price) => price.toLocaleString();
 </script>

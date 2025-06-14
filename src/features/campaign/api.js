@@ -1,4 +1,4 @@
-import api from '@/plugin/axios.js'
+import api from '@/plugin/axios.js';
 
 export const getCampaignList = async (page, size, company) => {
     return await api.get('/campaign', {
@@ -7,5 +7,9 @@ export const getCampaignList = async (page, size, company) => {
             size,
             ...(company && { company }),
         },
-    })
-}
+    });
+};
+
+export const getCampaignDetail = async (campaignId) => {
+    return await api.get(`/campaign/${campaignId}`);
+};

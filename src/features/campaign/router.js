@@ -7,4 +7,12 @@ export const campaignRoutes = [
             layout: 'none',
         },
     },
+    {
+        path: '/campaign/:campaignId',
+        name: 'campaignDetail',
+        component: () => import('@/features/campaign/views/CampaignDetail.vue'),
+        mete: {
+            layout: 'none',
+        },
+    },
 ];
