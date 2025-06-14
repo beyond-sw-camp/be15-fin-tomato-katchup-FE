@@ -294,7 +294,7 @@ const cancelEdit = () => {
                         </div>
                     </div>
                   <button
-                    class="bg-[#A8C1DA] text-white px-2 py-2 text-sm rounded cursor-pointer"
+                    class="btn-create"
                     @click="showPasswordModal = true"
                   >
                     비밀번호 변경

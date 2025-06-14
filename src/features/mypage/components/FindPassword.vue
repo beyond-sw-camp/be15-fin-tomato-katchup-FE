@@ -39,10 +39,10 @@
       </div>
 
       <div class="flex justify-end gap-3">
-        <button class="bg-gray-300 text-white text-sm px-4 py-2 rounded cursor-pointer" @click="$emit('close')">
+        <button class="btn-delete" @click="$emit('close')">
           취소
         </button>
-        <button class="bg-[#A8C1DA] text-white text-sm px-4 py-2 rounded cursor-pointer" @click="handleSubmit">
+        <button class="btn-create" @click="handleSubmit">
           변경
         </button>
       </div>
