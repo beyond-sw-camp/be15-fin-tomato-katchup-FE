@@ -3,11 +3,7 @@
         <div class="header mb-4">
             <div class="flex justify-between items-center">
                 <span>(검색결과: {{ total }}건)</span>
-                <button
-                    class="px-4 py-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition"
-                >
-                    등록
-                </button>
+                <button class="create-btn">등록</button>
             </div>
             <div class="w-full h-px bg-gray-300 my-4"></div>
         </div>
