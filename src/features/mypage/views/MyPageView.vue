@@ -1,30 +1,30 @@
 <script setup>
 import { Icon } from '@iconify/vue';
 import { reactive, ref } from 'vue';
-import FindFassword from '@/features/mypage/components/FindFassword.vue';
+import FindPassword from '@/features/mypage/components/FindPassword.vue';
 
 const influencers = ref([
-    { id: 1, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 2, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 3, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 4, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 5, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 6, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 7, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 8, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 9, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 10, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 11, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 12, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 13, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 14, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 15, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 16, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 17, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 18, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 19, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 20, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 21, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
+    { id: 1, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 2, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 3, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 4, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 5, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 6, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 7, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 8, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 9, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 10, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 11, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 12, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 13, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 14, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 15, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 16, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 17, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 18, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 19, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 20, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 21, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
 ]);
 
 const showPasswordModal = ref(false)
@@ -324,5 +324,5 @@ const cancelEdit = () => {
                 </div>
             </div>
         </div>
-  <FindFassword v-if="showPasswordModal" @close="showPasswordModal = false" />
+  <FindPassword v-if="showPasswordModal" @close="showPasswordModal = false" />
 </template>
