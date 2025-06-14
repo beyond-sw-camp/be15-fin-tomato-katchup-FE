@@ -9,7 +9,8 @@
             </div>
           <button class="btn-create">등록</button>
         </div>
-      <div class="blue-line"></div>
+        <div class="blue-line"></div>
+
         <PipelineCard :campaigns="campaigns" />
 
         <div class="pagination">

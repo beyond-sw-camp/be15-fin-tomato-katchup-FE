@@ -1,7 +1,7 @@
 <template>
-  <div class="relative w-[405px] min-h-[240px] p-4 border border-[color:var(--color-gray-dark)] rounded-xl bg-white font-sans flex flex-col">
+  <div class="relative w-[480px] min-h-[240px] p-5 border border-[color:var(--color-gray-dark)] rounded-xl bg-white font-sans flex flex-col">
     <!-- 점 3개 버튼 -->
-    <div class="absolute top-3 right-3">
+    <div class="absolute top-5 right-5">
       <button class="flex flex-col gap-[2px]" @click="toggleDropdown">
         <span
           class="w-1 h-1 bg-black rounded-full"
@@ -32,22 +32,21 @@
     </div>
 
     <!-- 프로필 섹션 -->
-    <div class="flex gap-3 items-start mb-3">
+    <div class="flex gap-5 items-start mb-3">
       <img
         :src="thumbnail || defaultThumbnail"
         alt="thumbnail"
         class="w-[100px] h-[100px] rounded-full object-cover border border-[color:var(--color-gray-light)]"
       />
       <div class="flex-1">
-        <div class="flex items-center gap-1 text-base font-medium mb-1">
+        <div class="flex items-center gap-3 text-base font-medium">
           <Icon icon="logos:youtube-icon" class="w-7 h-6" />
           <span class="font-bold text-[color:var(--color-click)]">{{ name }}</span>
         </div>
-        <div class="text-sm text-[color:var(--color-gray-dark)] mb-1">
+        <div class="text-sm text-[color:var(--color-gray-dark)] mb-2">
           {{ subscribers }}
         </div>
-        <div class="flex items-center gap-1 text-base font-medium mb-1">
-<!--          <img :src="instagramIcon" class="w-[18px] h-[18px]" alt="instagram" />-->
+        <div class="flex items-center gap-3 text-base font-medium mb-1">
           <Icon icon="skill-icons:instagram" class="w-7 h-6" />
           <span class="font-bold">{{ instagram }}</span>
         </div>
