@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import InfluencerCard from '@/components/common/InfluencerCard.vue'
 import InfluencerFormModal from '../components/InfluencerFormModal.vue'
 import CommonFiltering from "@/components/layout/CommonFiltering.vue";
 import { getMockInfluencers } from '@/features/user/api.js'
