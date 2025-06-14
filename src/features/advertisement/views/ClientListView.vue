@@ -1,14 +1,28 @@
 <template>
-  <div class="flex w-full px-8 pt-6 gap-8">
+  <div class="w-full min-h-screen bg-background flex font-sans">
     <!-- 사이드바 -->
     <CommonFiltering />
 
     <!-- 본문 영역 -->
     <div class="flex flex-col flex-1 container bg-white">
-      <div class="mt-6 mb-4 text-lg font-bold text-black ml-4">
-        고객사 목록
-        <span class="text-sm font-normal text-gray-medium">(검색 결과: {{ totalCount }}건)</span>
+
+      <!-- 제목 + 등록 버튼 -->
+      <div class="page-header">
+        <div class="page-title">
+          고객사 목록
+          <span class="cnt-search">
+            (검색 결과: {{ totalCount }}건)
+          </span>
+        </div>
+
+        <!-- 등록 버튼 -->
+        <button class="btn-create">
+          등록
+        </button>
       </div>
+
+      <!-- 회색 구분선 -->
+      <div class="blue-line"></div>
 
       <!-- 카드 리스트 -->
       <div class="grid grid-cols-2 gap-x-6 gap-y-6 px-4">

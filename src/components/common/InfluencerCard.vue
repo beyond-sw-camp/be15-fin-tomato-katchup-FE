@@ -1,121 +1,103 @@
+<script setup>
+import { TAG_COLOR_MAP } from '@/constants/tags.js'
+import { Icon } from '@iconify/vue';
+
+defineProps({
+  influencer: Object
+})
+
+const tagStyle = (tag) => {
+  return TAG_COLOR_MAP[tag] ?? 'bg-gray-200 text-black'
+}
+
+const genderColor = (gender) => {
+  switch (gender) {
+    case 'male':
+      return 'bg-blue-200'
+    case 'female':
+      return 'bg-pink-200'
+    case 'other':
+      return 'bg-purple-200'
+    default:
+      return 'bg-gray-200'
+  }
+}
+
+const genderLabel = (gender) => {
+  switch (gender) {
+    case 'male':
+      return '남성'
+    case 'female':
+      return '여성'
+    case 'other':
+      return '혼합'
+    default:
+      return '기타'
+  }
+}
+</script>
+
 <template>
-  <div class="relative w-[405px] min-h-[240px] p-4 border border-[color:var(--color-gray-dark)] rounded-xl bg-white font-sans flex flex-col">
-    <!-- 점 3개 버튼 -->
-    <div class="absolute top-3 right-3">
-      <button class="flex flex-col gap-[2px]" @click="toggleDropdown">
-        <span
-          class="w-1 h-1 bg-black rounded-full"
-          v-for="i in 3"
-          :key="i"
-        ></span>
-      </button>
+  <div class="border-[1.5px] rounded-lg px-7 py-5 shadow-sm mb-10">
+    <div class="flex items-center justify-between mb-4">
 
-      <div
-        v-if="showDropdown"
-        class="absolute top-0 right-7 flex flex-col bg-white border border-[color:var(--color-gray-medium)] rounded shadow-md z-10"
-      >
-        <!-- 수정하기 -->
-        <div
-          class="w-[100px] px-3 py-2 text-sm text-center whitespace-nowrap bg-[color:var(--color-gray-medium)] hover:bg-[color:var(--color-dropdown)] cursor-pointer"
-          @click="handleEdit"
-        >
-          수정하기
-        </div>
-        <!-- 삭제하기 -->
-        <div
-          class="w-[100px] px-3 py-2 text-sm text-center whitespace-nowrap bg-[color:var(--color-gray-medium)] hover:bg-[color:var(--color-dropdown)] cursor-pointer"
-          @click="handleDelete"
-        >
-          삭제하기
+      <!-- 유튜브명 -->
+      <div class="flex items-center gap-4 w-[220px]">
+        <img :src="influencer.thumbnail" alt="프로필" class="w-16 h-16 rounded-full" />
+        <div class="font-semibold text-lg truncate w-[120px]" :title="influencer.name">
+          {{ influencer.name }}
         </div>
       </div>
-    </div>
 
-    <!-- 프로필 섹션 -->
-    <div class="flex gap-3 items-start mb-3">
-      <img
-        :src="thumbnail || defaultThumbnail"
-        alt="thumbnail"
-        class="w-[100px] h-[100px] rounded-full object-cover border border-[color:var(--color-gray-light)]"
-      />
-      <div class="flex-1">
-        <div class="flex items-center gap-1 text-base font-medium mb-1">
-          <Icon icon="logos:youtube-icon" class="w-7 h-6" />
-          <span class="font-bold text-[color:var(--color-click)]">{{ name }}</span>
-        </div>
-        <div class="text-sm text-[color:var(--color-gray-dark)] mb-1">
-          {{ subscribers }}
-        </div>
-        <div class="flex items-center gap-1 text-base font-medium mb-1">
-<!--          <img :src="instagramIcon" class="w-[18px] h-[18px]" alt="instagram" />-->
-          <Icon icon="skill-icons:instagram" class="w-7 h-6" />
-          <span class="font-bold">{{ instagram }}</span>
-        </div>
-        <div class="text-sm text-[color:var(--color-gray-dark)] mb-2">
-          {{ instaFollowers }}
-        </div>
-
-        <p class="text-sm leading-snug text-black break-words whitespace-normal">
-          <span v-for="(tag, index) in tags" :key="index">
-            #{{ tag }}<span v-if="index < tags.length - 1">, </span>
-          </span>
-        </p>
+      <!-- 인스타 아이디 -->
+      <div class="w-[150px] text-lg font-semibold truncate">
+        {{ influencer.instagram }}
       </div>
-    </div>
 
-    <!-- 작성자 정보 -->
-    <div class="flex items-center gap-1 text-sm text-[color:var(--color-gray-dark)] mt-auto pl-[2px]">
-<!--      <img :src="userIcon" class="w-5 h-5" alt="owner icon" />-->
-      <Icon icon="tdesign:user" class="w-4 h-4" />
-      <span>{{ ownerName }}</span>
+      <!-- 유튜브 구독자 -->
+      <div class="flex flex-col items-center gap-2 w-[240px]">
+        <span class="text-lg font-semibold">{{ influencer.subscribers || '해당 없음' }}</span>
+        <button class="flex items-center bg-white text-black border border-black rounded-lg text-sm font-bold p-2">
+          <Icon icon="logos:youtube-icon" width="30" height="30" class="mr-2" />
+          유튜브 대시보드
+        </button>
+      </div>
+
+      <!-- 인스타 팔로워 -->
+      <div class="flex flex-col items-center gap-2 w-[240px]">
+        <span class="text-lg font-semibold">{{ influencer.instaFollowers || '해당 없음' }}</span>
+        <button class="flex items-center bg-white text-black border border-black rounded-lg text-sm font-bold p-2">
+          <Icon icon="skill-icons:instagram" width="30" height="30" class="mr-2" />
+          인스타 대시보드
+        </button>
+      </div>
+
+      <!-- 성별 -->
+      <div class="w-[90px] flex justify-center items-center">
+        <div :class="[genderColor(influencer.targetGender), 'px-3 py-1 rounded-xl text-sm text-black text-center']">
+          {{ genderLabel(influencer.targetGender) }}
+        </div>
+      </div>
+
+      <!-- 연령대 -->
+      <div class="w-[90px] flex justify-center items-center">
+        <div class="bg-green-100 text-black px-3 py-1 rounded-xl text-sm text-center">
+          {{ influencer.targetAgeGroup }}
+        </div>
+      </div>
+
+    </div>
+    <!-- 태그 -->
+    <div class="flex flex-wrap gap-2">
+    <span
+      v-for="tag in influencer.tags"
+      :key="tag"
+      class="text-sm rounded-lg px-2 py-0.5"
+      :class="tagStyle(tag)"
+    >
+      # {{ tag }}
+    </span>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import defaultThumbnail from '@/assets/icons/logo.png'
-import { Icon } from '@iconify/vue';
-
-// Props
-const props = defineProps({
-  id: Number,
-  name: String,
-  subscribers: String,
-  instagram: String,
-  instaFollowers: String,
-  tags: Array,
-  ownerName: String,
-  thumbnail: String
-})
-
-// Dropdown toggle 상태
-const showDropdown = ref(false)
-const toggleDropdown = () => {
-  showDropdown.value = !showDropdown.value
-}
-
-// Emit
-const emit = defineEmits(['edit', 'delete'])
-
-const handleEdit = () => {
-  emit('edit', {
-    id: props.id,
-    name: props.name,
-    subscribers: props.subscribers,
-    instagram: props.instagram,
-    instaFollowers: props.instaFollowers,
-    tags: props.tags,
-    ownerName: props.ownerName,
-    thumbnail: props.thumbnail
-  })
-}
-
-const handleDelete = () => {
-  emit('delete', props.id)
-}
-</script>
-
-<style scoped>
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
-</style>
