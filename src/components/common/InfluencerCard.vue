@@ -87,7 +87,6 @@ const genderLabel = (gender) => {
       </div>
 
     </div>
-
     <!-- 태그 -->
     <div class="flex flex-wrap gap-2">
     <span
@@ -100,6 +99,19 @@ const genderLabel = (gender) => {
     </span>
     </div>
   </div>
+const handleEdit = () => {
+  showDropdown.value = false
+  emit('edit', {
+    id: props.id,
+    name: props.name,
+    subscribers: props.subscribers,
+    instagram: props.instagram,
+    instaFollowers: props.instaFollowers,
+    tags: props.tags,
+    ownerName: props.ownerName,
+    thumbnail: props.thumbnail
+  })
+}
 
 </template>
 

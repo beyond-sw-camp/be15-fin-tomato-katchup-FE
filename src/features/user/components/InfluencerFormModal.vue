@@ -6,7 +6,7 @@
       <!-- 유튜브 / 인스타 연동 -->
       <div class="flex flex-col gap-3 mb-6">
         <!-- 유튜브 -->
-        <div class="flex items-start justify-between">
+        <div class="flex items-center justify-start">
           <div class="w-[85%]">
             <label class="text-sm font-medium mb-1 block">유튜브명</label>
             <input
@@ -35,7 +35,7 @@
         </div>
 
         <!-- 인스타그램 -->
-        <div class="flex items-start justify-between">
+        <div class="flex items-center justify-start">
           <div class="w-[85%]">
             <label class="text-sm font-medium mb-1 block">인스타그램 아이디</label>
             <input
@@ -68,7 +68,6 @@
       <div class="grid grid-cols-2 gap-x-4 gap-y-4 mb-6">
         <select class="h-[44px] border border-gray-medium rounded px-3 text-sm" v-model="form.gender">
           <option disabled value="">성별을 선택하세요.</option>
-          <option>전체</option>
           <option>남성</option>
           <option>여성</option>
           <option>기타</option>
@@ -87,7 +86,7 @@
         <select class="h-[44px] border border-gray-medium rounded px-3 text-sm" v-model="form.region">
           <option disabled value="">주요 지역</option>
           <option>국내</option>
-          <option>해외</option>
+          <option>국외</option>
         </select>
 
         <input
