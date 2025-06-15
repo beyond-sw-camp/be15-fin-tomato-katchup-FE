@@ -91,6 +91,8 @@ const campaignDetail = {
     clientCompany: 'Company 1',
     clientManagerName: '김동영',
     clientManagerPosition: '팀장',
+    productName: 'COMPACT 폴딩백 하이킹 경량 백팩 20L',
+    productPrice: 16300,
     expectedRevenue: 1000000, // 예상 매출
     expectedProfitMargin: 20, // 예상 이익률
     startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),

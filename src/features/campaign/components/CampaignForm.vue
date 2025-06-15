@@ -80,6 +80,19 @@ const groups = [
         ],
     },
     {
+        type: 'horizontal',
+        fields: [
+            { key: 'productName', label: '상품명', type: 'input', inputType: 'text' },
+            {
+                key: 'productPrice',
+                label: '상품 가격',
+                type: 'input',
+                inputType: 'number',
+                width: 'w-40',
+            },
+        ],
+    },
+    {
         type: 'single',
         fields: [
             { key: 'expectedRevenue', label: '예상 매출', type: 'input', inputType: 'number' },
