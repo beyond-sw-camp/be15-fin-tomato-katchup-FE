@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+const { title, createButtonText, items } = defineProps({
     title: { type: String, default: '참고 리스트' },
     createButtonText: { type: String, default: '추가' },
     items: { type: Array, default: () => [] },
