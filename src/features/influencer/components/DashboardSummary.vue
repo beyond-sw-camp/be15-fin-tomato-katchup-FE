@@ -1,5 +1,5 @@
 <script setup>
-import SummaryItem from './SummaryItem.vue'
+import SummaryItem from '@/features/influencer/components/chart/SummaryItem.vue';
 
 const props = defineProps({
   data: {
@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="w-full bg-white rounded-2xl shadow p-8 mb-8">
+  <div class="dashboard-section">
     <div class="grid grid-cols-4 gap-10 text-center">
       <SummaryItem title="릴스 수" :value="data.reels" icon="ph:play-circle-bold" />
       <SummaryItem title="평균 조회 수" :value="data.views" icon="mdi:eye-outline" />

@@ -1,10 +1,13 @@
 <script setup>
 import { TAG_COLOR_MAP } from '@/constants/tags.js'
 import { Icon } from '@iconify/vue';
+import { useRouter } from 'vue-router';
 
-defineProps({
+const props = defineProps({
   influencer: Object
 })
+
+const router = useRouter();
 
 const tagStyle = (tag) => {
   return TAG_COLOR_MAP[tag] ?? 'bg-gray-200 text-black'
@@ -35,6 +38,17 @@ const genderLabel = (gender) => {
       return '기타'
   }
 }
+
+function goToDashboard(target)  {
+  switch (target) {
+    case 'youtube':
+      router.push(`/influencer/dashboard/youtube?id=${props.influencer.id}`)
+      break;
+    case 'instagram':
+      router.push(`/influencer/dashboard/instagram?id=${props.influencer.id}`)
+      break;
+  }
+}
 </script>
 
 <template>
@@ -57,7 +71,10 @@ const genderLabel = (gender) => {
             <!-- 유튜브 구독자 -->
             <div class="flex flex-col items-center w-[180px]">
                 <span class="text-sm font-semibold truncate mb-2">{{ influencer.subscribers || '해당 없음' }}</span>
-                <button class="flex items-center justify-center bg-white text-black border border-black rounded-lg text-sm font-bold p-2 whitespace-nowrap w-[150px]">
+                <button
+                  @click="goToDashboard('youtube')"
+                  class="flex items-center justify-center bg-white text-black border border-black rounded-lg text-sm font-bold p-2 whitespace-nowrap w-[150px]"
+                >
                     <Icon icon="logos:youtube-icon" width="24" height="24" class="mr-2" />
                     <span class="hidden md:inline">유튜브 대시보드</span>
                 </button>
@@ -66,7 +83,10 @@ const genderLabel = (gender) => {
             <!-- 인스타 팔로워 -->
             <div class="flex flex-col items-center w-[180px]">
                 <span class="text-sm font-semibold truncate mb-2">{{ influencer.instaFollowers || '해당 없음' }}</span>
-                <button class="flex items-center justify-center bg-white text-black border border-black rounded-lg font-semibold text-sm p-2 whitespace-nowrap w-[150px]">
+                <button
+                  @click="goToDashboard('instagram')"
+                  class="flex items-center justify-center bg-white text-black border border-black rounded-lg font-semibold text-sm p-2 whitespace-nowrap w-[150px]"
+                >
                     <Icon icon="skill-icons:instagram" width="24" height="24" class="mr-2" />
                     <span class="hidden md:inline">인스타 대시보드</span>
                 </button>

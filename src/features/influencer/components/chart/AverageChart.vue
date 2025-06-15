@@ -42,7 +42,7 @@ const categories = ['일 평균 조회 수', '월 평균 조회 수']
 
     <ApexCharts
       type="bar"
-      height="300"
+      height="250"
       :series="series"
       :options="{
         chart: { toolbar: { show: false } },
@@ -57,12 +57,12 @@ const categories = ['일 평균 조회 수', '월 평균 조회 수']
         dataLabels: {
           enabled: true,
           formatter: val => `${val.toFixed(0)}만`,
-          style: { fontSize: '20px', fontWeight: 'bold', colors: '#5F38E9' },
-          position: 'top'
+          style: { fontSize: '20px', fontWeight: 'bold', colors: ['#5F38E9']   },
+          offsetY: 140,
         },
         xaxis: {
           categories,
-          labels: { style: { fontSize: '14px', colors: '#999' } }
+          labels: { style: { fontSize: '14px', colors: 'black' } }
         },
         yaxis: {
           show: false
