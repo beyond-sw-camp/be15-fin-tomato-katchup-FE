@@ -6,7 +6,6 @@ import DashboardHeader from '@/features/influencer/components/dashboard/Dashboar
 import DashboardSummary from '@/features/influencer/components/dashboard/DashboardSummary.vue'
 import AgeChart from '@/features/influencer/components/dashboard/AgeChart.vue'
 import PopularPosts from '@/features/influencer/components/dashboard/PopularPosts.vue'
-import PopularReels from '@/features/influencer/components/dashboard/PopularReels.vue';
 
 const router = useRouter()
 const data = ref(null)

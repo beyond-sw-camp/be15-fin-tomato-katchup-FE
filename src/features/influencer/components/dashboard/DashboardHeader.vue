@@ -16,7 +16,7 @@ const tagStyle = (tag) => TAG_COLOR_MAP[tag] ?? 'bg-gray-200 text-black'
 <template>
   <div class="w-full bg-white rounded-2xl shadow p-6 mb-10">
     <div class="flex gap-6">
-      <img :src="thumbnail" class="w-36 h-36 rounded-full object-cover border" />
+      <img :src="thumbnail" alt="썸네일" class="w-36 h-36 rounded-full object-cover border" />
       <div class="flex flex-col justify-center">
         <h1 class="text-2xl font-bold">{{ name }}</h1>
 

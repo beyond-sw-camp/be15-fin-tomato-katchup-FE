@@ -25,7 +25,7 @@ const formatDate = (timestamp) => {
       >
         <!-- 썸네일 클릭시 인스타로 이동 -->
         <a :href="item.permalink" target="_blank">
-          <img :src="item.thumbnail" class="w-full h-[150px] object-cover rounded-xl" />
+          <img :src="item.thumbnail" alt="썸네일" class="w-full h-[150px] object-cover rounded-xl" />
         </a>
 
         <div class="p-2 text-sm font-bold truncate">{{ item.title }}</div>
