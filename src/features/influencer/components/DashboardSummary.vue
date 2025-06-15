@@ -1,5 +1,5 @@
 <script setup>
-import SummaryItem from './SummaryItem.vue'
+import SummaryItem from '@/features/influencer/components/chart/SummaryItem.vue';
 
 const props = defineProps({
   data: {
