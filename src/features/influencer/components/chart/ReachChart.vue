@@ -1,6 +1,5 @@
 \<script setup>
 import ApexCharts from 'vue3-apexcharts'
-import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
 
 const props = defineProps({
