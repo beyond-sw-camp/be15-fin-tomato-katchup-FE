@@ -22,7 +22,7 @@ const chartTitle = props.platform === 'instagram' ? '팔로워 성별 비율' : 
   <div class="dashboard-section">
     <p class="dashboard-title">{{ chartTitle }}</p>
 
-    <div class="relative w-[300px] ml-2.5">
+    <div class="relative w-[300px] ml-5.5">
       <ApexCharts
         type="pie"
         width="320"

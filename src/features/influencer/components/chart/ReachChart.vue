@@ -30,7 +30,7 @@ const getReachText = () => {
   <div class="dashboard-section">
       <h3 class="dashboard-title">{{ getTitle() }}</h3>
 
-    <div class="relative w-[300px] ml-3 mt-6">
+    <div class="relative w-[300px] ml-6 mt-6">
       <ApexCharts
         v-if="series && series.length > 0"
         type="donut"
