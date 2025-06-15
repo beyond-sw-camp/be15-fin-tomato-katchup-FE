@@ -9,6 +9,40 @@ const formatDate = (date) => {
 
 const baseDate = new Date();
 
+const quotationDetail = {
+    title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 견적',
+    requestDate: '2025-06-05',
+    clientCompany: { id: 1, name: 'UVW 뷰티' },
+    clientManager: { id: 10, name: '송강' },
+    period: '2주간',
+    announcementDate: '2025-06-15',
+    pipeline: 'UVW 뷰티 디바이스 언박싱 캠페인',
+    username: { id: 100, name: '차은우' },
+    status: '승인요청',
+    price: 100000000,
+    supplyAmount: 20000,
+    extraProfit: 800000000,
+    content: '진행 내용: 인플루언서 선정 및 콘텐츠 제작 일정 포함',
+    notes: '특이사항 없음',
+    startDate: '2025-06-06',
+    endDate: '2025-06-20',
+};
+
+const opinionList = [
+    {
+        id: 1,
+        author: '차은우',
+        content: '첫 번째 의견입니다.',
+        createdAt: '2025-06-15 10:30:00',
+    },
+    {
+        id: 2,
+        author: '아이유',
+        content: '두 번째 의견입니다.',
+        createdAt: '2025-06-15 11:00:00',
+    },
+];
+
 const pipelineList = [
     {
         pipelineStep: 'chance',
@@ -107,6 +141,48 @@ const campaignDetail = {
         negotiation: { date: formatDate(new Date(baseDate.getFullYear(), 2, 27)) },
     },
 };
+const userList = [
+    { id: 1, name: '차은우' },
+    { id: 2, name: '아이유' },
+    { id: 3, name: '김수현' },
+    { id: 4, name: '장원영' },
+    { id: 5, name: '정국' },
+    { id: 6, name: '지민' },
+    { id: 7, name: '박보검' },
+    { id: 8, name: '손흥민' },
+    { id: 9, name: '임영웅' },
+];
+
+const clientCompanyList = [
+    { id: 1, name: 'UVW 뷰티' },
+    { id: 2, name: 'XYZ 패션' },
+    { id: 3, name: 'ABC 전자' },
+    { id: 4, name: '카카오 엔터' },
+    { id: 5, name: 'CJ ENM' },
+    { id: 6, name: '네이버 쇼핑' },
+    { id: 7, name: '하이마트' },
+    { id: 8, name: '삼성전자' },
+];
+
+const clientManagerList = [
+    { id: 101, name: '송강' },
+    { id: 102, name: '김민지' },
+    { id: 103, name: '이도현' },
+    { id: 104, name: '박서준' },
+    { id: 105, name: '정해인' },
+    { id: 106, name: '서강준' },
+    { id: 107, name: '문가영' },
+    { id: 108, name: '한소희' },
+    { id: 109, name: '신민아' },
+];
+
+const proposalReferenceList = [
+    { id: 1, title: '[1차] 광고 제안' },
+    { id: 2, title: '[2차] 광고 마지막 제안' },
+    { id: 3, title: '[3차] 광고 진짜 마지막 제안' },
+    { id: 4, title: '[4차] 광고 제안ㅜㅜ' },
+    { id: 5, title: '[5차] 계약 직전 최종안' },
+];
 
 const campaignList = Array.from({ length: 50 }, (_, index) => {
     baseDate.setFullYear(baseDate.getFullYear() + index); // 기준 연도 설정
@@ -174,6 +250,54 @@ const CampaignHandler = [
                 status: 200,
                 headers: { 'Cache-Control': 'no-store' },
             },
+        );
+    }),
+    http.get('/api/v1/opinion', async () => {
+        return HttpResponse.json(
+            {
+                data: opinionList,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/quotation/:id', async () => {
+        return HttpResponse.json(
+            {
+                data: quotationDetail,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/popup/user', async () => {
+        return HttpResponse.json(
+            { data: userList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
+
+    http.get('/api/v1/popup/client-company', async () => {
+        return HttpResponse.json(
+            { data: clientCompanyList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
+
+    http.get('/api/v1/popup/client-manager', async () => {
+        return HttpResponse.json(
+            { data: clientManagerList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
+    http.get('/api/v1/proposal/reference', async () => {
+        return HttpResponse.json(
+            { data: proposalReferenceList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
 ];
