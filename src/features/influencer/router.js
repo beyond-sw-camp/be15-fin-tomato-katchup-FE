@@ -1,6 +1,6 @@
 import InfluencerListView from '@/features/influencer/views/InfluencerListView.vue';
-import YoutubeDashboardView from '@/features/influencer/views/YoutubeDashboardView.vue';
 import InstagramDashboardView from '@/features/influencer/views/InstagramDashboardView.vue';
+import YoutubeDashboardView from '@/features/influencer/views/YoutubeDashboardView.vue';
 
 export const influencerRoutes = [
   {
