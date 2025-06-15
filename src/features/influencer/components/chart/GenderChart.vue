@@ -1,26 +1,31 @@
 <script setup>
 import ApexCharts from 'vue3-apexcharts'
 
-const props = defineProps({ data: Array })
+const props = defineProps({
+  platform: String,  // 'instagram' or 'youtube'
+  data: Array
+})
 
+// 성별 합산
 const totalMale = props.data.reduce((sum, item) => sum + item.male, 0)
 const totalFemale = props.data.reduce((sum, item) => sum + item.female, 0)
 const totalOther = props.data.reduce((sum, item) => sum + item.other, 0)
 
 const series = [totalMale, totalFemale, totalOther]
 const labels = ['남성', '여성', '사용자 지정']
-
 const total = totalMale + totalFemale + totalOther
+
+const chartTitle = props.platform === 'instagram' ? '팔로워 성별 비율' : '구독자 성별 비율'
 </script>
 
 <template>
   <div class="dashboard-section">
-    <p class="dashboard-title">팔로워 성별 비율</p>
+    <p class="dashboard-title">{{ chartTitle }}</p>
 
-    <div class="relative w-[300px] mx-auto">
+    <div class="relative w-[300px] ml-2.5">
       <ApexCharts
         type="pie"
-        width="300"
+        width="320"
         :series="series"
         :options="{
           labels,

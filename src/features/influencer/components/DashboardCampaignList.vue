@@ -60,7 +60,7 @@ const formatDate = (isoDate) => {
       </div>
 
       <!-- 캠페인 상세 정보 -->
-      <div class="flex-1 p-10 flex-col items-center overflow-hidden hover:shadow-lg rounded-xl transition cursor-pointer">
+      <div class="flex p-8 flex-col overflow-hidden hover:shadow-lg rounded-xl transition cursor-pointer">
         <a :href="selectedCampaign.permalink" target="_blank">
           <img :src="selectedCampaign.post.thumbnail" class="w-96 h-48 rounded object-cover mb-6" />
         </a>
