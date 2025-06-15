@@ -15,7 +15,7 @@ const influencerList = [
       'Professional', 'Gaming'
     ],
     ownerName: '오유경',
-    thumbnail: '/src/assets/images/gmovie.png'
+    thumbnail: '/src/assets/images/mock/gmovie.png'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const influencerList = [
     targetAgeGroup: '18-24',
     tags: ['Entertainment', 'LifeStyle', 'Food', 'Family & kids', 'Professional'],
     ownerName: '이승재',
-    thumbnail: '/src/assets/images/tzuyang.png'
+    thumbnail: '/src/assets/images/mock/tzuyang.png'
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const influencerList = [
     targetAgeGroup: '18-24',
     tags: ['Entertainment', 'LifeStyle', 'Food', 'Pet', 'Family & kids', 'Animation', 'Gaming', 'Professional', 'Fashion & Beauty'],
     ownerName: '윤채영',
-    thumbnail: '/src/assets/images/yeodano.png'
+    thumbnail: '/src/assets/images/mock/yeodano.png'
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const influencerList = [
       'Entertainment', 'LifeStyle'
     ],
     ownerName: '조현승',
-    thumbnail: '/src/assets/images/shortbox.png'
+    thumbnail: '/src/assets/images/mock/shortbox.png'
   },
   {
     id: 5,
@@ -67,7 +67,7 @@ const influencerList = [
       'Professional', 'Fashion & Beauty'
     ],
     ownerName: '조현승',
-    thumbnail: '/src/assets/images/kiu.png'
+    thumbnail: '/src/assets/images/mock/kiu.png'
   },
 ]
 

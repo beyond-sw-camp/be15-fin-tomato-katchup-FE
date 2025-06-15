@@ -1,30 +1,33 @@
 <script setup>
 import { Icon } from '@iconify/vue';
 import { reactive, ref } from 'vue';
+import FindPassword from '@/features/mypage/components/FindPassword.vue';
 
 const influencers = ref([
-    { id: 1, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 2, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 3, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 4, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 5, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 6, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 7, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 8, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 9, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 10, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 11, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 12, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 13, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 14, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 15, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 16, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 17, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 18, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 19, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 20, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
-    { id: 21, name: 'tzuyang쯔양', img: '/src/assets/icons/profile.png' },
+    { id: 1, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 2, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 3, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 4, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 5, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 6, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 7, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 8, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 9, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 10, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 11, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 12, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 13, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 14, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 15, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 16, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 17, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 18, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 19, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 20, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
+    { id: 21, name: 'tzuyang쯔양', img: '/src/assets/images/profile.png' },
 ]);
+
+const showPasswordModal = ref(false)
 
 // 현재 수정 중인 필드
 const editField = ref(null)
@@ -55,7 +58,6 @@ const handleImageUpload = (e) => {
 // 저장 버튼 클릭 시
 const saveEdit = (field) => {
   console.log(`${field} 저장됨`, form[field])
-  // 여기서 서버 업로드 로직 추가 가능 (ex. API 호출)
   editField.value = null
 }
 
@@ -66,8 +68,7 @@ const cancelEdit = () => {
 </script>
 
 <template>
-    <div class="container">
-        <div class="pt-[40px] px-[160px]">
+      <div class="container">
             <!-- 제목 -->
             <div class="mb-4">
                 <h2 class="text-[26px] font-medium mb-2">마이페이지</h2>
@@ -113,8 +114,8 @@ const cancelEdit = () => {
                                     <span class="text-base font-medium text-black">{{
                                         form.phone
                                     }}</span>
-                                    <button class="text-[#828282]" @click="editField = 'phone'">
-                                      <Icon icon="ei:pencil" clase="w-4 h-4" />
+                                    <button class="text-[#828282] cursor-pointer" @click="editField = 'phone'">
+                                      <Icon icon="ei:pencil" clase="w-4 h-4 cursor " />
                                     </button>
                                 </template>
                             </div>
@@ -131,7 +132,7 @@ const cancelEdit = () => {
                                         class="border px-2 py-1 text-sm rounded w-[180px]"
                                     />
                                     <button
-                                        class="text-xs text-blue-600"
+                                        class="text-xs text-blue-600 "
                                         @click="saveEdit('email')"
                                     >
                                         완료
@@ -144,7 +145,7 @@ const cancelEdit = () => {
                                     <span class="text-base font-medium text-black">{{
                                         form.email
                                     }}</span>
-                                    <button class="text-[#828282]" @click="editField = 'email'">
+                                    <button class="text-[#828282] cursor-pointer" @click="editField = 'email'">
                                       <Icon icon="ei:pencil" clase="w-4 h-4" />
                                     </button>
                                 </template>
@@ -189,7 +190,7 @@ const cancelEdit = () => {
                             </template>
 
                             <template v-else>
-                              <button @click="editField = 'profileImg'" class="text-[#828282]">
+                              <button @click="editField = 'profileImg'" class="text-[#828282] cursor-pointer">
                                 <Icon icon="ei:pencil" clase="w-4 h-4" />
                               </button>
                             </template>
@@ -219,7 +220,7 @@ const cancelEdit = () => {
                                     <span class="text-base font-medium text-black">{{
                                         form.name
                                     }}</span>
-                                    <button class="text-[#828282]" @click="editField = 'name'">
+                                    <button class="text-[#828282] cursor-pointer" @click="editField = 'name'">
                                       <Icon icon="ei:pencil" clase="w-4 h-4" />
                                     </button>
                                 </template>
@@ -235,7 +236,7 @@ const cancelEdit = () => {
                                     <input
                                         type="date"
                                         v-model="form.birth"
-                                        class="border px-2 py-1 text-sm rounded w-[120px]"
+                                        class="border px-2 py-1 text-sm rounded w-[130px]"
                                     />
                                     <button
                                         class="text-xs text-blue-600"
@@ -251,7 +252,7 @@ const cancelEdit = () => {
                                     <span class="text-base font-medium text-black">{{
                                         form.birth
                                     }}</span>
-                                    <button class="text-[#828282]" @click="editField = 'birth'">
+                                    <button class="text-[#828282] cursor-pointer" @click="editField = 'birth'">
                                       <Icon icon="ei:pencil" clase="w-4 h-4" />
                                     </button>
                                 </template>
@@ -285,16 +286,19 @@ const cancelEdit = () => {
                                     <span class="text-base font-medium text-black">{{
                                         form.gender
                                     }}</span>
-                                    <button class="text-[#828282]" @click="editField = 'gender'">
+                                    <button class="text-[#828282] cursor-pointer" @click="editField = 'gender'">
                                       <Icon icon="ei:pencil" clase="w-4 h-4" />
                                     </button>
                                 </template>
                             </div>
                         </div>
                     </div>
-                    <button class="bg-[#A8C1DA] text-white px-2 py-2 text-sm rounded">
-                        비밀번호 변경
-                    </button>
+                  <button
+                    class="btn-create"
+                    @click="showPasswordModal = true"
+                  >
+                    비밀번호 변경
+                  </button>
                 </div>
 
                 <!-- 세로선 -->
@@ -320,5 +324,5 @@ const cancelEdit = () => {
                 </div>
             </div>
         </div>
-    </div>
+  <FindPassword v-if="showPasswordModal" @close="showPasswordModal = false" />
 </template>
