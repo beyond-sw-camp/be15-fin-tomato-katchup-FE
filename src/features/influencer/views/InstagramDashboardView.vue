@@ -73,10 +73,12 @@ const goToPlatform = (platform) => {
         >인스타그램</button>
       </div>
 
-      <DashboardBase :summaryData="summaryData" :data="data" :satisfaction="satisfaction" />
-      <PopularPosts :posts="data.popularPosts" />
-      <PopularShortForms :reels="data.popularReels" />
-      <DashboardCampaignList />
+      <div class="flex flex-col gap-8">
+          <DashboardBase :summaryData="summaryData" :data="data" :satisfaction="satisfaction" />
+          <PopularPosts :posts="data.popularPosts" />
+          <PopularShortForms :reels="data.popularReels" />
+          <DashboardCampaignList />
+      </div>
     </div>
 
     <div v-else class="flex justify-center items-center w-full h-full">Loading...</div>

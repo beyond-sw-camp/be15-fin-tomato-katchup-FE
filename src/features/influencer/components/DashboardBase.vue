@@ -17,21 +17,21 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-8">
     <DashboardSummary :data="summaryData" />
 
-    <div class="flex gap-8 mb-8">
+    <div class="flex gap-8">
       <AverageChart :daily="data.dailyAverageViews" :monthly="data.monthlyAverageViews" class="w-1/3" />
       <AlgorithmChart class="w-1/3" :data="data" />
       <ReachChart :reach="data.reach" :followerRate="data.followerReachRate" :nonFollowerRate="data.nonFollowerReachRate" class="w-1/3" />
     </div>
 
-    <div class="flex gap-8 mb-8">
+    <div class="flex gap-8">
       <AgeChart :data="data.demographics.ageGender" class="w-2/3" />
       <GenderChart :data="data.demographics.ageGender" class="w-1/3" />
     </div>
 
-    <div class="flex gap-8 mb-8">
+    <div class="flex gap-8">
       <FollowerChart :data="data.followersTrend" class="w-2/3" />
       <div class="dashboard-section w-1/3">
         <div class="dashboard-title">평균 고객 만족도</div>
