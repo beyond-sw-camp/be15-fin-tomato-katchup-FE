@@ -118,7 +118,7 @@ function selectSubMenu(menu, subMenu) {
             </div>
           </div>
           <div class="flex items-center ml-4 gap-4">
-            <button><img src="@/assets/icons/calendar.svg" alt="캘린더" class="w-6 h-6" /></button>
+            <button><img src="@/assets/icons/calendar.svg" alt="캘린더" class="cursor-pointer w-6 h-6" @click="router.push('/calendar')" /></button>
             <button><img src="@/assets/icons/alarm.svg" alt="알림" class="w-6 h-6" /></button>
             <button><img src="@/assets/icons/logout.svg" alt="로그아웃" class="w-6 h-6" /></button>
           </div>
