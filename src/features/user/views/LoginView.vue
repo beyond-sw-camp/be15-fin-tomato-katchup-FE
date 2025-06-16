@@ -55,4 +55,5 @@ const password = ref('');
   justify-content: flex-start;
   align-items: center;
 }
+
 </style>
