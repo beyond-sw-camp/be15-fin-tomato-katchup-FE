@@ -47,3 +47,7 @@ export const getClientManager = async () => {
 export const getProposalReference = async () => {
     return await api.get('/proposal/reference');
 };
+
+export const getInfluencer = async () => {
+    return await api.get('/popup/influencer');
+};

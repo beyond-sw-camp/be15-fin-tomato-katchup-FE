@@ -1,7 +1,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getUser, getClientCompany, getClientManager } from '@/features/campaign/api';
+import {
+    getUser,
+    getClientCompany,
+    getClientManager,
+    getInfluencer,
+} from '@/features/campaign/api.js';
 
 const route = useRoute();
 const type = route.query.type ?? 'user';
@@ -24,6 +29,8 @@ const fetchData = async () => {
             res = await getClientCompany();
         } else if (type === 'manager') {
             res = await getClientManager();
+        } else if (type === 'influencer') {
+            res = await getInfluencer();
         } else {
             console.error('Unknown search type:', type);
         }
@@ -53,7 +60,7 @@ const isSelected = (item) => selectedItems.value.includes(item[valueKey]);
 const toggleSelect = (item) => {
     const id = item[valueKey];
 
-    if (type === 'user') {
+    if (type === 'user' || type === 'influencer') {
         // 다중 선택 유지
         if (isSelected(item)) {
             selectedItems.value = selectedItems.value.filter((i) => i !== id);
@@ -70,7 +77,7 @@ const toggleSelect = (item) => {
 const submit = () => {
     let result = null;
 
-    if (type === 'user') {
+    if (type === 'user' || type === 'influencer') {
         result = allItems.value.filter((item) => selectedItems.value.includes(item[valueKey]));
     } else {
         const selectedObj = allItems.value.find(

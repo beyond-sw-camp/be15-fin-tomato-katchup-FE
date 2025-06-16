@@ -103,10 +103,10 @@ const groups = [
         type: 'horizontal',
         fields: [
             {
-                key: 'status',
-                label: '진행단계',
-                type: 'select',
-                options: ['승인요청', '진행중', '보류', '완료'],
+                key: 'influencer',
+                label: '인플루언서',
+                type: 'search-influencer',
+                searchType: 'influencer',
             },
             { key: 'price', label: '견적가', type: 'input', inputType: 'number' },
         ],
@@ -114,8 +114,20 @@ const groups = [
     {
         type: 'horizontal',
         fields: [
+            {
+                key: 'status',
+                label: '진행단계',
+                type: 'select',
+                options: ['승인요청', '진행중', '보류', '완료'],
+            },
             { key: 'supplyAmount', label: '공급가능수량', type: 'input', inputType: 'number' },
-            { key: 'extraProfit', label: '기타수익', type: 'input', inputType: 'number' },
+        ],
+    },
+    {
+        type: 'horizontal',
+        fields: [
+            { key: '', label: '', type: 'spacer' },
+            { key: 'extraProfit', label: '기대수익', type: 'input', inputType: 'number' },
         ],
     },
     {

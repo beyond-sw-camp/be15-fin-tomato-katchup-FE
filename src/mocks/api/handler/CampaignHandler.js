@@ -18,6 +18,7 @@ const quotationDetail = {
     announcementDate: '2025-06-15',
     pipeline: 'UVW 뷰티 디바이스 언박싱 캠페인',
     username: { id: 100, name: '차은우' },
+    influencer: { id: 201, name: '나연' },
     status: '승인요청',
     price: 100000000,
     supplyAmount: 20000,
@@ -176,6 +177,18 @@ const clientManagerList = [
     { id: 109, name: '신민아' },
 ];
 
+const influencerList = [
+    { id: 201, name: '나연' },
+    { id: 202, name: '제니' },
+    { id: 203, name: '장원영' },
+    { id: 204, name: '윈터' },
+    { id: 205, name: '아이유' },
+    { id: 206, name: '수지' },
+    { id: 207, name: '조이' },
+    { id: 208, name: '유나' },
+    { id: 209, name: '솔라' },
+];
+
 const proposalReferenceList = [
     { id: 1, title: '[1차] 광고 제안' },
     { id: 2, title: '[2차] 광고 마지막 제안' },
@@ -291,6 +304,12 @@ const CampaignHandler = [
     http.get('/api/v1/popup/client-manager', async () => {
         return HttpResponse.json(
             { data: clientManagerList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
+    http.get('/api/v1/popup/influencer', async () => {
+        return HttpResponse.json(
+            { data: influencerList },
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),

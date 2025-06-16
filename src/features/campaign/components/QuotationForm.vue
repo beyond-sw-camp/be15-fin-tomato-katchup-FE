@@ -46,7 +46,6 @@ const openSearchPopup = (key, type) => {
                 <template v-for="field in group.fields" :key="field.key">
                     <div class="flex-1">
                         <label class="input-form-label">{{ field.label }}</label>
-
                         <div v-if="field.type === 'date-range'" class="flex items-center gap-2">
                             <input
                                 type="date"
@@ -62,6 +61,12 @@ const openSearchPopup = (key, type) => {
                                 class="input-form-box"
                             />
                         </div>
+
+                        <template v-else-if="field.type === 'spacer'">
+                            <div class="flex-1">
+                                <label class="input-form-label">{{ field.label }}</label>
+                            </div>
+                        </template>
 
                         <select
                             v-else-if="field.type === 'select'"
