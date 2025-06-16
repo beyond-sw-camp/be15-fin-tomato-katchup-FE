@@ -22,27 +22,29 @@ const chartTitle = props.platform === 'instagram' ? '팔로워 성별 비율' : 
   <div class="dashboard-section">
     <p class="dashboard-title">{{ chartTitle }}</p>
 
-    <div class="relative w-[300px] ml-5.5">
-      <ApexCharts
-        type="pie"
-        width="320"
-        :series="series"
-        :options="{
-          labels,
-          colors: ['#A2C9F4', '#F6A6B2', '#D9D9D9'],
-          legend: { position: 'bottom' },
-          dataLabels: { enabled: false },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                const percent = (val / total * 100).toFixed(1);
-                return `${val}명 (${percent}%)`;
+    <div class="flex justify-center items-center">
+      <div class="relative">
+        <ApexCharts
+          type="pie"
+          width="300"
+          :series="series"
+          :options="{
+            labels,
+            colors: ['#A2C9F4', '#F6A6B2', '#D9D9D9'],
+            legend: { position: 'bottom' },
+            dataLabels: { enabled: false },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  const percent = (val / total * 100).toFixed(1);
+                  return `${val}명 (${percent}%)`;
+                }
               }
-            }
-          },
-          stroke: { show: false }
-        }"
-      />
+            },
+            stroke: { show: false }
+          }"
+        />
+      </div>
     </div>
   </div>
 </template>
