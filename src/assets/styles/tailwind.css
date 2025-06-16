@@ -123,7 +123,7 @@
   /* === Dashboard === */
   /* 그래프 영역 */
   .dashboard-section {
-    @apply bg-white rounded-2xl shadow p-6 mb-2
+    @apply bg-white rounded-2xl shadow p-7 px-6 mb-10 items-center justify-center
   }
 
   /* 그래프 제목 */

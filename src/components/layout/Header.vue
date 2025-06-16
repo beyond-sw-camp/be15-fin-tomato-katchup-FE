@@ -77,7 +77,7 @@ function selectSubMenu(menu, subMenu) {
 </script>
 
 <template>
-  <div class="relative w-full font-display font-semibold text-gray-medium" @mouseleave="hoveredMenu = ''">
+  <div class="relative w-full font-semibold text-gray-medium" @mouseleave="hoveredMenu = ''">
     <header class="w-full bg-white border-b border-gray-medium text-lg">
       <div class="flex justify-between items-center h-[90px]">
         <!-- 로고 -->
