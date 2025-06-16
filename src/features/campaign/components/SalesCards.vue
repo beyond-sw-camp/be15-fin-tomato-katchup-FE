@@ -39,12 +39,17 @@
             </div>
         </div>
 
-        <!-- 부모 캠페인 명 -->
+        <!-- 캠페인 명 -->
         <div class="text-gray-dark text-sm mb-1 truncate max-w-full">
             {{ managementOption.campaignTitle }}
         </div>
-        <div v-if="pageType === 'quotation'" class="text-gray-dark text-sm truncate max-w-full">
-            상품명 : {{ managementOption.productName }}
+
+        <!-- 상품명 (Quotation, Contract, Revenue 전용) -->
+        <div
+            v-if="['quotation', 'contract', 'revenue'].includes(pageType)"
+            class="text-gray-dark text-sm truncate max-w-full"
+        >
+            상품명 : {{ managementOption.productName ?? '-' }}
         </div>
 
         <!-- 상세 정보 -->
@@ -68,15 +73,29 @@
 
         <!-- 하단 상세 -->
         <div class="flex flex-row gap-2 text-sm text-gray-dark border-t pt-2 w-full max-w-full">
-            <!-- Proposal -->
             <template v-if="pageType === 'proposal'">
-                <div class="truncate">요청일 :{{ formatDate(managementOption.requestDate) }}</div>
-                <div class="truncate">발표일 :{{ formatDate(managementOption.presentDate) }}</div>
+                <div class="truncate">요청일 : {{ formatDate(managementOption.requestDate) }}</div>
+                <div class="truncate">발표일 : {{ formatDate(managementOption.presentDate) }}</div>
             </template>
 
-            <!-- Quotation -->
-            <template v-else-if="pageType === 'quotation'">
+            <template v-else-if="['quotation', 'contract', 'revenue'].includes(pageType)">
                 <div class="truncate">광고단가 : {{ formatMoney(managementOption.adPrice) }}</div>
+            </template>
+
+            <template v-else-if="pageType === 'listup'">
+                <!-- 첫 줄: 상품명 -->
+                <div class="flex w-full">
+                    <div class="w-[80%] truncate">
+                        상품명 : {{ managementOption.productName ?? '-' }}
+                    </div>
+                </div>
+
+                <!-- 두 번째 줄: 인플루언서 -->
+                <div class="flex w-full">
+                    <div class="w-[100%] truncate">
+                        인플루언서 : {{ renderListupCount(managementOption.influencers) }}
+                    </div>
+                </div>
             </template>
         </div>
     </div>
@@ -91,23 +110,27 @@ const { managementOption, openMenuId, pageType } = defineProps({
     pageType: { type: String, default: 'listUp' },
 });
 
-// 날짜 포맷터
+// 날짜 포맷
 const formatDate = (dateString) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const dd = String(date.getDate()).padStart(2, '0');
-    return `${yyyy}.${mm}.${dd}`;
+    return `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
 };
 
-// 금액 포맷터
+// 금액 포맷
 const formatMoney = (price) => {
     if (price == null) return '-';
     return `￦ ${Number(price).toLocaleString()}`;
 };
 
-// 상태 색상 분기
+// 리스트업 인플루언서 수 표기
+const renderListupCount = (list = []) => {
+    if (!list || list.length === 0) return '0명';
+    if (list.length === 1) return list[0].name ?? list[0];
+    return `${list[0].name ?? list[0]} 외 ${list.length - 1}명`;
+};
+
+// 상태 색상
 const statusColor = (status) => {
     switch (status) {
         case '승인완료':

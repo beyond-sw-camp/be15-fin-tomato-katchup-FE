@@ -35,13 +35,13 @@ export const getProposalDetail = async (proposalId) => {
 };
 
 export const getListUpList = async (page, size, filters = {}) => {
-    return await api.get('/sales/list-up', {
+    return await api.get('/sales/listup', {
         params: { page, size, ...filters },
     });
 };
 
 export const getListUpDetail = async (listUpId) => {
-    return await api.get(`/sales/list-up/${listUpId}`);
+    return await api.get(`/sales/listup/${listUpId}`);
 };
 
 export const getQuotationList = async (page, size, filters = {}) => {
@@ -54,14 +54,14 @@ export const getQuotationDetail = async (quotationId) => {
     return await api.get(`/sales/quotation/${quotationId}`);
 };
 
-export const getSalesList = async (page, size, filters = {}) => {
-    return await api.get('/sales/sale', {
+export const getRevenueList = async (page, size, filters = {}) => {
+    return await api.get('/sales/revenue', {
         params: { page, size, ...filters },
     });
 };
 
-export const getSalesDetail = async (salesId) => {
-    return await api.get(`/sales/sale/${salesId}`);
+export const getRevenueDetail = async (revenueId) => {
+    return await api.get(`/sales/revenue/${revenueId}`);
 };
 
 export const getContractList = async (page, size, filters = {}) => {

@@ -18,7 +18,7 @@ export const campaignRoutes = [
         meta: { useLayout: 'none' },
     },
     {
-        path: '/sales/list-up',
+        path: '/sales/listup',
         name: 'ListUpList',
         component: () => import('@/features/campaign/views/ListUpList.vue'),
     },
@@ -38,9 +38,9 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/QuotationDetail.vue'),
     },
     {
-        path: '/sales/sale',
-        name: 'SalesList',
-        component: () => import('@/features/campaign/views/SalesList.vue'),
+        path: '/sales/revenue',
+        name: 'RevenueList',
+        component: () => import('@/features/campaign/views/RevenueList.vue'),
     },
     {
         path: '/sales/contract',

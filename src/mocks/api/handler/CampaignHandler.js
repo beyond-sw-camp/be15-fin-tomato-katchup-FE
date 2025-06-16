@@ -270,6 +270,83 @@ const quotationList = Array.from({ length: 50 }, (_, index) => {
     };
 });
 
+const contractList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `Contract ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        adPrice: 30000000,
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
+const revenueList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `Revenue ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        adPrice: 30000000,
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
+const ListUpList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `ListUp ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        influencers: [
+            { id: 1, name: '지무비' },
+            { id: 2, name: '감자탕' },
+            { id: 3, name: '맛피자' },
+            { id: 4, name: '감스트' },
+        ],
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
         const url = new URL(request.url);
@@ -367,6 +444,28 @@ const CampaignHandler = [
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
+    http.get('/api/v1/sales/listup', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = ListUpList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
     http.get('/api/v1/sales/proposal', async ({ request }) => {
         const url = new URL(request.url);
         const page = parseInt(url.searchParams.get('page')) || 1;
@@ -397,6 +496,50 @@ const CampaignHandler = [
         const startIndex = (page - 1) * size;
         const endIndex = startIndex + size;
         const pagedData = quotationList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/contract', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = contractList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/revenue', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = revenueList.slice(startIndex, endIndex);
 
         return HttpResponse.json(
             {
