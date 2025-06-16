@@ -19,7 +19,7 @@ export const campaignRoutes = [
     {
         path: '/search-popup',
         name: 'SearchPopup',
-        component: () => import('@/components/layout/SearchPopup.vue'),
+        component: () => import('@/components/common/SearchPopup.vue'),
         meta: { useLayout: 'none' },
     },
     {
