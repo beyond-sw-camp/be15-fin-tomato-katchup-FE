@@ -110,7 +110,7 @@
       </ul>
       <div class="flex justify-end gap-2">
         <button class="px-4 py-2 text-sm border rounded" @click="showCreateModal = false">취소</button>
-        <button class="px-4 py-2 text-sm bg-[--color-btn-blue] text-white rounded" @click="handleCreate">생성</button>
+        <button class="px-4 py-2 text-sm border rounded" @click="handleCreate">생성</button>
       </div>
     </div>
 
