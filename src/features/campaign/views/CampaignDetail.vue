@@ -6,7 +6,6 @@ import { useRoute, useRouter } from 'vue-router';
 import CampaignForm from '@/features/campaign/components/CampaignForm.vue';
 import PipelineDiagram from '@/features/campaign/components/PipelineDiagram.vue';
 import CampaignHistory from '@/features/campaign/components/CampaignHistory.vue';
-
 const route = useRoute();
 const router = useRouter();
 const campaignDetail = ref(null);
@@ -55,8 +54,8 @@ const cancel = () => {
                 </button>
                 <Icon
                     icon="material-symbols:lists-rounded"
-                    width="48"
-                    height="48"
+                    width="40"
+                    height="40"
                     class="text-btn-gray"
                     @click="router.push('/campaign')"
                 />

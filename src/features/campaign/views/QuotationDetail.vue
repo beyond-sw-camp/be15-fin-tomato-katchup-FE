@@ -20,8 +20,8 @@
 
                         <Icon
                             icon="material-symbols:lists-rounded"
-                            width="48"
-                            height="48"
+                            width="32"
+                            height="32"
                             class="text-btn-gray"
                             @click="router.push('/quotation')"
                         />
