@@ -7,10 +7,6 @@ export const advertisementRoutes = [
     path: '/management/client',
     name: 'ClientList',
     component: ClientListView,
-    meta: {
-      layout: 'default',
-      requiresAuth: true,
-    }
   },
   // 고객사 등록
   {
