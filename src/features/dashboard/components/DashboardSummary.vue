@@ -1,5 +1,5 @@
 <script setup>
-import SummaryItem from '@/features/influencer/components/chart/SummaryItem.vue';
+import SummaryItem from '@/features/dashboard/components/chart/SummaryItem.vue';
 
 const props = defineProps({
   platform: {
