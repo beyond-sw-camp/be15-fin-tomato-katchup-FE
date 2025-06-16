@@ -41,7 +41,6 @@ const password = ref('');
 
     </div>
   </div>
-
 </template>
 
 <style scoped>

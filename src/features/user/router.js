@@ -39,5 +39,4 @@ export const userRoutes = [
         name: 'surveyList',
         component: SurveyListView,
     },
-
 ]
