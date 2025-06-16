@@ -163,7 +163,12 @@ function deleteEvent(eventToDelete) {
               <span class="text-sm text-black-500">{{ event.end.slice(11, 16) }}</span>
             </div>
             <div class="flex-20 pl-5 flex flex-col justify-center">
-              <span class="text-md text-gray-800 font-medium">{{ event.title }}</span>
+              <span
+                  class="text-md text-black-500 truncate max-w-[120px]"
+                  :title="event.title"
+              >
+              {{ event.title }}
+              </span>
             </div>
 
             <!-- 수정,삭제 아이콘 -->
@@ -182,10 +187,10 @@ function deleteEvent(eventToDelete) {
         <!-- 추가 버튼 -->
         <div class="flex justify-center mt-6">
           <button
-            class="w-8 h-8 rounded-full bg-gray-200 text-xl text-gray-600 hover:bg-gray-300"
-            @click="openAddModal"
+              class="cursor-pointer"
+              @click="openAddModal"
           >
-            +
+              <Icon icon="ei:plus" width="50" height="50" />
           </button>
         </div>
       </div>
