@@ -1,101 +1,99 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router';
+import { Icon } from '@iconify/vue'
 
-import DashboardHeader from '@/features/influencer/components/dashboard/DashboardHeader.vue'
-import DashboardSummary from '@/features/influencer/components/dashboard/DashboardSummary.vue'
-import AgeChart from '@/features/influencer/components/dashboard/AgeChart.vue'
-import PopularPosts from '@/features/influencer/components/dashboard/PopularPosts.vue'
+import DashboardBase from '@/features/influencer/components/DashboardBase.vue'
+import DashboardHeader from '@/features/influencer/components/DashboardHeader.vue'
+import PopularPosts from '@/features/influencer/components/PopularPosts.vue'
+import PopularShortForms from '@/features/influencer/components/PopularShortForms.vue'
+import DashboardCampaignList from '@/features/influencer/components/DashboardCampaignList.vue'
 
+const route = useRoute()
 const router = useRouter()
 const data = ref(null)
-const activePlatform = ref('youtube')
+const satisfaction = ref(82.5)
+
+const influencerId = route.query.id
 
 onMounted(async () => {
-  const res = await fetch('/api/v1/dashboard/instagram')
+  const res = await fetch(`/api/v1/dashboard/youtube?id=${influencerId}`)
   const resData = await res.json()
-  if (resData.data?.length > 0) {
-    data.value = resData.data[0]
-  } else {
-    data.value = null
+
+  if (!resData.data) {
+    toast.warning('유튜브 계정이 연결되어있지 않습니다.');
+    router.replace(`/influencer/dashboard/instagram?id=${influencerId}`);
   }
+
+  data.value = resData.data
 })
 
 const summaryData = computed(() => {
-  if (!data.value) return {}
+  if (!data.value?.shortsSummary) {
+    return { shorts: 0, views: '0만', comments: '0개', likes: '0만' }
+  }
   return {
-    reels: data.value.reels.count,
-    views: `${(data.value.reels.avgViews / 10000).toFixed(1)}만`,
-    comments: `${data.value.reels.avgComments}개`,
-    likes: `${(data.value.reels.avgLikes / 10000).toFixed(1)}만`
+    shorts: data.value.shortsSummary.count,
+    views: `${(data.value.shortsSummary.averageViewCount / 10000).toFixed(1)}만`,
+    comments: `${data.value.shortsSummary.commentCount}개`,
+    likes: `${(data.value.shortsSummary.likeCount / 10000).toFixed(1)}만`
   }
 })
 
 const formatSubscribers = (num) => {
-  return num >= 10000 ? `${Math.floor(num / 10000)}만명` : `${num}명`
-}
-
-const formatFollowers = (num) => {
-  return num >= 10000 ? `${Math.floor(num / 10000)}만명` : `${num}명`
+  const parsedNum = parseInt(num)
+  return parsedNum >= 10000 ? `${Math.floor(parsedNum / 10000)}만명` : `${parsedNum}명`
 }
 
 const goToPlatform = (platform) => {
-  activePlatform.value = platform
+  router.push(`/influencer/dashboard/${platform}?id=${influencerId}`);
+}
 
-  if (platform === 'youtube') {
-    router.push('/influencer/dashboard/youtube')
-  } else if (platform === 'instagram') {
-    router.push('/influencer/dashboard/instagram')
-  }
+const goToList = () => {
+  router.push(`/influencer/list`);
 }
 </script>
 
 <template>
-  <div class="w-full min-h-screen bg-background flex items-center justify-center">
-    <div v-if="data && data.title">
-      <DashboardHeader
-        :name="data.title"
-        :thumbnail="data.thumbnail"
-        :tags="data.tags"
-        :subscribers="null"
-        :instaFollowers="formatFollowers(data.instagram.followers)"
-      />
-
-      <div class="flex gap-3 mb-6">
-        <!-- 유튜브 버튼 -->
+  <div class="w-full min-h-screen flex items-center justify-center">
+    <div v-if="data">
+      <div class="sticky top-10 flex justify-end">
         <button
-          @click="goToPlatform('youtube')"
-          :class="[
-            'w-28 h-10 rounded-xl text-white font-semibold text-sm shadow-md transition',
-            activePlatform === 'youtube'
-              ? 'bg-gradient-to-r from-[#FF9999] via-[#FF6666] to-[#CC3333]'
-              : 'bg-gradient-to-r from-[#FFCCCC] via-[#FF9999] to-[#FF6666]'
-          ]"
+          @click="goToList"
+          class="flex items-center gap-2 px-4 py-2 mb-5 bg-btn-blue text-white font-bold rounded-md"
         >
-          유튜브
-        </button>
-
-        <!-- 인스타그램 버튼 -->
-        <button
-          @click="goToPlatform('instagram')"
-          :class="[
-            'w-28 h-10 rounded-xl text-white font-semibold text-sm shadow-md transition',
-            activePlatform === 'instagram'
-              ? 'bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#515BD4]'
-              : 'bg-gradient-to-r from-[#FFDABF] via-[#F5B5D4] to-[#B0B6F0]'
-          ]"
-        >
-          인스타그램
+          나가기
+          <Icon icon="tabler:door-exit" width="24" height="24" />
         </button>
       </div>
+      <DashboardHeader
+        :name="data.channel.title"
+        :thumbnail="data.channel.thumbnails.default.url"
+        :tags="data.tags"
+        :subscribers="formatSubscribers(data.channel.statistics.subscriberCount)"
+      />
 
-      <DashboardSummary :data="summaryData" />
-      <AgeChart />
-      <PopularPosts :posts="data.popularPosts" />
+      <DashboardBase
+        :platform="'youtube'"
+        :summaryData="summaryData"
+        :data="data"
+        :satisfaction="satisfaction"
+        @switch="goToPlatform"
+      />
+
+      <PopularPosts
+        :platform="'youtube'"
+        :items="data.popularVideos"
+      />
+
+      <PopularShortForms
+        :platform="'youtube'"
+        :items="data.popularShorts"
+      ></PopularShortForms>
+
+      <DashboardCampaignList />
     </div>
 
-    <div v-else class="flex justify-center items-center w-full h-full">
-      Loading...
-    </div>
+    <div v-else class="flex justify-center items-center w-full h-full">Loading...</div>
   </div>
 </template>

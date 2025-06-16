@@ -47,8 +47,6 @@ const paginatedList = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   return filteredList.value.slice(start, start + pageSize)
 })
-
-
 </script>
 
 <template>
