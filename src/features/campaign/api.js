@@ -31,6 +31,15 @@ export const getOpinion = async (targetId, targetType) => {
     });
 };
 
+export const getProposalList = async (page, size) => {
+    return await api.get('/sales/proposal', {
+        params: {
+            page,
+            size,
+        },
+    });
+};
+
 // === 팝업용 API ===
 export const getUser = async () => {
     return await api.get('/popup/user');
@@ -51,3 +60,4 @@ export const getProposalReference = async () => {
 export const getInfluencer = async () => {
     return await api.get('/popup/influencer');
 };
+// ======

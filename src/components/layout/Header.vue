@@ -30,7 +30,7 @@ const menuMap = {
     routes: {
       '리스트업': '/sales/listup',
       '제안': '/sales/proposal',
-      '견적': '/sales/estimate',
+      '견적': '/sales/quotation',
       '계약': '/sales/contract',
       '매출': '/sales/revenue'
     }
@@ -174,11 +174,11 @@ onBeforeUnmount(() => {
             </div>
           </div>
           <div class="flex items-center ml-4 gap-4">
-            <button><img src="@/assets/icons/calendar.svg" alt="캘린더" class="w-6 h-6" /></button>
+            <button><img src="@/assets/icons/calendar.svg" alt="캘린더" class="cursor-pointer w-6 h-6" @click="router.push('/calendar')" /></button>
 
-            <div class="relative">
+            <div class="relative cursor-pointer">
               <button @click.stop="toggleNotification">
-                <img src="@/assets/icons/alarm.svg" alt="알림" class="w-6 h-6 relative top-[4px]" />
+                <img src="@/assets/icons/alarm.svg" alt="알림" class="w-6 h-6 relative top-[4px] cursor-pointer" />
               </button>
               <span
                 v-if="unreadCount > 0"
@@ -217,7 +217,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-            <button><img src="@/assets/icons/logout.svg" alt="로그아웃" class="w-6 h-6" /></button>
+            <button><img src="@/assets/icons/logout.svg" alt="로그아웃" class="w-6 h-6 cursor-pointer" /></button>
           </div>
         </div>
       </div>

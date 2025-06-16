@@ -70,7 +70,7 @@ const getMonthlyTooltip = () => {
               enabled: true,
               formatter: val => `${val.toFixed(0)}만`,
               style: { fontSize: '20px', fontWeight: 'bold', colors: ['#5F38E9'] },
-              offsetY: 140,
+              offsetY: 140
             },
             xaxis: {
               categories,
