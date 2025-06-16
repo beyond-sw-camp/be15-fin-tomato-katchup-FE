@@ -64,14 +64,15 @@ const calendarOptions = {
     const day = arg.date.getDay()
     const dateStr = formatDateToLocalYYYYMMDD(arg.date)
     const isSelected = selectedDate.value === dateStr
-    arg.el.classList.remove('fc-day-today')
     arg.el.style.color = '#9ca3af'
     if (day === 0) arg.el.style.color = '#ef4444'
     if (day === 6) arg.el.style.color = '#5F38E9'
     if (isSelected) {
-      arg.el.style.color = '#111827'
-      arg.el.style.fontWeight = '700'
+        arg.el.style.backgroundColor = '#FFE0E0'
+        arg.el.style.color = '#111827'
+        arg.el.style.fontWeight = '700'
     }
+
   },
 
   events: events.value
