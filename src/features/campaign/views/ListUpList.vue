@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { getProposalList } from '@/features/campaign/api.js';
+import { getListUpList } from '@/features/campaign/api.js';
 import { computed, onMounted, ref } from 'vue';
 import SalesCards from '@/features/campaign/components/SalesCards.vue';
 import SalesFiltering from '@/components/layout/SalesFiltering.vue';
@@ -8,7 +8,7 @@ import Pagination from '@/components/common/PagingBar.vue';
 
 const router = useRouter();
 
-const proposalList = ref([]);
+const listupList = ref([]);
 const page = ref(1);
 const size = ref(10);
 const total = ref(0);
@@ -37,34 +37,34 @@ const searchFilters = ref({
 });
 
 // 목록 불러오기
-const fetchProposalList = async () => {
+const fetchListUpList = async () => {
     try {
-        const res = await getProposalList(page.value, size.value, searchFilters.value);
-        proposalList.value = res.data.data;
+        const res = await getListUpList(page.value, size.value, searchFilters.value);
+        listupList.value = res.data.data;
         total.value = res.data.total;
     } catch (e) {
         console.error(e);
     }
 };
 
-onMounted(fetchProposalList);
+onMounted(fetchListUpList);
 
 const handlePageChange = async (newPage) => {
     page.value = newPage;
-    await fetchProposalList();
+    await fetchListUpList();
 };
 
 const handleSearch = () => {
     page.value = 1;
-    fetchProposalList();
+    fetchListUpList();
 };
 
 const goDetail = (id) => {
-    router.push(`/sales/proposal/${id}`);
+    router.push(`/sales/listup/${id}`);
 };
 
 const handleDelete = (id) => {
-    proposalList.value = proposalList.value.filter((item) => item.id !== id);
+    listupList.value = listupList.value.filter((item) => item.id !== id);
 };
 
 const menuOpenId = ref(null);
@@ -85,14 +85,14 @@ const toggleMenu = (id) => {
         <div class="container">
             <div class="grid grid-cols-2 gap-6">
                 <SalesCards
-                    v-for="proposal in proposalList"
-                    :key="proposal.id"
-                    :managementOption="proposal"
+                    v-for="listup in listupList"
+                    :key="listup.id"
+                    :management-option="listup"
                     :openMenuId="menuOpenId"
-                    :pageType="'proposal'"
+                    :pageType="'listup'"
                     @menuToggle="toggleMenu"
                     @delete="handleDelete"
-                    @click="goDetail(proposal.id)"
+                    @click="goDetail(listup.id)"
                 />
             </div>
 

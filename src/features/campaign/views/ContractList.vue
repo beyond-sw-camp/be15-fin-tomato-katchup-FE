@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { getProposalList } from '@/features/campaign/api.js';
+import { getContractList } from '@/features/campaign/api.js';
 import { computed, onMounted, ref } from 'vue';
 import SalesCards from '@/features/campaign/components/SalesCards.vue';
 import SalesFiltering from '@/components/layout/SalesFiltering.vue';
@@ -8,7 +8,7 @@ import Pagination from '@/components/common/PagingBar.vue';
 
 const router = useRouter();
 
-const proposalList = ref([]);
+const contractList = ref([]);
 const page = ref(1);
 const size = ref(10);
 const total = ref(0);
@@ -37,34 +37,34 @@ const searchFilters = ref({
 });
 
 // 목록 불러오기
-const fetchProposalList = async () => {
+const fetchContractList = async () => {
     try {
-        const res = await getProposalList(page.value, size.value, searchFilters.value);
-        proposalList.value = res.data.data;
+        const res = await getContractList(page.value, size.value, searchFilters.value);
+        contractList.value = res.data.data;
         total.value = res.data.total;
     } catch (e) {
         console.error(e);
     }
 };
 
-onMounted(fetchProposalList);
+onMounted(fetchContractList);
 
 const handlePageChange = async (newPage) => {
     page.value = newPage;
-    await fetchProposalList();
+    await fetchContractList();
 };
 
 const handleSearch = () => {
     page.value = 1;
-    fetchProposalList();
+    fetchContractList();
 };
 
 const goDetail = (id) => {
-    router.push(`/sales/proposal/${id}`);
+    router.push(`/sales/contract/${id}`);
 };
 
 const handleDelete = (id) => {
-    proposalList.value = proposalList.value.filter((item) => item.id !== id);
+    contractList.value = contractList.value.filter((item) => item.id !== id);
 };
 
 const menuOpenId = ref(null);
@@ -85,14 +85,14 @@ const toggleMenu = (id) => {
         <div class="container">
             <div class="grid grid-cols-2 gap-6">
                 <SalesCards
-                    v-for="proposal in proposalList"
-                    :key="proposal.id"
-                    :managementOption="proposal"
+                    v-for="contract in contractList"
+                    :key="contract.id"
+                    :management-option="contract"
                     :openMenuId="menuOpenId"
-                    :pageType="'proposal'"
+                    :pageType="'contract'"
                     @menuToggle="toggleMenu"
                     @delete="handleDelete"
-                    @click="goDetail(proposal.id)"
+                    @click="goDetail(contract.id)"
                 />
             </div>
 
