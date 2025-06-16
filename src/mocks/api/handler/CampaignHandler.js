@@ -246,6 +246,30 @@ const proposalList = Array.from({ length: 50 }, (_, index) => {
     };
 });
 
+const quotationList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `Quotation ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        adPrice: 30000000,
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
         const url = new URL(request.url);
@@ -300,7 +324,7 @@ const CampaignHandler = [
             },
         );
     }),
-    http.get('/api/v1/quotation/:id', async () => {
+    http.get('/api/v1/sales/quotation/:id', async () => {
         return HttpResponse.json(
             {
                 data: quotationDetail,
@@ -358,6 +382,28 @@ const CampaignHandler = [
                 page,
                 size,
                 total: proposalList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/quotation', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = quotationList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
             },
             {
                 status: 200,
