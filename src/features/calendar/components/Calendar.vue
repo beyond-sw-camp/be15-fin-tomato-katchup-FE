@@ -4,7 +4,6 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
-// 오늘 날짜 yyyy-MM-dd 형식
 const today = new Date().toISOString().split('T')[0]
 const selectedDate = ref(today)
 
@@ -26,7 +25,7 @@ const calendarOptions = {
       title: '휴가',
       start: '2025-06-04T09:00:00',
       end: '2025-06-04T18:00:00',
-      backgroundColor: '#6366f1'
+      backgroundColor: '#a78bfa'
     }
   ]
 }
@@ -38,56 +37,57 @@ const filteredEvents = computed(() => {
 })
 </script>
 
-
 <template>
   <div class="container">
-    <div class="flex justify-between p-4">
-      <!-- 왼쪽: 캘린더 -->
-      <div class="w-2/3 rounded-lg shadow-md bg-white p-4">
-        <FullCalendar :options="calendarOptions" />
+  <div class="flex p-6 gap-6">
+    <!-- 왼쪽: 캘린더 -->
+    <div class="w-2/3 bg-white rounded-xl shadow-md p-4">
+      <FullCalendar :options="calendarOptions" />
+    </div>
+
+    <!-- 오른쪽: 상세 보기 -->
+    <div class="w-1/3 bg-white rounded-xl shadow-md p-5 min-h-[400px]">
+      <div class="text-gray-800 font-semibold text-base mb-4">
+        {{ selectedDate }}
       </div>
 
-      <!-- 오른쪽: 일정 상세보기 -->
-      <div class="w-1/3 ml-6 bg-white shadow-md rounded-2xl p-4 min-h-[300px]">
-        <div v-if="selectedDate" class="mb-4 font-bold text-gray-700 text-lg">
-          {{ selectedDate }}
-        </div>
+      <div v-if="filteredEvents.length > 0">
+        <div
+          v-for="(event, index) in filteredEvents"
+          :key="index"
+          class="flex bg-gray-100 rounded-md p-3 mb-3 min-h-[72px]"
+        >
+          <!-- 왼쪽 색상바 -->
+          <div class="flex items-stretch">
+            <div
+              class="w-1.5 rounded-sm"
+              :style="{ backgroundColor: event.backgroundColor, width: '4px', height: '100%' }"
+            ></div>
+          </div>
 
-        <div v-if="filteredEvents.length > 0">
-          <div
-            v-for="(event, index) in filteredEvents"
-            :key="index"
-            class="flex items-center justify-between p-3 mb-3 rounded-md bg-gray-100"
-          >
-            <div class="flex items-start gap-2">
-              <div class="w-1 rounded-sm" :style="{ backgroundColor: event.backgroundColor }"></div>
-              <div>
-                <div class="text-sm font-semibold text-gray-800">
-                  {{ event.title }}
-                </div>
-                <div class="text-xs text-gray-500">
-                  {{ event.start.slice(11, 16) }} ~ {{ event.end.slice(11, 16) }}
-                </div>
-              </div>
-            </div>
+          <!-- 중앙: 시간 + 제목 -->
+          <div class="flex-1 pl-3 flex flex-col justify-center">
+            <span class="text-xs text-gray-500">{{ event.start.slice(11, 16) }}</span>
+            <span class="text-sm text-gray-800 font-medium">{{ event.title }}</span>
+            <span class="text-xs text-gray-500">{{ event.end.slice(11, 16) }}</span>
+          </div>
 
-            <div class="flex items-center gap-2 text-gray-500">
-              <button class="text-sm hover:text-gray-800">✏️</button>
-              <button class="text-sm hover:text-gray-800">❌</button>
-            </div>
+          <!-- 우측: 아이콘 -->
+          <div class="flex items-start gap-2 ml-2">
+            <button class="text-orange-500 hover:text-orange-600 text-sm">✏️</button>
+            <button class="text-pink-500 hover:text-pink-600 text-sm">❌</button>
           </div>
         </div>
 
-        <div v-else class="text-gray-400 text-sm">일정이 없습니다.</div>
 
-        <div class="flex justify-center mt-4">
-          <button
-            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300"
-          >
-            +
-          </button>
-        </div>
+      </div>
+      <div v-else class="text-sm text-gray-400">일정이 없습니다.</div>
+
+      <!-- 추가 버튼 -->
+      <div class="flex justify-center mt-6">
+        <button class="w-8 h-8 rounded-full bg-gray-200 text-xl text-gray-600 hover:bg-gray-300">+</button>
       </div>
     </div>
+  </div>
   </div>
 </template>
