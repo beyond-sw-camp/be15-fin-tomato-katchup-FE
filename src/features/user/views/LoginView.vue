@@ -45,14 +45,9 @@ const password = ref('');
 
 <style scoped>
 .login-layout {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
