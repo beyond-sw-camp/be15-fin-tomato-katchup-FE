@@ -29,9 +29,12 @@ const isLoading = ref(false);
                 <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-6 py-6" />
                 <label class="input-box-label text-click text-md pt-5 pb-1">이메일</label>
                 <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-6 py-6 pb-6" />
-                <button class = "mt-12 bg-[#A8C1DA] text-white w-full py-4 text-md rounded">
-                    비밀번호 찾기
-                </button>
+
+                <RouterLink to="/login" class = "inline-block">
+                    <button class="mt-12 bg-[#A8C1DA] text-white w-full py-4 text-md rounded">
+                        비밀번호 찾기
+                    </button>
+                </RouterLink>
             </form>
         </div>
     </div>

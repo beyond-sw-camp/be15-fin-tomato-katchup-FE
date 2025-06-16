@@ -34,9 +34,12 @@ const password = ref('');
         <div class="flex justify-between mt-2 text-[1rem] pt-5 pb-1 text-gray-medium">
           <RouterLink to="findPassword">비밀번호 찾기</RouterLink>
         </div>
-        <button class="bg-[#A8C1DA] text-white px-60 py-4 text-md rounded">
-          <RouterLink to = "/">로그인</RouterLink>
-        </button>
+
+          <RouterLink to="/" class = "inline-block">
+              <button class="bg-[#A8C1DA] text-white px-60 py-4 text-md rounded">
+                  로그인
+              </button>
+          </RouterLink>
       </form>
 
     </div>
