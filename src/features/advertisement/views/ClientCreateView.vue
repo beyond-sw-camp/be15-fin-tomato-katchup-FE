@@ -19,7 +19,7 @@ const form = reactive({
   address2: '',
 });
 
-// ▶ 사원 관련
+// 사원 관련
 const employeeList = ref([]); // 등록된 사원 목록
 const isAddingEmployee = ref(false); // 사원 추가 폼 토글
 const editIndex = ref(-1); // 수정 중인 index (-1이면 새로 추가)
@@ -39,13 +39,13 @@ const newEmployee = reactive({
 const isEditing = ref(true);
 
 const save = () => {
-  console.log('✅ 저장할 값:', form);
-  console.log('📌 등록된 사원들:', employeeList.value);
+  console.log('저장할 값:', form);
+  console.log('등록된 사원들:', employeeList.value);
   isEditing.value = false;
 };
 
 const cancel = () => {
-  console.log('❌ 취소됨');
+  console.log('취소됨');
   isEditing.value = false;
 };
 
@@ -94,15 +94,32 @@ const openPostcodeSearch = () => {
 
 // ------------------ 사원 추가 ------------------
 const addEmployee = () => {
-  employeeList.value.push({ ...newEmployee });
+  if (editIndex.value === -1) {
+    // 새로 추가
+    employeeList.value.push({ ...newEmployee });
+  } else {
+    // 수정일 경우 기존 항목 덮어쓰기
+    employeeList.value[editIndex.value] = { ...newEmployee };
+  }
+
+  // 초기화
   Object.keys(newEmployee).forEach((key) => newEmployee[key] = '');
   newEmployee.position = '재직';
+  editIndex.value = -1;
   isAddingEmployee.value = false;
 };
 
 const deleteEmployee = (index) => {
   employeeList.value.splice(index, 1);
 };
+// ------------------ 사원 수정 시작 ------------------
+const editEmployee = (index) => {
+  // 수정 모드 전환
+  Object.assign(newEmployee, employeeList.value[index]); // 기존 값 복사
+  editIndex.value = index; // 현재 수정 중인 index 저장
+  isAddingEmployee.value = true; // 폼 열기
+};
+
 
 </script>
 
@@ -113,8 +130,9 @@ const deleteEmployee = (index) => {
     <div class="page-header">
       <div class="page-title">고객사 등록</div>
       <div class="flex items-center gap-3">
-        <button class="btn-delete" @click="cancel">취소</button>
-        <button class="btn-create" @click="save">저장</button>
+        <button class="btn-delete" v-if="isEditing" @click="cancel">취소</button>
+        <button class="btn-create" v-if="isEditing" @click="save">저장</button>
+        <button class="btn-edit" v-else @click="isEditing = true">수정</button>
         <Icon icon="material-symbols:lists-rounded" width="48" height="48" class="text-btn-gray cursor-pointer" @click="router.push('/management/client')" />
       </div>
     </div>
@@ -214,7 +232,9 @@ const deleteEmployee = (index) => {
 
   <!-- 사원 추가 폼 -->
   <div class="container bg-white mt-8" v-if="isAddingEmployee">
-    <p class="font-bold mb-2">사원 추가</p>
+    <p class="font-bold mb-2">
+      {{ editIndex === -1 ? '사원 추가' : '사원 수정' }}
+    </p>
     <div class="blue-line mb-4" />
     <div class="grid grid-cols-2 gap-4">
       <div class="flex flex-col gap-2">
@@ -249,7 +269,6 @@ const deleteEmployee = (index) => {
       <button class="btn-create !px-5" @click="addEmployee">
         {{ editIndex === -1 ? '등록' : '수정 완료' }}
       </button>
-
     </div>
   </div>
 </template>
