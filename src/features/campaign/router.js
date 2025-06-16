@@ -10,7 +10,7 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/CampaignDetail.vue'),
     },
     {
-        path: '/quotation/:quotationId',
+        path: '/sales/quotation/:quotationId',
         name: 'quotationDetail',
         component: () => import('@/features/campaign/views/QuotationDetail.vue'),
     },
@@ -21,5 +21,14 @@ export const campaignRoutes = [
         name: 'searchPopup',
         component: () => import('@/components/layout/SearchPopup.vue'),
         meta: { useLayout: 'none' },
+    },
+
+    {
+        path: '/sales/proposal',
+        name: 'proposalList',
+        component: () => import('@/features/campaign/views/ProposalList.vue'),
+        meta: {
+            layout: 'noe',
+        },
     },
 ];

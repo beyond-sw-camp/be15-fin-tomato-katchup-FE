@@ -30,7 +30,7 @@ const menuMap = {
     routes: {
       '리스트업': '/sales/listup',
       '제안': '/sales/proposal',
-      '견적': '/sales/estimate',
+      '견적': '/sales/quotation',
       '계약': '/sales/contract',
       '매출': '/sales/revenue'
     }
