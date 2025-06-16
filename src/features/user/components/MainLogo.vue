@@ -11,7 +11,7 @@ const handleMainLogo = async() => {
 
 <template>
     <div class = "main-logo">
-        <img src = "@/assets/images/newlogo.png" alt = "logo" class = "logo-img" @click = "handleMainLogo"/>
+        <img src = "@/assets/images/logofinal.png" alt = "logo" class = "logo-img" @click = "handleMainLogo"/>
     </div>
 </template>
 

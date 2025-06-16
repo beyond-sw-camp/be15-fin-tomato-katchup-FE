@@ -50,5 +50,4 @@ const password = ref('');
   justify-content: center;
   align-items: center;
 }
-
 </style>
