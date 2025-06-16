@@ -16,9 +16,7 @@
         </div>
 
         <!-- 등록 버튼 -->
-        <button class="btn-create">
-          등록
-        </button>
+        <RouterLink to="/management/client/new" class="btn-create">등록</RouterLink>
       </div>
 
       <!-- 구분선 -->
