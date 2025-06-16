@@ -42,7 +42,7 @@ onMounted(async () => {
           </div>
 
           <div class="flex items-center gap-4">
-            <Icon icon="skill-icons:instagram" class="w-8 h-8" />
+            <Icon icon="skill-icons:instagram" class="w-9 h-9" />
             <span>{{ influencer.instaFollowers ? `팔로워 ${influencer.instaFollowers}` : '해당 없음' }}</span>
           </div>
         </div>

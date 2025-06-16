@@ -40,6 +40,8 @@
   --color-graph-bar: #5F38E9;
   --color-graph-line: #328E6F;
 
+  --color-opinion-circle: #FF6E64;
+
   /* Font size tokens */
   --text-sm: 16px;
   --text-md: 18px;
@@ -73,6 +75,11 @@
 
   .cardLists {
     @apply w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200
+  }
+
+  .card-style {
+    @apply w-[631px] h-[526px] px-12 pt-7 pb-4 rounded-[24px] bg-white;
+    box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
 
   /* === 버튼 === */
@@ -121,13 +128,17 @@
   /* === Dashboard === */
   /* 그래프 영역 */
   .dashboard-section {
-    @apply bg-white rounded-2xl shadow p-6 mb-2
+    @apply bg-white rounded-2xl shadow p-7 px-6 mb-10 items-center justify-center
   }
 
   /* 그래프 제목 */
   .dashboard-title {
     @apply font-bold text-lg mb-4
   }
+  /* === 사이드 바 === */
+  .custom-sidebar {
+    @apply sticky top-10 w-[304px] h-[630px] bg-white rounded-2xl  p-6;
+    box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
+  }
 
 }
-
