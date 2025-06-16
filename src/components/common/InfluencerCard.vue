@@ -110,14 +110,14 @@ function goToDashboard(target)  {
 
         <!-- 태그 -->
         <div class="flex flex-wrap gap-2 mt-4">
-      <span
-          v-for="tag in influencer.tags"
-          :key="tag"
-          class="text-xs rounded-lg px-1 py-0.5"
-          :class="tagStyle(tag)"
-      >
-        # {{ tag }}
-      </span>
+            <span
+                v-for="tag in influencer.tags"
+                :key="tag"
+                class="text-xs rounded-lg px-1 py-0.5"
+                :class="tagStyle(tag)"
+            >
+            # {{ tag }}
+            </span>
         </div>
     </div>
 </template>
