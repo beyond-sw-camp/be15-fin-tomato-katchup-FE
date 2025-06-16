@@ -10,7 +10,7 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/CampaignDetail.vue'),
     },
     {
-        path: '/quotation/:quotationId',
+        path: '/sales/quotation/:quotationId',
         name: 'quotationDetail',
         component: () => import('@/features/campaign/views/QuotationDetail.vue'),
     },
