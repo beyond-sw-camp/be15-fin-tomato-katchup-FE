@@ -16,7 +16,7 @@ const isLoading = ref(false);
 </script>
 
 <template>
-    <div class = "findPassword-layout">
+    <div class = "findPassword-layout bg-[#f5f7fa]">
         <MainLogo />
 
         <div class = "card-style">
@@ -44,5 +44,6 @@ const isLoading = ref(false);
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 </style>

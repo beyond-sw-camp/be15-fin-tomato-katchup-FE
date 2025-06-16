@@ -14,7 +14,7 @@ const password = ref('');
 </script>
 
 <template>
-  <div class = "login-layout">
+  <div class = "login-layout bg-[#f5f7fa]">
     <MainLogo />
 
     <div class = "card-style">
@@ -49,5 +49,6 @@ const password = ref('');
   flex-direction: column;
   justify-content: center;
   align-items: center;
+    height: 100vh;
 }
 </style>

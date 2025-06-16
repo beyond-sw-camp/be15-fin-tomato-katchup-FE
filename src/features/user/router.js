@@ -14,7 +14,7 @@ export const userRoutes = [
         name: 'login',
         component: () => import('@/features/user/views/LoginView.vue'),
         meta: {
-            layout: 'none',
+            useLayout: 'none'
         },
     },
 
@@ -23,7 +23,7 @@ export const userRoutes = [
         name: 'findPassword',
         component: () => import('@/features/user/views/FindPasswordView.vue'),
         meta: {
-            layout: 'none',
+            useLayout: 'none',
         },
     },
 
