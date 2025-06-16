@@ -44,9 +44,9 @@ const scoreData = computed(() => {
   const avgComments = s.avgComments ?? s.commentCount ?? 0
   const count = s.count ?? 0
 
-  const algorithmScore = safeDivide(avgViews, f) * 100
-  const engagement = safeDivide(avgLikes + avgComments, avgViews) * 100
-  const activeness = safeDivide(count * avgViews, f) * 100
+  const algorithmScore = Math.min(safeDivide(avgViews, f) * 10, 100)
+  const engagement = Math.min(safeDivide(avgLikes + avgComments, avgViews) * 100, 100)
+  const activeness = Math.min(safeDivide(count, 30) * 100, 100)
 
   return [
     { label: '알고리즘 스코어', value: algorithmScore },
@@ -56,9 +56,9 @@ const scoreData = computed(() => {
 })
 
 const tooltipMap = {
-  '알고리즘 스코어': '평균 조회수 ÷ 팔로워(구독자) 수 × 100',
-  '참여도': '(좋아요 + 댓글) ÷ 조회수 × 100',
-  '활성도': '(게시물 수 × 평균 조회수) ÷ 팔로워(구독자) 수 × 100'
+  '알고리즘 스코어': '평균 조회수 ÷ 팔로워(구독자) 수 × 10 (최대 100)',
+  '참여도': '(좋아요 + 댓글) ÷ 조회수 × 100 (최대 100)',
+  '활성도': '게시물 수 ÷ 30 × 100 (최대 100)'
 }
 
 const barColors = ['#FF3B30', '#FF8A65', '#90A4AE', '#7C9CF6', '#5F38E9']
@@ -68,20 +68,25 @@ const getSegmentColor = (segment, percent) => {
   const level = getActiveLevel(percent)
   return segment <= level + 1 ? barColors[segment - 1] : '#EAEAEA'
 }
+
+// 소수점 처리
+const formatValue = (value) => {
+  return (value % 1 === 0) ? value.toFixed(0) : value.toFixed(1)
+}
 </script>
 
 <template>
-  <div class="dashboard-section space-y-16">
+  <div class="dashboard-section space-y-8">
     <div v-for="score in scoreData" :key="score.label" class="space-y-3">
-      <div class="flex items-center gap-1">
-        <h3 class="text-gray-dark font-semibold">{{ score.label }}</h3>
-        <div class="relative group">
-          <Icon icon="material-symbols:info-outline-rounded" class="w-5 h-5 text-gray-dark cursor-pointer" />
-          <div class="absolute left-1/2 -translate-x-1/2 top-8 w-max bg-black text-white text-xs rounded px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 z-10">
-            {{ tooltipMap[score.label] }}
+        <div class="flex items-center gap-1">
+          <h3 class="text-gray-dark font-semibold">{{ score.label }}</h3>
+          <div class="relative group">
+            <Icon icon="material-symbols:info-outline-rounded" class="w-5 h-5 text-gray-dark cursor-pointer" />
+            <div class="absolute left-1/2 -translate-x-1/2 top-8 w-max bg-black text-white text-xs rounded px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 z-10">
+              {{ tooltipMap[score.label] }}
+            </div>
           </div>
         </div>
-      </div>
 
       <div class="flex gap-1.5">
         <div
@@ -94,6 +99,10 @@ const getSegmentColor = (segment, percent) => {
           }"
           :style="{ backgroundColor: getSegmentColor(n, score.value) }"
         ></div>
+      </div>
+
+      <div class="flex justify-end">
+        <div class="text-black font-semibold">{{ formatValue(score.value) }}</div>
       </div>
     </div>
   </div>
