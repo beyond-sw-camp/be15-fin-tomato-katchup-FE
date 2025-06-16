@@ -2,11 +2,10 @@
 import ApexCharts from 'vue3-apexcharts'
 
 const props = defineProps({
-  platform: String,  // 'instagram' or 'youtube'
+  platform: String,
   data: Array
 })
 
-// 성별 합산
 const totalMale = props.data.reduce((sum, item) => sum + item.male, 0)
 const totalFemale = props.data.reduce((sum, item) => sum + item.female, 0)
 const totalOther = props.data.reduce((sum, item) => sum + item.other, 0)
