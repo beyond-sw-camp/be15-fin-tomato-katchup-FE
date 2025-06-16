@@ -83,17 +83,15 @@
             </template>
 
             <template v-else-if="pageType === 'listup'">
-                <!-- 첫 줄: 상품명 -->
-                <div class="flex w-full">
-                    <div class="w-[80%] truncate">
-                        상품명 : {{ managementOption.productName ?? '-' }}
-                    </div>
+                <!-- 상품명 (우측 시작) -->
+                <div class="flex w-full max-w-[60%] justify-start">
+                    <div class="truncate text-right">{{ managementOption.productName ?? '-' }}</div>
                 </div>
 
-                <!-- 두 번째 줄: 인플루언서 -->
-                <div class="flex w-full">
-                    <div class="w-[100%] truncate">
-                        인플루언서 : {{ renderListupCount(managementOption.influencers) }}
+                <!-- 인플루언서 (우측 시작) -->
+                <div class="flex w-full justify-end max-w-[40%]">
+                    <div class="truncate text-right">
+                        {{ renderListupCount(managementOption.influencers) }}
                     </div>
                 </div>
             </template>
