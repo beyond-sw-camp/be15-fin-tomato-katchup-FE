@@ -33,7 +33,6 @@ export const userRoutes = [
         component: EmailSystemView,
     },
 
-
     {
         path: '/management/survey',
         name: 'surveyList',
