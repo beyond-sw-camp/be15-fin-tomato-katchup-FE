@@ -1,15 +1,33 @@
 <template>
   <div class="w-full min-h-screen bg-[#f4f8fc] px-12 py-10 font-sans">
     <div class="flex gap-6">
+      <!-- 좌측 필터 -->
       <CommonFiltering class="w-[260px] shrink-0" />
 
+      <!-- 본문 콘텐츠 -->
       <div class="flex-1 bg-white rounded-xl p-6 shadow-sm">
+        <!-- 제목 + 검색결과 -->
+        <div class="flex justify-between items-center mb-3">
+          <div class="text-lg font-semibold">
+            계약서 목록
+            <span class="text-sm text-gray-400 ml-1">
+              (검색 결과: {{ contractList.length }}건)
+            </span>
+          </div>
+        </div>
+
+        <!-- 파란 줄 -->
+        <div class="blue-line mb-6"></div>
+
+        <!-- 탭 버튼 -->
         <div class="flex gap-2 mb-6">
           <SelectedYoutubeBtn v-if="activeTab === 'youtube'" @click="activeTab = 'youtube'" />
           <UnselectedYoutubeBtn v-else @click="activeTab = 'youtube'" />
           <SelectedInstagramBtn v-if="activeTab === 'instagram'" @click="activeTab = 'instagram'" />
           <UnselectedInstagram v-else @click="activeTab = 'instagram'" />
         </div>
+
+        <!-- 계약 테이블 -->
         <table class="w-full text-sm text-center border-t border-gray-200">
           <thead class="bg-gray-100 text-sm font-semibold border-b border-gray-300">
           <tr>
@@ -45,6 +63,7 @@
           </tbody>
         </table>
 
+        <!-- 페이지네이션 -->
         <PagingBar
           class="mt-6"
           :total-pages="Math.ceil(contractList.length / 10)"
@@ -54,12 +73,14 @@
       </div>
     </div>
 
+    <!-- 비밀번호 모달 -->
     <PasswordModal
       v-if="showModal"
       @submit="handlePasswordSubmit"
       @close="showModal = false"
     />
 
+    <!-- PDF 뷰어 모달 -->
     <PdfViewerModal
       v-if="showPdf"
       :contract-id="selectedContractId"
@@ -88,6 +109,7 @@ const showPdf = ref(false)
 const selectedContractId = ref(null)
 const contractList = ref([])
 
+// 계약 목록 불러오기
 const fetchContracts = async () => {
   const url =
     activeTab.value === 'youtube'
@@ -123,3 +145,10 @@ const handlePasswordSubmit = (password) => {
   }
 }
 </script>
+
+<style scoped>
+.blue-line {
+  height: 2px;
+  background-color: #a6bdfc;
+}
+</style>

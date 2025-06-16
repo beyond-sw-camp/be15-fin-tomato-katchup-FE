@@ -72,6 +72,7 @@ const influencerList = [
 ]
 
 const InfluencerHandler = [
+  // 전체 목록
   http.get('/api/v1/influencer', async () => {
     return HttpResponse.json(
       {
@@ -83,6 +84,18 @@ const InfluencerHandler = [
         headers: { 'Cache-Control': 'no-store' }
       }
     )
+  }),
+
+  // 개별 상세 조회
+  http.get('/api/v1/influencer/:id', async ({ params }) => {
+    const id = parseInt(params.id);
+    const influencer = influencerList.find(item => item.id === id);
+
+    if (!influencer) {
+      return HttpResponse.json({ message: 'Not Found' }, { status: 404 });
+    }
+
+    return HttpResponse.json({ data: influencer }, { status: 200 });
   })
 ]
 
