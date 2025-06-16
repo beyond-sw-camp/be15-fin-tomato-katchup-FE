@@ -142,4 +142,13 @@
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
 
+  .btn-icon {
+    @apply flex items-center gap-2 px-4 py-2 rounded-md text-white font-medium text-sm shadow;
+    background-color: var(--color-btn-blue);
+    transition: background-color 0.2s;
+  }
+
+  .btn-icon:hover {
+    background-color: #a8b9f8; /* hover 시 조금 밝게 */
+  }
 }
