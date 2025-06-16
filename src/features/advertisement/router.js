@@ -1,6 +1,8 @@
 import ClientListView from './views/ClientListView.vue'
+import ClientDetailView from '@/features/advertisement/views/ClientDetailView.vue';
 
 export const advertisementRoutes = [
+  // 고객사 목록 조회
   {
     path: '/management/client',
     name: 'ClientList',
@@ -9,5 +11,17 @@ export const advertisementRoutes = [
       layout: 'default',
       requiresAuth: true,
     }
+  },
+  // 고객사 등록
+  {
+    path: '/management/client/new',
+    name: 'ClientCreate',
+    component: ClientDetailView,
+  },
+  // 고객사 상세 조회/수정
+  {
+    path: '/management/client/:id',
+    name: 'ClientDetail',
+    component: ClientDetailView,
   }
 ]
