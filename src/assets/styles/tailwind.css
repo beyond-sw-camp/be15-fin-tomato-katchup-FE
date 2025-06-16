@@ -40,6 +40,8 @@
   --color-graph-bar: #5F38E9;
   --color-graph-line: #328E6F;
 
+  --color-opinion-circle: #FF6E64;
+
   /* Font size tokens */
   --text-sm: 16px;
   --text-md: 18px;
@@ -67,7 +69,72 @@
 
 @layer components {
   .container {
-    @apply px-4 py-5 rounded-2xl;
+    @apply px-12 py-8 rounded-2xl bg-white flex-1 ml-8;
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
+
+  .cardLists {
+    @apply w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200
+  }
+
+  /* === 버튼 === */
+  /* 등록 버튼*/
+  .btn-create {
+    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+  }
+
+  /* 삭제 버튼 */
+  .btn-delete {
+    @apply px-4 py-2 bg-gray-medium text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+  }
+
+  /* === 페이지 상단 타이틀 === */
+  /* 페이지 상단 감싸는 div */
+  .page-header {
+    @apply flex items-center justify-between mt-6 mb-5
+  }
+
+  /* 페이지 제목 */
+  .page-title {
+    @apply text-lg font-bold text-black
+  }
+
+  /* 페이지 제목 밑에 선 */
+  .blue-line {
+    @apply h-[2.5px] bg-btn-blue mb-10 w-full
+  }
+
+  /* 페이지 제목 옆에 검색 결과 개수 */
+  .cnt-search {
+    @apply text-sm font-normal text-gray-medium
+  }
+
+  /* === FORM === */
+  /* 폼 라벨 */
+  .input-form-label {
+    @apply text-sm text-gray-dark font-semibold
+  }
+
+  /* 폼 input box*/
+  .input-form-box {
+    @apply w-full px-3 py-2 rounded-sm border border-gray-dark hover:border-black focus:border-black;
+  }
+
+  /* === Dashboard === */
+  /* 그래프 영역 */
+  .dashboard-section {
+    @apply bg-white rounded-2xl shadow p-7 px-6 mb-10 items-center justify-center
+  }
+
+  /* 그래프 제목 */
+  .dashboard-title {
+    @apply font-bold text-lg mb-4
+  }
+  /* === 사이드 바 === */
+  .custom-sidebar {
+    @apply sticky top-10 w-[304px] h-[630px] bg-white rounded-2xl  p-6;
+    box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
+  }
+
 }
+

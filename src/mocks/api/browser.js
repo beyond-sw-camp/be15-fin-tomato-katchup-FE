@@ -1,5 +1,10 @@
-import { setupWorker } from 'msw/browser';
-import CampaignHandler from '@/mocks/api/handler/CampaignHandler.js';
-import ProposalHandler from '@/mocks/api/handler/ProposalHandler.js';
+import { setupWorker } from 'msw/browser'
+import CampaignHandler from '@/mocks/api/handler/CampaignHandler.js'
 
-export const worker = setupWorker(...CampaignHandler, ...ProposalHandler);
+export const worker = setupWorker(
+  ...CampaignHandler,
+  ...InfluencerHandler,
+  ...ContractHandler,
+  ...InstagramDashboardHandler,
+  ...YouTubeDashboardHandler
+)
