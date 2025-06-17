@@ -44,7 +44,10 @@ const openSearchPopup = (key, type) => {
         <template v-for="(group, index) in groups" :key="index">
             <div v-if="group.type === 'horizontal'" class="flex gap-4">
                 <template v-for="field in group.fields" :key="field.key">
-                    <div class="flex-1">
+                    <div
+                        class="flex-1"
+                        :style="{ flexBasis: (field.width ?? 100 / group.fields.length) + '%' }"
+                    >
                         <label class="input-form-label">{{ field.label }}</label>
                         <div v-if="field.type === 'date-range'" class="flex items-center gap-2">
                             <input
@@ -84,7 +87,7 @@ const openSearchPopup = (key, type) => {
                             type="text"
                             :value="formatNumber(form[field.key])"
                             @input="parseNumberInput($event, field.key)"
-                            :readonly="!isEditing"
+                            :readonly="!isEditing || field.disabled"
                             class="input-form-box"
                         />
 
@@ -120,7 +123,7 @@ const openSearchPopup = (key, type) => {
                             v-else
                             type="text"
                             v-model="form[field.key]"
-                            :readonly="!isEditing"
+                            :readonly="!isEditing || field.disabled"
                             class="input-form-box"
                         />
                     </div>
@@ -134,7 +137,7 @@ const openSearchPopup = (key, type) => {
                         <textarea
                             v-if="field.type === 'textarea'"
                             v-model="form[field.key]"
-                            :readonly="!isEditing"
+                            :readonly="!isEditing || field.disabled"
                             class="input-form-box"
                             rows="3"
                         />

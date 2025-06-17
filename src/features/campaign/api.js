@@ -95,3 +95,11 @@ export const getInfluencer = async () => {
 export const getProposalReference = async () => {
     return await api.get('/proposal/reference');
 };
+
+export const getQuotationReference = async () => {
+    return await api.get('/quotation/reference');
+};
+
+export const getContractReference = async () => {
+    return await api.get('/contract/reference');
+};
