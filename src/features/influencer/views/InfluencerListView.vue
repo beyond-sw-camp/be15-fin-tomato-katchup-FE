@@ -50,18 +50,16 @@ const paginatedList = computed(() => {
 </script>
 
 <template>
-  <div class="w-full min-h-screen bg-background flex font-sans">
-      <CommonFiltering class="custom-sidebar" />
-      <div class="container">
-        <div class="page-header">
-          <div class="page-title">
-            인플루언서
-            <span class="cnt-search">
-              (검색 결과: {{ totalCount }}건)
-            </span>
-          </div>
-        </div>
-        <div class="blue-line"></div>
+    <div class="w-full min-h-screen bg-background flex font-sans">
+        <CommonFiltering />
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">
+                    인플루언서
+                    <span class="cnt-search"> (검색 결과: {{ totalCount }}건) </span>
+                </div>
+            </div>
+            <div class="blue-line"></div>
 
         <InfluencerCategory @update:selected="selectedCategory = $event" />
 

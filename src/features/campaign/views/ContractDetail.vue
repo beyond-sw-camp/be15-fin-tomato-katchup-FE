@@ -1,65 +1,22 @@
-<template>
-    <div class="flex">
-        <!-- 좌측 의견 바 -->
-        <OpinionBar :opinions="opinions" @submit="handleSubmit" @delete="handleDelete" />
-
-        <!-- 본문 영역 -->
-        <div class="flex-1 flex flex-col gap-8">
-            <!-- 상단: 견적 폼 -->
-            <div class="container">
-                <div class="page-header">
-                    <div class="page-title">견적</div>
-                    <div class="flex justify-end gap-2">
-                        <button class="btn-delete" @click="isEditing ? cancel() : remove()">
-                            {{ isEditing ? '취소' : '삭제' }}
-                        </button>
-
-                        <button class="btn-create" @click="isEditing ? save() : (isEditing = true)">
-                            {{ isEditing ? '저장' : '수정' }}
-                        </button>
-
-                        <Icon
-                            icon="material-symbols:lists-rounded"
-                            width="32"
-                            height="32"
-                            class="text-btn-gray"
-                            @click="router.push('/sales/quotation')"
-                        />
-                    </div>
-                </div>
-
-                <div class="blue-line"></div>
-
-                <SalesForm v-model="form" :groups="groups" :isEditing="isEditing" />
-            </div>
-
-            <!-- 하단: 참조 리스트 -->
-            <div class="container">
-                <DetailReferenceList :items="proposalReferences" @select="handleReferenceSelect" />
-            </div>
-        </div>
-    </div>
-</template>
-
 <script setup>
-import { onMounted, reactive, ref } from 'vue';
-import OpinionBar from '@/components/layout/OpinionBar.vue';
-import SalesForm from '@/features/campaign/components/SalesForm.vue';
-import { getOpinion, getProposalReference, getQuotationDetail } from '@/features/campaign/api.js';
 import { useRoute, useRouter } from 'vue-router';
+import { onMounted, reactive, ref } from 'vue';
+import { getContractDetail, getOpinion, getQuotationReference } from '@/features/campaign/api.js';
 import { Icon } from '@iconify/vue';
 import DetailReferenceList from '@/features/campaign/components/DetailReferenceList.vue';
+import OpinionBar from '@/components/layout/OpinionBar.vue';
+import SalesForm from '@/features/campaign/components/SalesForm.vue';
+import FileUploadCard from '@/features/campaign/components/FileUploadCard.vue';
 
 const route = useRoute();
 const router = useRouter();
 
 const opinions = ref([]);
-const quotationForm = ref(null);
+const contractForm = ref(null);
 const form = reactive({});
-const proposalReferences = ref([]);
+const quotationReferences = ref([]);
 const isEditing = ref(false);
 
-// form 그룹 정의
 const groups = [
     {
         type: 'horizontal',
@@ -139,27 +96,30 @@ const groups = [
     },
 ];
 
-// API 데이터 로딩 함수
+// 의견 호출
 const fetchOpinions = async () => {
-    const res = await getOpinion(route.params.quotationId, 'quotation');
-    opinions.value = res.data.data;
+    try {
+        const res = await getOpinion(route.params.quotationId, 'contract');
+        opinions.value = res.data.data;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
-const fetchQuotationDetail = async () => {
-    const res = await getQuotationDetail(route.params.quotationId);
-    quotationForm.value = res.data.data;
-    Object.assign(form, res.data.data);
+const fetchQuotationReferences = async () => {
+    const res = await getQuotationReference();
+    quotationReferences.value = res.data.data;
 };
 
-const fetchProposalReferences = async () => {
-    const res = await getProposalReference();
-    proposalReferences.value = res.data.data;
+const fetchContractDetail = async () => {
+    try {
+        const res = await getContractDetail(route.params.contractId);
+        contractForm.value = res.data.data;
+        Object.assign(form, res.data.data);
+    } catch (e) {
+        console.log(e);
+    }
 };
-
-// 마운트 시 전부 패칭
-onMounted(async () => {
-    await Promise.all([fetchQuotationDetail(), fetchOpinions(), fetchProposalReferences()]);
-});
 
 // 의견 등록
 const handleSubmit = (newComment) => {
@@ -206,7 +166,59 @@ const save = () => {
 };
 
 const cancel = () => {
-    Object.assign(form, quotationForm.value);
+    Object.assign(form, contractForm.value);
     isEditing.value = false;
 };
+
+onMounted(async () => {
+    await Promise.all([fetchContractDetail(), fetchOpinions(), fetchQuotationReferences()]);
+});
 </script>
+
+<template>
+    <div class="flex">
+        <!-- 좌측 의견 바 -->
+        <OpinionBar :opinions="opinions" @submit="handleSubmit" @delete="handleDelete" />
+
+        <!-- 본문 영역 -->
+        <div class="flex-1 flex flex-col gap-8">
+            <!-- 상단: 견적 폼 -->
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title">계약</div>
+                    <div class="flex justify-end gap-2">
+                        <button class="btn-delete" @click="isEditing ? cancel() : remove()">
+                            {{ isEditing ? '취소' : '삭제' }}
+                        </button>
+
+                        <button class="btn-create" @click="isEditing ? save() : (isEditing = true)">
+                            {{ isEditing ? '저장' : '수정' }}
+                        </button>
+
+                        <Icon
+                            icon="material-symbols:lists-rounded"
+                            width="32"
+                            height="32"
+                            class="text-btn-gray"
+                            @click="router.push('/sales/contract')"
+                        />
+                    </div>
+                </div>
+
+                <div class="blue-line"></div>
+
+                <SalesForm v-model="form" :groups="groups" :isEditing="isEditing" />
+            </div>
+
+            <!-- 하단: 참조 리스트 -->
+            <div class="container">
+                <DetailReferenceList :items="quotationReferences" @select="handleReferenceSelect" />
+            </div>
+            <div class="container">
+                <FileUploadCard :isEditing="isEditing" v-model="form.attachments" />
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped></style>
