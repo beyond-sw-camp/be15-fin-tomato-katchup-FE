@@ -165,6 +165,32 @@ const handleDelete = (id) => {
     opinions.value = opinions.value.filter((opinion) => opinion.id !== id);
 };
 
+const handleReferenceSelect = (item) => {
+    if (!isEditing.value) {
+        alert('수정 모드가 아닙니다!');
+        return;
+    }
+
+    // contract -> revenue 변환 매핑
+    form.title = item.title;
+    form.requestDate = item.requestDate;
+    form.clientCompany = item.clientCompany;
+    form.clientManager = item.clientManager;
+    form.period = item.period;
+    form.announcementDate = item.announcementDate;
+    form.pipeline = item.pipeline;
+    form.username = item.username;
+    form.influencer = item.influencer;
+    form.status = item.status; // 상태도 그대로 넣을거면 포함
+    form.adPrice = item.price;
+    form.productPrice = item.supplyAmount;
+    form.salesQuantity = item.extraProfit;
+    form.content = item.content;
+    form.notes = item.notes;
+    form.startDate = item.startDate;
+    form.endDate = item.endDate;
+};
+
 // 저장 및 취소
 const save = () => {
     console.log('저장할 값:', form);
@@ -227,7 +253,7 @@ onMounted(async () => {
 
             <!-- 하단: 참조 리스트 -->
             <div class="container">
-                <DetailReferenceList :items="contractReferences" />
+                <DetailReferenceList :items="contractReferences" @select="handleReferenceSelect" />
             </div>
             <div class="container">
                 <FileUploadCard :isEditing="isEditing" v-model="form.attachments" />
