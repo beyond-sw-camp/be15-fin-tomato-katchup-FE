@@ -1,3 +1,14 @@
+<script setup>
+import { Icon } from '@iconify/vue'
+
+defineProps({
+  client: {
+    type: Object,
+    required: true
+  }
+})
+</script>
+
 <template>
   <div class="w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200">
     <div class="flex justify-between items-start mb-4">
@@ -26,14 +37,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { Icon } from '@iconify/vue'
-
-defineProps({
-  client: {
-    type: Object,
-    required: true
-  }
-})
-</script>

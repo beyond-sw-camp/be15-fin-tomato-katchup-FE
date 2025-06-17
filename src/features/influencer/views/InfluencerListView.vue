@@ -51,7 +51,7 @@ const paginatedList = computed(() => {
 
 <template>
   <div class="w-full min-h-screen bg-background flex font-sans">
-      <CommonFiltering class="sticky top-0 w-[304px] h-screen bg-white shadow-md z-10" />
+      <CommonFiltering class="custom-sidebar" />
       <div class="container">
         <div class="page-header">
           <div class="page-title">
