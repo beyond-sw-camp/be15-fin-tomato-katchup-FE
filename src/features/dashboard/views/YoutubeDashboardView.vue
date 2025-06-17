@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
+import { useToast } from 'vue-toastification'
 
 import DashboardBase from '@/features/dashboard/components/DashboardBase.vue'
 import DashboardHeader from '@/features/dashboard/components/DashboardHeader.vue'
@@ -11,32 +12,46 @@ import DashboardCampaignList from '@/features/dashboard/components/DashboardCamp
 
 const route = useRoute()
 const router = useRouter()
-const data = ref(null)
-const satisfaction = ref(82.5)
+const toast = useToast()
 
+const dashboard = ref(null)
+const influencer = ref(null)
+const satisfaction = ref(82.5)
 const influencerId = route.query.id
 
 onMounted(async () => {
-  const res = await fetch(`/api/v1/dashboard/youtube?id=${influencerId}`)
-  const resData = await res.json()
+  try {
+    const [dashboardRes, influencerRes] = await Promise.all([
+      fetch(`/api/v1/dashboard/youtube?id=${influencerId}`),
+      fetch(`/api/v1/influencer/${influencerId}`)
+    ])
 
-  if (!resData.data) {
-    toast.warning('유튜브 계정이 연결되어있지 않습니다.');
-    router.replace(`/influencer/dashboard/instagram?id=${influencerId}`);
+    const dashboardData = await dashboardRes.json()
+    const influencerData = await influencerRes.json()
+
+    if (!dashboardData.data) {
+      toast.warning('유튜브 계정이 연결되어있지 않습니다.')
+      router.replace(`/influencer/dashboard/instagram?id=${influencerId}`)
+      return
+    }
+
+    dashboard.value = dashboardData.data
+    influencer.value = influencerData.data
+
+  } catch (err) {
+    toast.error('데이터를 불러오지 못했습니다.')
   }
-
-  data.value = resData.data
 })
 
 const summaryData = computed(() => {
-  if (!data.value?.shortsSummary) {
+  if (!dashboard.value?.shortsSummary) {
     return { shorts: 0, views: '0만', comments: '0개', likes: '0만' }
   }
   return {
-    shorts: data.value.shortsSummary.count,
-    views: `${(data.value.shortsSummary.averageViewCount / 10000).toFixed(1)}만`,
-    comments: `${data.value.shortsSummary.commentCount}개`,
-    likes: `${(data.value.shortsSummary.likeCount / 10000).toFixed(1)}만`
+    shorts: dashboard.value.shortsSummary.count,
+    views: `${(dashboard.value.shortsSummary.averageViewCount / 10000).toFixed(1)}만`,
+    comments: `${dashboard.value.shortsSummary.commentCount}개`,
+    likes: `${(dashboard.value.shortsSummary.likeCount / 10000).toFixed(1)}만`
   }
 })
 
@@ -46,18 +61,18 @@ const formatSubscribers = (num) => {
 }
 
 const goToPlatform = (platform) => {
-  router.push(`/influencer/dashboard/${platform}?id=${influencerId}`);
+  router.push(`/influencer/dashboard/${platform}?id=${influencerId}`)
 }
 
 const goToList = () => {
-  router.push(`/influencer/list`);
+  router.push(`/influencer/list`)
 }
 </script>
 
 <template>
   <div class="w-full min-h-screen flex items-center justify-center">
-    <div v-if="data">
-      <div class="sticky top-10 flex justify-end">
+    <div v-if="dashboard" class="w-full">
+      <div class="flex justify-end">
         <button
           @click="goToList"
           class="flex items-center gap-2 px-4 py-2 mb-5 bg-btn-blue text-white font-bold rounded-md"
@@ -66,31 +81,25 @@ const goToList = () => {
           <Icon icon="tabler:door-exit" width="24" height="24" />
         </button>
       </div>
+
       <DashboardHeader
-        :name="data.channel.title"
-        :thumbnail="data.channel.thumbnails.default.url"
-        :tags="data.tags"
-        :subscribers="formatSubscribers(data.channel.statistics.subscriberCount)"
+        :name="dashboard.channel.title"
+        :thumbnail="dashboard.channel.thumbnails.default.url"
+        :tags="dashboard.tags"
+        :subscribers="formatSubscribers(dashboard.channel.statistics.subscriberCount)"
+        :influencer="influencer"
       />
 
       <DashboardBase
-        :platform="'youtube'"
+        platform="youtube"
         :summaryData="summaryData"
-        :data="data"
+        :data="dashboard"
         :satisfaction="satisfaction"
         @switch="goToPlatform"
       />
 
-      <PopularPosts
-        :platform="'youtube'"
-        :items="data.popularVideos"
-      />
-
-      <PopularShortForms
-        :platform="'youtube'"
-        :items="data.popularShorts"
-      ></PopularShortForms>
-
+      <PopularPosts :platform="'youtube'" :items="dashboard.popularVideos" />
+      <PopularShortForms :platform="'youtube'" :items="dashboard.popularShorts" />
       <DashboardCampaignList />
     </div>
 
