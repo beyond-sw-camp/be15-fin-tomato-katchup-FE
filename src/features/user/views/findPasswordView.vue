@@ -13,13 +13,14 @@ const email = ref('');
 
 const handleFindPassword = () => {
     if (!emp_number.value || !email.value) {
-        toast.error('사원코드와 이메일을 입력해주세요.');
-        return;
+        toast.error('사원코드와 이메일을 입력해주세요.')
+        return
     }
-
-    toast.success('입력하신 이메일 주소로 비밀번호가 발송되었습니다.');
-    router.push('/login');
-};
+    toast.success('입력하신 이메일 주소로 비밀번호가 발송되었습니다.')
+    router.push('/login')
+    const domain = email.value.split('@')[1]
+    window.open(`https://${domain}`, '_blank')
+}
 </script>
 
 <template>
