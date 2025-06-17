@@ -20,6 +20,10 @@
     "axios": "^1.9.0",
     "bootstrap-icons": "^1.13.1",
     "chart.js": "^4.5.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "google-trends-api": "^4.9.2",
+    "chart.js": "^4.5.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "pinia": "^3.0.1",
     "v-drag": "^3.0.9",
@@ -50,5 +54,10 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
