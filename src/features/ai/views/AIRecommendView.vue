@@ -1,10 +1,8 @@
 <template>
   <div class="relative">
     <div class="flex gap-6">
-      <!-- 왼쪽 즐겨찾기 추가된 인플루언서 -->
       <AddedInfluencers :added-influencers="addedInfluencers" @remove="removeInfluencer" />
 
-      <!-- 오른쪽 전체 내용 -->
       <div class="flex-1">
         <!-- 캠페인 검색 -->
         <div class="container mb-10">
@@ -51,7 +49,7 @@
             </span>
           </div>
 
-          <div class="border border-gray-light rounded-md bg-white p-4">
+          <div class="border border-gray-light rounded-md bg-white p-4 overflow-y-auto max-h-[400px]">
             <table class="w-full text-sm text-center">
               <thead class="text-xs text-gray-500 border-b border-gray-light">
               <tr>
@@ -64,47 +62,53 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(item, index) in filteredCampaigns" :key="item.id" class="h-[64px]">
-                <td>{{ index + 1 }}</td>
-                <td>
-                  <span class="text-white text-xs px-2 py-1 rounded bg-gray-600">{{ item.status1 }}</span>
-                  <span
-                    class="text-white text-xs px-2 py-1 rounded ml-1"
-                    :class="item.status2 === '제안' ? 'bg-pink-300' : 'bg-orange-300'"
-                  >
-                      {{ item.status2 }}
-                    </span>
-                </td>
-                <td class="font-semibold">{{ item.company }}</td>
-                <td>{{ item.title }}</td>
-                <td>{{ item.product }}</td>
-                <td>
-                  <button
-                    class="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded hover:bg-blue-200"
-                    @click="getRecommendationsByCampaignId(item.id)"
-                  >
-                    AI 추천 받기
-                  </button>
-
-                </td>
-              </tr>
+              <template v-for="(item, index) in filteredCampaigns" :key="item?.id ?? index">
+                <tr v-if="item" class="h-[64px]">
+                  <td>{{ index + 1 }}</td>
+                  <td>
+                    <span class="text-white text-xs px-2 py-1 rounded bg-gray-600">{{ item.status1 }}</span>
+                    <span
+                      class="text-white text-xs px-2 py-1 rounded ml-1"
+                      :class="item.status2 === '제안' ? 'bg-pink-300' : 'bg-orange-300'"
+                    >
+        {{ item.status2 }}
+      </span>
+                  </td>
+                  <td class="font-semibold">{{ item.company }}</td>
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.product }}</td>
+                  <td>
+                    <button
+                      class="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded hover:bg-blue-200"
+                      @click="getRecommendationsByCampaignId(item.id)"
+                    >
+                      AI 추천 받기
+                    </button>
+                  </td>
+                </tr>
+              </template>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- AI 추천 카드 (이제 중간에 들어감) -->
-        <div v-if="showRecommendation" class="container mb-10">
+        <div v-if="showRecommendation" class="container mb-10 relative">
+          <button
+            class="absolute top-3 right-3 text-gray-400 hover:text-black z-10"
+            @click="showRecommendation = false"
+          >
+            <Icon icon="flowbite:close-outline" width="28" height="28" />
+          </button>
+
           <AIInfluencerCard
-            :influencers="filteredInfluencers"
+            :influencers="filteredAiInfluencers"
             @close="showRecommendation = false"
             @add-influencer="addInfluencer"
           />
         </div>
 
-        <!-- 인플루언서 검색 -->
-        <div class="container">
-          <h2 class="text-lg font-bold text-black mb-2">인플루언서 검색</h2>
+        <div class="container overflow-y-auto max-h-[600px]">
+        <h2 class="text-lg font-bold text-black mb-2">인플루언서 검색</h2>
           <div class="blue-line mb-4"></div>
 
           <div class="grid grid-cols-7 gap-2 mb-4">
@@ -180,8 +184,13 @@ const recommendedInfluencers = ref([])
 const addedInfluencers = ref([])
 const searchQuery = ref('')
 const selectedCategory = ref('전체')
+const allInfluencers = ref([])
 const showRecommendation = ref(false)
 const categories = ['전체', '엔터테인먼트', '지식/정보', '푸드', '뷰티/패션', '키즈', '게임']
+
+const filteredInfluencers = computed(() => {
+  return filteredAllInfluencers.value
+})
 
 const toggleTag = (tag) => {
   if (selectedTags.value.includes(tag)) {
@@ -197,22 +206,43 @@ const applyFilter = () => {
   console.log('선택된 태그:', selectedTags.value)
 }
 
+const fetchAllInfluencers = async () => {
+  try {
+    const res = await axios.get('/api/v1/influencers')
+    allInfluencers.value = res.data.data
+  } catch (e) {
+    console.error('전체 인플루언서 불러오기 실패', e)
+  }
+}
+
 const filteredCampaigns = computed(() => {
-  return campaignList.value.filter((item) => {
-    const matchName = filters.value.name === '' || item.title.includes(filters.value.name)
-    const matchCompany = filters.value.company === '' || item.company.includes(filters.value.company)
-    const matchTags = selectedTags.value.length === 0 || selectedTags.value.some((tag) => item.tags.includes(tag))
-    return matchName && matchCompany && matchTags
+  return (campaignList.value || [])
+    .filter((item) => {
+      if (!item || typeof item !== 'object') return false
+      const title = item.title ?? ''
+      const company = item.company ?? ''
+      const tags = Array.isArray(item.tags) ? item.tags : []
+      const matchName = filters.value.name === '' || title.includes(filters.value.name)
+      const matchCompany = filters.value.company === '' || company.includes(filters.value.company)
+      const matchTags = selectedTags.value.length === 0 || selectedTags.value.some((tag) => tags.includes(tag))
+      return matchName && matchCompany && matchTags
+    })
+})
+
+
+const filteredAiInfluencers = computed(() => {
+  return recommendedInfluencers.value.filter((influencer) => {
+    const matchCategory = selectedCategory.value === '전체' || influencer.categories?.includes(selectedCategory.value)
+    const matchSearch = searchQuery.value === '' || influencer.name.includes(searchQuery.value) || influencer.username.includes(searchQuery.value)
+    return matchCategory && matchSearch
   })
 })
 
-const filteredInfluencers = computed(() => {
-  return recommendedInfluencers.value.filter((influencer) => {
-    const matchCategory = selectedCategory.value === '전체' || influencer.categories?.includes(selectedCategory.value)
-    const matchSearch =
-      searchQuery.value === '' ||
-      influencer.name.includes(searchQuery.value) ||
-      influencer.username.includes(searchQuery.value)
+const filteredAllInfluencers = computed(() => {
+  return allInfluencers.value.filter((influencer) => {
+    const hasCategory = Array.isArray(influencer.categories)
+    const matchCategory = selectedCategory.value === '전체' || (hasCategory && influencer.categories.includes(selectedCategory.value))
+    const matchSearch = searchQuery.value === '' || influencer.name?.includes(searchQuery.value) || influencer.username?.includes(searchQuery.value)
     return matchCategory && matchSearch
   })
 })
@@ -234,6 +264,7 @@ const addInfluencer = (influencer) => {
 const removeInfluencer = (id) => {
   addedInfluencers.value = addedInfluencers.value.filter((i) => i.id !== id)
 }
+
 const getRecommendationsByCampaignId = async (campaignId) => {
   try {
     const res = await axios.get(`/api/v1/ai/campaigns/${campaignId}/recommendations`)
@@ -244,8 +275,10 @@ const getRecommendationsByCampaignId = async (campaignId) => {
   }
 }
 
-
-onMounted(fetchCampaigns)
+onMounted(() => {
+  fetchCampaigns()
+  fetchAllInfluencers()
+})
 </script>
 
 <style scoped>

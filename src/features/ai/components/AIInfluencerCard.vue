@@ -24,8 +24,8 @@
     </div>
 
     <!-- 우측 인플루언서 카드 리스트 -->
-    <div class="flex-1 space-y-4 pl-2">
-      <div
+    <div class="flex-1 space-y-4 pl-2 overflow-y-auto max-h-[800px]">
+    <div
         v-for="influencer in influencers"
         :key="influencer.id"
         class="flex justify-between items-center p-4 bg-white border border-gray-300 rounded-lg cursor-pointer hover:shadow-sm"
