@@ -17,7 +17,7 @@ const handleMainLogo = async() => {
 
 <style scoped>
 .main-logo {
-    max-width: 480px;
+    max-width: 320px;
     max-height: 100%;
     cursor: pointer;
 }
