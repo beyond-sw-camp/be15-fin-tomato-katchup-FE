@@ -29,6 +29,26 @@ const quotationDetail = {
     endDate: '2025-06-20',
 };
 
+const contractDetail = {
+    title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 계약',
+    requestDate: '2025-06-05',
+    clientCompany: { id: 1, name: 'UVW 뷰티' },
+    clientManager: { id: 10, name: '송강' },
+    period: '2주간',
+    announcementDate: '2025-06-15',
+    pipeline: 'UVW 뷰티 디바이스 언박싱 캠페인',
+    username: { id: 100, name: '차은우' },
+    influencer: { id: 201, name: '나연' },
+    status: '승인요청',
+    price: 100000000,
+    supplyAmount: 20000,
+    extraProfit: 800000000,
+    content: '진행 내용: 인플루언서 선정 및 콘텐츠 제작 일정 포함',
+    notes: '특이사항 없음',
+    startDate: '2025-06-06',
+    endDate: '2025-06-20',
+};
+
 const opinionList = [
     {
         id: 1,
@@ -198,6 +218,14 @@ const proposalReferenceList = [
     { id: 2, title: '[2차] 광고 마지막 제안' },
     { id: 3, title: '[3차] 광고 진짜 마지막 제안' },
     { id: 4, title: '[4차] 광고 제안ㅜㅜ' },
+    { id: 5, title: '[5차] 계약 직전 최종안' },
+];
+
+const quotationReferenceList = [
+    { id: 1, title: '[1차] 광고 견적' },
+    { id: 2, title: '[2차] 광고 마지막 견적' },
+    { id: 3, title: '[3차] 광고 진짜 마지막 견적' },
+    { id: 4, title: '[4차] 광고 견적ㅜㅜ' },
     { id: 5, title: '[5차] 계약 직전 최종안' },
 ];
 
@@ -532,6 +560,23 @@ const CampaignHandler = [
                 status: 200,
                 headers: { 'Cache-Control': 'no-store' },
             },
+        );
+    }),
+    http.get('/api/v1/sales/contract/:id', async () => {
+        return HttpResponse.json(
+            {
+                data: contractDetail,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/quotation/reference', async () => {
+        return HttpResponse.json(
+            { data: quotationReferenceList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
     http.get('/api/v1/sales/revenue', async ({ request }) => {
