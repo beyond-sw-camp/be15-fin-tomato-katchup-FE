@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, nextTick, onMounted } from 'vue';
+import { reactive, ref, nextTick, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
@@ -33,6 +33,11 @@ const newEmployee = reactive({
   mobile: '',
   email: '',
   note: ''
+});
+
+// 고객사명이 바뀔 때마다 사원 등록용에도 자동 반영
+watch(() => form.name, (newVal) => {
+  newEmployee.client = newVal;
 });
 
 // ------------------ 기본 기능 ------------------
@@ -94,6 +99,9 @@ const openPostcodeSearch = () => {
 
 // ------------------ 사원 추가 ------------------
 const addEmployee = () => {
+  // 고객사 이름 자동 입력
+  newEmployee.client = form.name;
+
   if (editIndex.value === -1) {
     // 새로 추가
     employeeList.value.push({ ...newEmployee });
@@ -103,7 +111,9 @@ const addEmployee = () => {
   }
 
   // 초기화
-  Object.keys(newEmployee).forEach((key) => newEmployee[key] = '');
+  Object.keys(newEmployee).forEach((key) => {
+    if (key !== 'client') newEmployee[key] = '';
+  });
   newEmployee.position = '재직';
   editIndex.value = -1;
   isAddingEmployee.value = false;
@@ -238,7 +248,9 @@ const editEmployee = (index) => {
     <div class="blue-line mb-4" />
     <div class="grid grid-cols-2 gap-4">
       <div class="flex flex-col gap-2">
-        <label class="input-form-label">이름</label>
+        <label class="input-form-label">
+          이름<span class="text-red-500 ml-1">*</span>
+        </label>
         <input v-model="newEmployee.name" class="input-form-box" />
         <label class="input-form-label">상태</label>
         <select v-model="newEmployee.position" class="input-form-box">
@@ -255,12 +267,19 @@ const editEmployee = (index) => {
       </div>
       <div class="flex flex-col gap-2">
         <label class="input-form-label">고객사</label>
-        <input v-model="newEmployee.client" class="input-form-box" />
+        <input v-model="newEmployee.client" class="input-form-box bg-gray-100" readonly />
+
         <label class="input-form-label">직책</label>
         <input v-model="newEmployee.title" class="input-form-box" />
-        <label class="input-form-label">휴대폰번호</label>
+
+        <label class="input-form-label">
+          휴대폰번호<span class="text-red-500 ml-1">*</span>
+        </label>
         <input v-model="newEmployee.mobile" class="input-form-box" />
-        <label class="input-form-label">이메일</label>
+
+        <label class="input-form-label">
+          이메일<span class="text-red-500 ml-1">*</span>
+        </label>
         <input v-model="newEmployee.email" class="input-form-box" />
       </div>
     </div>
@@ -272,4 +291,3 @@ const editEmployee = (index) => {
     </div>
   </div>
 </template>
-
