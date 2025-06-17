@@ -4,7 +4,7 @@
             v-for="campaign in campaigns"
             :key="campaign.id"
             @click="gotoDetail(campaign.id)"
-            class="campaign-card border-1 border-solid border-gray-medium mb-[16px] px-4 py-1 hover:bg-dropdown/10 active:bg-dropdown/15"
+            class="campaign-card border-1 border-solid border-gray-medium mb-[16px] px-4 py-3 hover:bg-dropdown/10 active:bg-dropdown/15"
         >
             <div class="campaign-header mb-2">
                 <CampaignBadge :label="campaign.status" status="default" />
