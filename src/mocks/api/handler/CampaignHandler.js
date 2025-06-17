@@ -127,6 +127,7 @@ const campaignDetail = {
     clientManagerName: '김동영',
     clientManagerPosition: '팀장',
     productName: 'COMPACT 폴딩백 하이킹 경량 백팩 20L',
+    adPrice: 9300000,
     productPrice: 16300,
     expectedRevenue: 1000000, // 예상 매출
     expectedProfitMargin: 20, // 예상 이익률
@@ -143,17 +144,18 @@ const campaignDetail = {
         proposal: { date: formatDate(new Date(baseDate.getFullYear(), 2, 25)) },
         negotiation: { date: formatDate(new Date(baseDate.getFullYear(), 2, 27)) },
     },
+    influencerId: 1,
 };
 const userList = [
     { id: 1, name: '차은우' },
     { id: 2, name: '아이유' },
     { id: 3, name: '김수현' },
     { id: 4, name: '장원영' },
-    { id: 5, name: '정국' },
-    { id: 6, name: '지민' },
+    { id: 5, name: '전정국' },
+    { id: 6, name: '박지민' },
     { id: 7, name: '박보검' },
     { id: 8, name: '손흥민' },
-    { id: 9, name: '임영웅' },
+    { id: 9, name: '김정우' },
 ];
 
 const clientCompanyList = [
