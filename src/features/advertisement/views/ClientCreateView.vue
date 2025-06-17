@@ -150,9 +150,11 @@ const editEmployee = (index) => {
       <div class="blue-line"></div>
 
       <div class="grid grid-cols-2 gap-10">
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2.5">
           <!-- 왼쪽 필드 -->
-          <label class="input-form-label">고객사</label>
+          <label class="input-form-label">
+            광고업체명 <span class="text-red-500 ml-1">*</span>
+          </label>
           <input class="input-form-box" v-model="form.name" :disabled="!isEditing" />
           <label class="input-form-label">매출</label>
           <input class="input-form-box" v-model="form.revenue" :disabled="!isEditing" />
@@ -169,9 +171,11 @@ const editEmployee = (index) => {
           />
         </div>
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2.5">
           <!-- 오른쪽 필드 -->
-          <label class="input-form-label">진행 상태</label>
+          <label class="input-form-label">
+            진행 상태 <span class="text-red-500 ml-1">*</span>
+          </label>
           <select class="input-form-box" v-model="form.status" :disabled="!isEditing">
             <option value="시작전">시작전</option>
             <option value="진행중">진행중</option>
@@ -183,7 +187,9 @@ const editEmployee = (index) => {
           <input class="input-form-box" v-model="form.phone" :disabled="!isEditing" />
           <label class="input-form-label">팩스번호</label>
           <input class="input-form-box" v-model="form.fax" :disabled="!isEditing" />
-          <label class="input-form-label">담당자</label>
+          <label class="input-form-label">
+            담당자 <span class="text-red-500 ml-1">*</span>
+          </label>
           <div class="flex gap-2">
             <input type="text" :value="form.user.map((u) => u.name).join(', ')" readonly class="input-form-box flex-1" />
             <button class="border bg-gray-300 rounded px-3 py-1 text-sm shadow" @click="openUserSearch" v-if="isEditing">검색</button>
