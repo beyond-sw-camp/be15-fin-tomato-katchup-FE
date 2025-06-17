@@ -11,8 +11,15 @@ const router = useRouter();
 const emp_number = ref('');
 const email = ref('');
 
-const isLoading = ref(false);
+const handleFindPassword = () => {
+    if (!emp_number.value || !email.value) {
+        toast.error('사원코드와 이메일을 입력해주세요.');
+        return;
+    }
 
+    toast.success('입력하신 이메일 주소로 비밀번호가 발송되었습니다.');
+    router.push('/login');
+};
 </script>
 
 <template>
@@ -25,17 +32,17 @@ const isLoading = ref(false);
             </div>
 
             <form class="login-form flex flex-col" @submit.prevent="handleFindPassword">
-                <label class="input-box-label text-click text-md pt-5 pb-1">사원코드</label>
-                <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-6 py-6" />
-                <label class="input-box-label text-click text-md pt-5 pb-1">이메일</label>
-                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-6 py-6 pb-6" />
+                <label class="input-box-label text-click text-md pt-1 pb-1">사원코드</label>
+                <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
+                <label class="input-box-label text-click text-md pt-6 pb-1">이메일</label>
+                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
 
-                <RouterLink to="/login" class = "inline-block">
-                    <button class="mt-12 bg-[#A8C1DA] text-white w-full py-4 text-md rounded">
-                        비밀번호 찾기
-                    </button>
-                </RouterLink>
+                <button class="mt-19 bg-[#A8C1DA] text-white w-full py-4 text-md rounded">
+                    비밀번호 찾기
+                </button>
             </form>
+            <div>
+            </div>
         </div>
     </div>
 
@@ -46,7 +53,7 @@ const isLoading = ref(false);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+     align-items: center;
     height: 100vh;
 }
 </style>
