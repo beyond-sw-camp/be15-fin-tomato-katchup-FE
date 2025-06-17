@@ -19,9 +19,12 @@
     "apexcharts": "^4.7.0",
     "axios": "^1.9.0",
     "bootstrap-icons": "^1.13.1",
+    "chart.js": "^4.5.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "pinia": "^3.0.1",
     "v-drag": "^3.0.9",
     "vue": "^3.5.16",
+    "vue-chartjs": "^5.3.2",
     "vue-router": "^4.5.0",
     "vue-toastification": "^2.0.0-rc.5",
     "vue3-apexcharts": "^1.8.0"
