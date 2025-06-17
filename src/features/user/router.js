@@ -1,5 +1,5 @@
 import InfluencerManagementView from '@/features/user/views/InfluencerManagementView.vue';
-import EmailSystemView from '@/features/user/views/EmailSystemView.vue';
+// import EmailSystemView from '@/features/user/views/EmailSystemView.vue';
 import SurveyListView from '@/features/user/views/SurveyListView.vue';
 
 export const userRoutes = [
