@@ -9,12 +9,17 @@ export const campaignRoutes = [
         name: 'CampaignDetail',
         component: () => import('@/features/campaign/views/CampaignDetail.vue'),
     },
+    {
+        path: '/sales/quotation/:quotationId',
+        name: 'quotationDetail',
+        component: () => import('@/features/campaign/views/QuotationDetail.vue'),
+    },
 
     /* === 공통 SearchPopup 하나로 통합 === */
     {
         path: '/search-popup',
         name: 'SearchPopup',
-        component: () => import('@/components/layout/SearchPopup.vue'),
+        component: () => import('@/components/common/SearchPopup.vue'),
         meta: { useLayout: 'none' },
     },
     {
