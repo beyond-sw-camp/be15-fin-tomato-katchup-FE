@@ -2,9 +2,6 @@ export const calendarRoutes = [
   {
     path: '/calendar',
     name: 'calendar',
-    component: () => import('@/features/calendar/components/Calendar.vue'),
-    meta: {
-      layout: 'none',
-    },
+    component: () => import('@/features/calendar/views/Calendar.vue'),
   },
 ]

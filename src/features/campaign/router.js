@@ -33,6 +33,11 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/ProposalList.vue'),
     },
     {
+        path: '/sales/proposal/:proposalDetail',
+        name: 'ProposalDetail',
+        component: () => import('@/features/campaign/views/ProposalDetail.vue'),
+    },
+    {
         path: '/sales/quotation',
         name: 'QuotationList',
         component: () => import('@/features/campaign/views/QuotationList.vue'),
@@ -48,8 +53,18 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/RevenueList.vue'),
     },
     {
+        path: '/sales/revenue/:revenueId',
+        name: 'RevenueDetail',
+        component: () => import('@/features/campaign/views/RevenueDetail.vue'),
+    },
+    {
         path: '/sales/contract',
         name: 'ContractList',
         component: () => import('@/features/campaign/views/ContractList.vue'),
+    },
+    {
+        path: '/sales/contract/:contractId',
+        name: 'ContractDetail',
+        component: () => import('@/features/campaign/views/ContractDetail.vue'),
     },
 ];

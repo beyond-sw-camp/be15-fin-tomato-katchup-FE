@@ -86,7 +86,7 @@ const toggleMenu = (id) => {
             <div class="page-header flex justify-between items-center">
                 <!-- 좌측: 제목 + 검색결과 -->
                 <div class="flex items-center">
-                    <div class="page-title">리스트업 목록</div>
+                    <div class="page-title">매출 목록</div>
                     <span class="cnt-search ml-2">(검색 결과: {{ total }} 건)</span>
                 </div>
 
