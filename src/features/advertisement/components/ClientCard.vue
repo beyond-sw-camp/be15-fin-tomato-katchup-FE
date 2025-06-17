@@ -1,16 +1,23 @@
 <script setup>
 import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router';
 
-defineProps({
-  client: {
-    type: Object,
-    required: true
-  }
+const props = defineProps({
+  client: Object
 })
+
+const router = useRouter()
+
+const goToDetail = () => {
+  router.push(`/management/client/${props.client?.id}`)
+}
 </script>
 
 <template>
-  <div class="w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200">
+  <div
+    class="w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+    @click="goToDetail"
+  >
     <div class="flex justify-between items-start mb-4">
       <div class="flex flex-col justify-between min-h-[80px]">
         <h3 class="text-lg font-semibold text-black">{{ client.name }}</h3>
