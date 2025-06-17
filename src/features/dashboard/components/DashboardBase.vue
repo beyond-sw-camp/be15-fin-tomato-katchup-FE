@@ -141,23 +141,23 @@ const satisfactionColorClass = computed(() => {
         </div>
 
         <div class="flex gap-8">
-            <AgeChart :platform="platform" :data="data.demographics.ageGender" class="w-2/3" />
-            <GenderChart :platform="platform" :data="data.demographics.ageGender" class="w-1/3" />
+            <AgeChart :platform="platform" :data="data.demographics.ageGender" class="w-[70%]" />
+            <GenderChart :platform="platform" :data="data.demographics.ageGender" class="w-[30%]" />
         </div>
 
         <div class="flex gap-8">
             <FollowerChart
                 :platform="platform"
                 :data="platform === 'instagram' ? data.followersTrend : data.subscribersTrend"
-                class="w-2/3"
+                class="w-[70%]"
             />
-          <ReachChart
-            :platform="platform"
-            :reach="data.reach"
-            :followerRate="platform === 'instagram' ? data.followerReachRate : data.subscriberRate"
-            :nonFollowerRate="platform === 'instagram' ? data.nonFollowerReachRate : data.nonSubscriberRate"
-            class="w-1/3"
-          />
+            <ReachChart
+              :platform="platform"
+              :reach="data.reach"
+              :followerRate="platform === 'instagram' ? data.followerReachRate : data.subscriberRate"
+              :nonFollowerRate="platform === 'instagram' ? data.nonFollowerReachRate : data.nonSubscriberRate"
+              class="w-[30%]"
+            />
         </div>
     </div>
 </template>
