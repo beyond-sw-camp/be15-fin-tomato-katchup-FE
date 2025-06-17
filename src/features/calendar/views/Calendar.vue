@@ -5,7 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import koLocale from '@fullcalendar/core/locales/ko'
 import { Icon } from '@iconify/vue'
-import ScheduleModal from './ScheduleModal.vue'
+import ScheduleModal from '../components/ScheduleModal.vue'
 import { useToast } from 'vue-toastification';
 
 function formatDateToLocalYYYYMMDD(date) {
