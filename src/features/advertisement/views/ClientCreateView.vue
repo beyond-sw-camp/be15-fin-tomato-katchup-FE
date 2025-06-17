@@ -161,7 +161,12 @@ const editEmployee = (index) => {
           <label class="input-form-label">사업자 번호</label>
           <input class="input-form-box" v-model="form.businessNumber" :disabled="!isEditing" />
           <label class="input-form-label">비고</label>
-          <input class="input-form-box" v-model="form.note" :disabled="!isEditing" />
+          <textarea
+            class="input-form-box resize-y min-h-[80px]"
+          v-model="form.note"
+          :disabled="!isEditing"
+          rows="3"
+          />
         </div>
 
         <div class="flex flex-col gap-4">
