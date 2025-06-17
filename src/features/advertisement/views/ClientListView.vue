@@ -30,7 +30,7 @@ const paginatedClients = computed(() => {
 <template>
   <div class="w-full min-h-screen bg-background flex font-sans">
     <!-- 사이드바 -->
-    <CommonFiltering />
+    <CommonFiltering class="custom-sidebar" />
 
     <!-- 본문 영역 -->
     <div class="flex flex-col flex-1 container bg-white">
