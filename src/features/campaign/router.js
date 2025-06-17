@@ -5,6 +5,11 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/CampaignList.vue'),
     },
     {
+        path: '/campaign/create',
+        name: 'CampaignCreate',
+        component: () => import('@/features/campaign/views/CampaignCreate.vue'),
+    },
+    {
         path: '/campaign/:campaignId',
         name: 'CampaignDetail',
         component: () => import('@/features/campaign/views/CampaignDetail.vue'),
