@@ -7,6 +7,7 @@ import { YouTubeDashboardHandler } from '@/mocks/api/handler/YoutubeDashboardHan
 import ChatHandler from '@/mocks/api/handler/ChatHandler.js';
 import { YoutubeMockHandler } from '@/mocks/api/handler/YoutubeAnalyticsHandler.js';
 import { YoutubeTrafficSourcesHandler } from '@/mocks/api/handler/YoutubeTrafficSourcesHandler.js';
+import SatisfactionHandler from '@/mocks/api/handler/SatisfactionHandler.js';
 
 export const worker = setupWorker(
     ...CampaignHandler,
@@ -17,4 +18,5 @@ export const worker = setupWorker(
     ...YouTubeDashboardHandler,
     ...YoutubeMockHandler,
     ...YoutubeTrafficSourcesHandler,
+    ...SatisfactionHandler,
 );

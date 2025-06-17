@@ -1,6 +1,6 @@
 import InfluencerManagementView from '@/features/user/views/InfluencerManagementView.vue';
-// import EmailSystemView from '@/features/user/views/EmailSystemView.vue';
-// import SurveyListView from '@/features/user/views/SurveyListView.vue';
+import EmailSystemView from '@/features/user/views/EmailSystemView.vue';
+import SurveyListView from '@/features/user/views/SurveyListView.vue';
 
 export const userRoutes = [
     {
@@ -28,14 +28,14 @@ export const userRoutes = [
     },
 
     // {
-    //      path: '/management/email',
+    //     path: '/management/email',
     //     name: 'emailSystem',
     //     component: EmailSystemView,
     // },
-    //
-    // {
-    //     path: '/management/survey',
-    //     name: 'surveyList',
-    //     component: SurveyListView,
-    // },
+
+    {
+        path: '/management/survey',
+        name: 'surveyList',
+        component: SurveyListView,
+    },
 ];
