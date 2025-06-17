@@ -10,6 +10,10 @@ export const getCampaignList = async (page, size, company) => {
     });
 };
 
+export const createCampaign = async (campaignInfo) => {
+    return await api.post('/campaign', campaignInfo);
+};
+
 export const getCampaignDetail = async (campaignId) => {
     return await api.get(`/campaign/${campaignId}`);
 };

@@ -36,7 +36,7 @@
                 >
                 <span class="bar mx-2">|</span>
                 <span class="client-name mx-2 flex items-center"
-                    ><Icon icon="mdi:coins" width="24" height="24" class="mr-2" />{{
+                    ><Icon icon="la:coins" width="24" height="24" class="mr-2" />{{
                         formatPrice(campaign.price)
                     }}</span
                 >

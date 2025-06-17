@@ -34,6 +34,7 @@
   --color-btn-sky: #A3D8FF;
   --color-btn-blue: #BAC9FF;
   --color-btn-gray: #A8C1DA;
+  --color-btn-open-popup: #7FA2EE;
 
   --color-gender-male: #A2C9F4;
   --color-gender-female: #F6A6B2;
@@ -97,6 +98,11 @@
   /* 수정 버튼 */
   .btn-edit {
     @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+  }
+
+  /* 팝업 여는 버튼 */
+  .btn-open-popup{
+    @apply px-3 py-1 bg-btn-open-popup text-white rounded hover:brightness-95 active:brightness-90 transition
   }
 
   /* === 페이지 상단 타이틀 === */

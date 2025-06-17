@@ -5,7 +5,7 @@
                 파이프라인
                 <span class="cnt-search">(검색결과: {{ total }}건)</span>
             </div>
-            <button class="btn-create">등록</button>
+            <button class="btn-create" @click="router.push('/campaign/create')">등록</button>
         </div>
 
         <div class="blue-line"></div>
@@ -26,6 +26,9 @@ import { ref, onMounted, computed } from 'vue';
 import { getCampaignList } from '@/features/campaign/api.js';
 import PipelineCard from '@/features/campaign/components/PipelineCard.vue';
 import Pagination from '@/components/common/PagingBar.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const campaigns = ref([]);
 const page = ref(1);
