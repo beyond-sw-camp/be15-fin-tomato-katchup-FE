@@ -5,6 +5,7 @@ import ContractHandler from '@/mocks/api/handler/ContractHandler.js';
 import { InstagramDashboardHandler } from '@/mocks/api/handler/InstagramDashboardHandler.js';
 import { YouTubeDashboardHandler } from '@/mocks/api/handler/YoutubeDashboardHandler.js';
 import ChatHandler from '@/mocks/api/handler/ChatHandler.js';
+import AIHandler from "@/mocks/api/handler/AIHandler.js";
 
 export const worker = setupWorker(
     ...CampaignHandler,
@@ -13,4 +14,5 @@ export const worker = setupWorker(
     ...InstagramDashboardHandler,
     ...ChatHandler,
     ...YouTubeDashboardHandler,
+    ...AIHandler,
 );
