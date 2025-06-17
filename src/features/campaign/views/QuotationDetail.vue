@@ -23,7 +23,7 @@
                             width="32"
                             height="32"
                             class="text-btn-gray"
-                            @click="router.push('/quotation')"
+                            @click="router.push('/sales/quotation')"
                         />
                     </div>
                 </div>
@@ -35,7 +35,7 @@
 
             <!-- 하단: 참조 리스트 -->
             <div class="container">
-                <DetailReferenceList :items="proposalReferences" />
+                <DetailReferenceList :items="proposalReferences" @select="handleReferenceSelect" />
             </div>
         </div>
     </div>
@@ -174,6 +174,29 @@ const handleSubmit = (newComment) => {
 // 의견 삭제
 const handleDelete = (id) => {
     opinions.value = opinions.value.filter((opinion) => opinion.id !== id);
+};
+
+const handleReferenceSelect = (item) => {
+    if (!isEditing.value) {
+        // 수정 모드 아닐 때는 무시
+        alert('수정 모드가 아닙니다!');
+        return;
+    }
+    // 필요한 값만 form에 적용 (안전하게 매핑)
+    form.title = item.title;
+    form.requestDate = item.requestDate;
+    form.clientCompany = item.clientCompany;
+    form.clientManager = item.clientManager;
+    form.period = item.period;
+    form.announcementDate = item.announcementDate;
+    form.pipeline = item.pipeline;
+    form.username = item.username;
+    form.influencer = item.influencer;
+    form.price = item.price;
+    form.supplyAmount = item.supplyAmount;
+    form.extraProfit = item.extraProfit;
+    form.content = item.content;
+    form.notes = item.notes;
 };
 
 // 저장 및 취소

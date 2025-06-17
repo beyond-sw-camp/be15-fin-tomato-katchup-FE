@@ -99,3 +99,7 @@ export const getProposalReference = async () => {
 export const getQuotationReference = async () => {
     return await api.get('/quotation/reference');
 };
+
+export const getContractReference = async () => {
+    return await api.get('/contract/reference');
+};

@@ -6,6 +6,7 @@ import { Icon } from '@iconify/vue';
 import DetailReferenceList from '@/features/campaign/components/DetailReferenceList.vue';
 import OpinionBar from '@/components/layout/OpinionBar.vue';
 import SalesForm from '@/features/campaign/components/SalesForm.vue';
+import FileUploadCard from '@/features/campaign/components/FileUploadCard.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -98,7 +99,7 @@ const groups = [
 // 의견 호출
 const fetchOpinions = async () => {
     try {
-        const res = await getOpinion(route.params.quotationId, 'quotation');
+        const res = await getOpinion(route.params.quotationId, 'contract');
         opinions.value = res.data.data;
     } catch (e) {
         console.log(e);
@@ -112,7 +113,7 @@ const fetchQuotationReferences = async () => {
 
 const fetchContractDetail = async () => {
     try {
-        const res = getContractDetail(route.params.contractId);
+        const res = await getContractDetail(route.params.contractId);
         contractForm.value = res.data.data;
         Object.assign(form, res.data.data);
     } catch (e) {
@@ -176,7 +177,7 @@ onMounted(async () => {
                             width="32"
                             height="32"
                             class="text-btn-gray"
-                            @click="router.push('/contract')"
+                            @click="router.push('/sales/contract')"
                         />
                     </div>
                 </div>
@@ -189,6 +190,9 @@ onMounted(async () => {
             <!-- 하단: 참조 리스트 -->
             <div class="container">
                 <DetailReferenceList :items="quotationReferences" />
+            </div>
+            <div class="container">
+                <FileUploadCard :isEditing="isEditing" v-model="form.attachments" />
             </div>
         </div>
     </div>
