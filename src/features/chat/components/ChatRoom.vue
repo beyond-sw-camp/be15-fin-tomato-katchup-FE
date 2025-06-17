@@ -72,11 +72,10 @@
           class="flex-1 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-1 focus:ring-[--color-request]"
         />
 
-        <!-- 전송 버튼 -->
         <button
           @click="sendMessage"
           :disabled="(!newMessage.trim() && !attachedFile) || isUploading"
-          class="px-3 py-2 text-sm rounded-full text-white bg-[--color-request] hover:brightness-105 disabled:opacity-40"
+          class="px-3 py-2 text-sm rounded-full text-white bg-blue-500 hover:brightness-105 disabled:opacity-40"
         >
           전송
         </button>
