@@ -2,13 +2,13 @@
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
 
-import AverageChart from '@/features/influencer/components/chart/AverageChart.vue';
-import AlgorithmChart from '@/features/influencer/components/chart/AlgorithmChart.vue';
-import ReachChart from '@/features/influencer/components/chart/ReachChart.vue';
-import AgeChart from '@/features/influencer/components/chart/AgeChart.vue';
-import GenderChart from '@/features/influencer/components/chart/GenderChart.vue';
-import FollowerChart from '@/features/influencer/components/chart/FollowerChart.vue';
-import DashboardSummary from '@/features/influencer/components/DashboardSummary.vue';
+import AverageChart from '@/features/dashboard/components/chart/AverageChart.vue';
+import AlgorithmChart from '@/features/dashboard/components/chart/AlgorithmChart.vue';
+import ReachChart from '@/features/dashboard/components/chart/ReachChart.vue';
+import AgeChart from '@/features/dashboard/components/chart/AgeChart.vue';
+import GenderChart from '@/features/dashboard/components/chart/GenderChart.vue';
+import FollowerChart from '@/features/dashboard/components/chart/FollowerChart.vue';
+import DashboardSummary from '@/features/dashboard/components/DashboardSummary.vue';
 
 const props = defineProps({
     platform: String,

@@ -6,6 +6,8 @@ import { InstagramDashboardHandler } from '@/mocks/api/handler/InstagramDashboar
 import { YouTubeDashboardHandler } from '@/mocks/api/handler/YoutubeDashboardHandler.js';
 import ChatHandler from '@/mocks/api/handler/ChatHandler.js';
 import AIHandler from "@/mocks/api/handler/AIHandler.js";
+import { YoutubeMockHandler } from '@/mocks/api/handler/YoutubeAnalyticsHandler.js';
+import { YoutubeTrafficSourcesHandler } from '@/mocks/api/handler/YoutubeTrafficSourcesHandler.js';
 
 export const worker = setupWorker(
     ...CampaignHandler,
@@ -15,4 +17,6 @@ export const worker = setupWorker(
     ...ChatHandler,
     ...YouTubeDashboardHandler,
     ...AIHandler,
+    ...YoutubeMockHandler,
+    ...YoutubeTrafficSourcesHandler,
 );

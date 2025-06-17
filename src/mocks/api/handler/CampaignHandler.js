@@ -127,6 +127,7 @@ const campaignDetail = {
     clientManagerName: '김동영',
     clientManagerPosition: '팀장',
     productName: 'COMPACT 폴딩백 하이킹 경량 백팩 20L',
+    adPrice: 9300000,
     productPrice: 16300,
     expectedRevenue: 1000000, // 예상 매출
     expectedProfitMargin: 20, // 예상 이익률
@@ -143,17 +144,18 @@ const campaignDetail = {
         proposal: { date: formatDate(new Date(baseDate.getFullYear(), 2, 25)) },
         negotiation: { date: formatDate(new Date(baseDate.getFullYear(), 2, 27)) },
     },
+    influencerId: 1,
 };
 const userList = [
     { id: 1, name: '차은우' },
     { id: 2, name: '아이유' },
     { id: 3, name: '김수현' },
     { id: 4, name: '장원영' },
-    { id: 5, name: '정국' },
-    { id: 6, name: '지민' },
+    { id: 5, name: '전정국' },
+    { id: 6, name: '박지민' },
     { id: 7, name: '박보검' },
     { id: 8, name: '손흥민' },
-    { id: 9, name: '임영웅' },
+    { id: 9, name: '김정우' },
 ];
 
 const clientCompanyList = [
@@ -246,6 +248,107 @@ const proposalList = Array.from({ length: 50 }, (_, index) => {
     };
 });
 
+const quotationList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `Quotation ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        adPrice: 30000000,
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
+const contractList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `Contract ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        adPrice: 30000000,
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
+const revenueList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `Revenue ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        adPrice: 30000000,
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
+const ListUpList = Array.from({ length: 50 }, (_, index) => {
+    const baseDate = new Date();
+    baseDate.setFullYear(baseDate.getFullYear() + index);
+
+    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
+
+    return {
+        id: index + 1,
+        status: statusArr[Math.floor(Math.random() * 4)],
+        title: `ListUp ${index + 1}`,
+        createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: '김동영',
+        clientManagerPosition: '팀장',
+        userName: '정재현',
+        userPosition: '과장',
+        productName: '조던 브루클린 플리스 풀오버 후디',
+        influencers: [
+            { id: 1, name: '지무비' },
+            { id: 2, name: '감자탕' },
+            { id: 3, name: '맛피자' },
+            { id: 4, name: '감스트' },
+        ],
+        requestDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+    };
+});
+
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
         const url = new URL(request.url);
@@ -300,7 +403,7 @@ const CampaignHandler = [
             },
         );
     }),
-    http.get('/api/v1/quotation/:id', async () => {
+    http.get('/api/v1/sales/quotation/:id', async () => {
         return HttpResponse.json(
             {
                 data: quotationDetail,
@@ -343,6 +446,28 @@ const CampaignHandler = [
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
+    http.get('/api/v1/sales/listup', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = ListUpList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
     http.get('/api/v1/sales/proposal', async ({ request }) => {
         const url = new URL(request.url);
         const page = parseInt(url.searchParams.get('page')) || 1;
@@ -358,6 +483,72 @@ const CampaignHandler = [
                 page,
                 size,
                 total: proposalList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/quotation', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = quotationList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/contract', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = contractList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/revenue', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = revenueList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: quotationList.length,
             },
             {
                 status: 200,

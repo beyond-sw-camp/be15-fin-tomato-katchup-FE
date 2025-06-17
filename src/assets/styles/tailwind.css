@@ -69,10 +69,11 @@
 
 @layer components {
   .container {
-    @apply px-12 py-8 rounded-2xl bg-white flex-1 ml-8;
+    @apply px-12 py-8 rounded-2xl bg-white flex-1;
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
 
+  /* 카드 목록 */
   .cardLists {
     @apply w-full border border-gray-medium rounded-xl bg-white shadow-sm p-5 hover:bg-gray-100 transition-colors duration-200
   }
@@ -91,6 +92,11 @@
   /* 삭제 버튼 */
   .btn-delete {
     @apply px-4 py-2 bg-gray-medium text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+  }
+
+  /* 수정 버튼 */
+  .btn-edit {
+    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition
   }
 
   /* === 페이지 상단 타이틀 === */
@@ -137,8 +143,18 @@
   }
   /* === 사이드 바 === */
   .custom-sidebar {
-    @apply sticky top-10 w-[304px] h-[630px] bg-white rounded-2xl  p-6;
+    @apply sticky top-10 w-[304px] h-[630px] bg-white rounded-2xl p-6 mr-8;
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
+  }
+
+  .btn-icon {
+    @apply flex items-center gap-2 px-4 py-2 rounded-md text-white font-medium text-sm shadow;
+    background-color: var(--color-btn-blue);
+    transition: background-color 0.2s;
+  }
+
+  .btn-icon:hover {
+    background-color: #a8b9f8; /* hover 시 조금 밝게 */
   }
 
 }

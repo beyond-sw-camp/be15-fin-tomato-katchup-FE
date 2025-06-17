@@ -9,6 +9,7 @@ import { userRoutes } from '@/features/user/router'
 import { influencerRoutes } from '@/features/influencer/router.js';
 import { myPageRoutes } from '@/features/mypage/router.js';
 import {aiRoutes} from "@/features/ai/router.js";
+import { dashboardRoutes } from '@/features/dashboard/router.js';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,6 +24,7 @@ const router = createRouter({
     ...influencerRoutes,
     ...myPageRoutes,
     ...aiRoutes,
+    ...dashboardRoutes,
   ],
   scrollBehavior() {
     return { left: 0, top: 0 }
