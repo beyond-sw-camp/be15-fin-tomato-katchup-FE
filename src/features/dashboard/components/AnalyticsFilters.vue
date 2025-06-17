@@ -8,7 +8,7 @@ const emit = defineEmits(['update:metric', 'update:period'])
 </script>
 
 <template>
-  <div class="flex gap-4 justify-between text-xs">
+  <div class="flex gap-4 justify-between text-sm">
     <div class="flex gap-2">
       <button v-for="metric in ['조회수','댓글수','좋아요수','클릭수']"
               :key="metric"
