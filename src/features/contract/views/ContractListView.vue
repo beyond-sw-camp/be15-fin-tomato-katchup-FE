@@ -1,11 +1,11 @@
 <template>
-    <div class="w-full min-h-screen bg-[#f4f8fc] px-12 py-10 font-sans">
+    <div class="w-full">
         <div class="flex gap-6">
             <!-- 좌측 필터 -->
             <CommonFiltering />
 
             <!-- 본문 콘텐츠 -->
-            <div class="flex-1 bg-white rounded-xl p-6 shadow-sm">
+            <div class="container">
                 <!-- 제목 + 검색결과 -->
                 <div class="flex justify-between items-center mb-3">
                     <div class="text-lg font-semibold">

@@ -9,3 +9,4 @@ export const TAG_COLOR_MAP = {
   'Professional': 'bg-[#E0E0E0] text-black',
   'Fashion & Beauty': 'bg-[#E5CCFF] text-black',
 }
+export const TAGS = Object.keys(TAG_COLOR_MAP);
