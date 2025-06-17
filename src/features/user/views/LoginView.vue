@@ -38,11 +38,16 @@ const handleLogin = () => {
 
 
         <label class="input-box-label text-click text-md pt-6 pb-1">비밀번호</label>
-        <input v-model="password" type="password" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
+        <input v-model="password" type="password" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4 w-full" />
 
 
-        <div class="flex justify-between mt-2 text-[1rem] pt-10 pb-1 text-gray-medium">
-          <RouterLink to="findPassword">비밀번호 찾기</RouterLink>
+        <div class="flex justify-between mt-2 text-[1rem] pt-0.5 pb-10 text-gray-medium">
+            <RouterLink
+                to="findPassword"
+                class="ml-114 pb-1 text-[0.9rem] text-gray-400 whitespace-nowrap hover:underline"
+            >
+                비밀번호 찾기
+            </RouterLink>
         </div>
               <button type = "submit" class="bg-[#A8C1DA] text-white px-60 py-4 text-md rounded ">
                   로그인
