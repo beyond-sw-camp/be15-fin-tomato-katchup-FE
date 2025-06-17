@@ -1,55 +1,55 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { Icon } from '@iconify/vue'
 import { TAG_COLOR_MAP } from '@/constants/tags'
+import { Icon } from '@iconify/vue'
 
-const route = useRoute()
-const influencer = ref(null)
+const props = defineProps({
+  influencer: {
+    type: Object,
+    required: true
+  }
+})
 
 const tagStyle = (tag) => TAG_COLOR_MAP[tag] ?? 'bg-gray-200 text-black'
 
-onMounted(async () => {
-  const id = route.params.id || route.query.id
-  const res = await fetch(`/api/v1/influencer/${id}`)
-  const resData = await res.json()
-  influencer.value = resData.data
-})
+const formatCount = (num) => {
+  if (!num) return '해당 없음'
+  const parsedNum = parseInt(num)
+  return parsedNum >= 10000 ? `${Math.floor(parsedNum / 10000)}만명` : `${parsedNum}명`
+}
 </script>
 
 <template>
-  <div v-if="influencer" class="w-full bg-white rounded-2xl shadow p-8 mb-10">
+  <div class="dashboard-section">
     <div class="flex gap-6">
       <img :src="influencer.thumbnail" alt="썸네일" class="w-28 h-28 rounded-full object-cover mr-3" />
+
       <div class="flex flex-col justify-center">
         <h1 class="text-2xl font-bold">{{ influencer.name }}</h1>
 
-        <div class="flex flex-wrap gap-2 mt-2">
+        <div class="flex flex-wrap gap-2">
           <span
             v-for="tag in influencer.tags"
             :key="tag"
-            class="px-2 py-1 rounded-full text-sm font-medium mb-3"
+            class="px-1.5 py-0.5 mt-1 rounded-full text-sm font-medium mb-3"
             :class="tagStyle(tag)"
           >
             # {{ tag }}
           </span>
         </div>
 
-        <div class="flex flex-col mt-4 gap-2 text-md text-gray-medium">
+        <div class="flex flex-col gap-1 text-md text-gray-medium">
           <div class="flex items-center gap-3">
             <Icon icon="logos:youtube-icon" class="w-9 h-9" />
-            <span>{{ influencer.subscribers ? `구독자 ${influencer.subscribers}` : '해당 없음' }}</span>
+            <span>구독자 {{ formatCount(influencer.subscribers) }}</span>
           </div>
 
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-3">
             <Icon icon="skill-icons:instagram" class="w-9 h-9" />
-            <span>{{ influencer.instaFollowers ? `팔로워 ${influencer.instaFollowers}` : '해당 없음' }}</span>
+            <span>팔로워 {{ formatCount(influencer.instaFollowers) }}</span>
           </div>
         </div>
 
       </div>
     </div>
   </div>
-
-  <div v-else>Loading...</div>
 </template>
