@@ -22,11 +22,28 @@ defineProps({
         </p>
         <p class="text-sm text-gray-medium mt-1">{{ client.address }}</p>
       </div>
+
+      <!-- 상태 뱃지 + 메뉴 -->
+      <div class="flex flex-col items-end gap-1">
+        <!-- 상태 표시 추가 -->
+        <p
+          class="text-xs font-semibold px-2 py-1 rounded-md"
+          :class="{
+        'bg-gray-300 text-white': client.status === '시작전',
+        'bg-blue-400 text-white': client.status === '진행중',
+        'bg-green-500 text-white': client.status === '종료',
+        'bg-yellow-400 text-white': client.status === '보류',
+        'bg-red-500 text-white': client.status === '거절'
+      }"
+        >
+          {{ client.status }}
+        </p>
+
       <button class="text-gray-medium">
         <i class="fas fa-ellipsis-v" />
       </button>
     </div>
-
+  </div>
     <!-- 담당자 아이콘 -->
     <div class="flex justify-between items-end">
       <p class="text-sm text-gray-dark flex items-end leading-none">
