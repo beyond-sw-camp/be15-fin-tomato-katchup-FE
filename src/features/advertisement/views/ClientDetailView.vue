@@ -638,18 +638,27 @@ function selectCampaign(id) {
 
         <!-- 1. 캠페인 목록 -->
         <div class="col-span-1 flex flex-col gap-2">
+          <!-- 전체 버튼 -->
           <button
-            class="px-4 py-1 border rounded bg-gray-100 text-sm font-semibold"
-            :class="{ 'bg-primary/10 border-primary': selectedCampaignId === null }"
+            class="px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-150 text-gray-700 hover:bg-gray-100"
+            :class="{
+      'bg-[#e6f0ff] border-[#5b8cff] text-[#00274A] font-semibold': selectedCampaignId === null,
+      'border-[var(--color-gray-medium)]': selectedCampaignId !== null
+    }"
             @click="selectedCampaignId = null"
           >
             전체
           </button>
+
+          <!-- 캠페인별 버튼 -->
           <button
             v-for="c in campaignList"
             :key="c.id"
-            class="px-4 py-1 border rounded bg-gray-100 text-sm truncate"
-            :class="{ 'bg-primary/10 border-primary': selectedCampaignId === c.id }"
+            class="px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-150 text-gray-700 truncate hover:bg-gray-100"
+            :class="{
+      'bg-[#e6f0ff] border-[#5b8cff] text-[#00274A] font-semibold': selectedCampaignId === c.id,
+      'border-[var(--color-gray-medium)]': selectedCampaignId !== c.id
+    }"
             @click="selectCampaign(c.id)"
           >
             {{ c.title }}
@@ -662,17 +671,31 @@ function selectCampaign(id) {
             v-for="item in filteredHistories"
             :key="item.id"
             @click="selectedMsg = item"
-            class="w-full text-left border rounded p-3 hover:bg-gray-50"
-            :class="{ 'bg-[#e6f0ff] border-[#5b8cff]': selectedMsg?.id === item.id }"
+            class="w-full text-left rounded-lg text-sm font-medium border transition-all duration-150 hover:bg-gray-100 px-4 py-3"
+            :class="{
+      'bg-[#e6f0ff] border-[#5b8cff] text-[#00274A]': selectedMsg?.id === item.id,
+      'border-[var(--color-gray-medium)] text-gray-800': selectedMsg?.id !== item.id
+    }"
           >
+            <!-- 카테고리와 날짜 -->
             <div class="flex justify-between items-center mb-1">
               <span class="font-semibold text-sm">{{ item.category }}</span>
               <span class="text-xs text-gray-500">{{ item.createdAt }}</span>
             </div>
-            <p class="text-sm font-medium">{{ item.title }}</p>
+
+            <!-- 제목 -->
+            <p class="text-sm font-medium mb-1">{{ item.title }}</p>
+
+            <!-- 작성자 / 부서 -->
             <p class="text-xs text-gray-500">{{ item.writer }} / {{ item.department }}</p>
+
+            <!-- 내부 날짜 -->
             <p class="text-xs text-gray-500">{{ item.date }}</p>
-            <p v-if="item.price" class="text-xs font-semibold">KRW {{ item.price.toLocaleString() }}</p>
+
+            <!-- 가격 (있을 경우) -->
+            <p v-if="item.price" class="text-xs font-semibold text-right text-[#333]">
+              KRW {{ item.price.toLocaleString() }}
+            </p>
           </button>
         </div>
 
