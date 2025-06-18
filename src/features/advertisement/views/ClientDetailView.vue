@@ -497,12 +497,14 @@ const editEmployee = (index) => {
     </div>
   </div>
 
-  <!-- 캠페인 진행 현황 -->
+  <!-- 캠페인 진행 현황 + (스크롤) -->
   <div class="w-full flex justify-center px-4 mt-12">
     <div class="container bg-white pt-4 pb-6">
       <p class="font-bold mb-2">캠페인 진행 현황 ({{ campaignList.length }})</p>
       <div class="blue-line mb-4"/>
-      <PipelineCard :campaigns="campaignList" />
+      <div class="max-h-[500px] overflow-y-auto pr-2">
+        <PipelineCard :campaigns="campaignList" />
+      </div>
     </div>
   </div>
 
