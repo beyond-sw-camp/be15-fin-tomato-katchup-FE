@@ -8,14 +8,14 @@ const currentPage = ref(1)
 const pageSize = 6
 
 const clientList = ref([
-  { id: 1, name: 'ABC 화장품', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
-  { id: 2, name: '아모레퍼시픽', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경', '이승재'], price: '23,370,000' },
-  { id: 3, name: '마니커', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
-  { id: 4, name: '마니커', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
-  { id: 5, name: '마니커', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
-  { id: 6, name: '마니커', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
-  { id: 7, name: '마니커', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
-  { id: 8, name: '마니커', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 1, name: 'ABC 화장품', status: '잠재고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 2, name: '아모레퍼시픽', status: '기존고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경', '이승재'], price: '23,370,000' },
+  { id: 3, name: '마니커', status: '신규고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 4, name: '마니커', status: '잠재고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 5, name: '마니커', status: '신규고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 6, name: '마니커', status: '잠재고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 7, name: '마니커', status: '기존고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
+  { id: 8, name: '마니커', status: '기존고객', address: '서울특별시 구로구 디지털로 76길 111(구로동)', contacts: ['오유경'], price: '23,370,000' },
 ])
 
 const totalCount = clientList.value.length

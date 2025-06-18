@@ -3,11 +3,7 @@
     <!-- 점 3개 버튼 -->
     <div class="absolute top-5 right-5">
       <button class="flex flex-col gap-[2px]" @click="toggleDropdown">
-        <span
-          class="w-1 h-1 bg-black rounded-full"
-          v-for="i in 3"
-          :key="i"
-        ></span>
+        <span class="w-1 h-1 bg-black rounded-full" v-for="i in 3" :key="i"></span>
       </button>
 
       <div
@@ -37,13 +33,22 @@
         class="w-[90px] h-[90px] rounded-full object-cover border border-[color:var(--color-gray-light)]"
       />
       <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-3 text-base font-medium mb-1 mt-2">
+        <!-- 유튜브명 + 본명 -->
+        <div class="flex items-center gap-2 text-base font-medium mb-1 mt-2">
           <Icon icon="logos:youtube-icon" class="w-7 h-6" />
-          <span class="font-bold text-[color:var(--color-click)] truncate">{{ name }}</span>
+          <span class="font-bold text-[color:var(--color-click)] truncate">
+            {{ name }}
+          </span>
+          <span v-if="realName" class="text-xs text-gray-500 truncate">
+            ({{ realName }})
+          </span>
         </div>
+
         <div class="text-sm text-[color:var(--color-gray-dark)] mb-2 truncate">
           {{ subscribers }}
         </div>
+
+        <!-- 인스타 -->
         <div class="flex items-center gap-3 text-base font-medium mb-1">
           <Icon icon="skill-icons:instagram" class="w-7 h-6" />
           <span class="font-bold truncate">{{ instagram }}</span>
@@ -61,7 +66,7 @@
       </div>
     </div>
 
-    <!-- 작성자 정보 -->
+    <!-- 담당자 -->
     <div class="flex items-center gap-1 text-sm text-[color:var(--color-gray-dark)] mt-auto pl-[2px]">
       <Icon icon="tdesign:user" class="w-4 h-4" />
       <span class="truncate">{{ ownerName }}</span>
@@ -77,6 +82,7 @@ import { Icon } from '@iconify/vue'
 const props = defineProps({
   id: Number,
   name: String,
+  realName: String,
   subscribers: String,
   instagram: String,
   instaFollowers: String,
@@ -85,12 +91,12 @@ const props = defineProps({
   thumbnail: String
 })
 
+const emit = defineEmits(['edit', 'delete'])
+
 const showDropdown = ref(false)
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
 }
-
-const emit = defineEmits(['edit', 'delete'])
 
 const handleEdit = () => {
   emit('edit', { ...props })

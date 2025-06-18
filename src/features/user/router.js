@@ -1,5 +1,5 @@
 import InfluencerManagementView from '@/features/user/views/InfluencerManagementView.vue';
-// import EmailSystemView from '@/features/user/views/EmailSystemView.vue';
+import EmailSystemView from '@/features/user/views/EmailSystemView.vue';
 import SurveyListView from '@/features/user/views/SurveyListView.vue';
 
 export const userRoutes = [
@@ -8,7 +8,6 @@ export const userRoutes = [
         name: 'InfluencerManagement',
         component: InfluencerManagementView,
     },
-
     {
         path: '/login',
         name: 'login',
@@ -17,7 +16,6 @@ export const userRoutes = [
             useLayout: 'none'
         },
     },
-
     {
         path: '/findPassword',
         name: 'findPassword',
@@ -27,11 +25,11 @@ export const userRoutes = [
         },
     },
 
-    // {
-    //     path: '/management/email',
-    //     name: 'emailSystem',
-    //     component: EmailSystemView,
-    // },
+    {
+        path: '/management/email',
+        name: 'emailSystem',
+        component: EmailSystemView,
+    },
 
     {
         path: '/management/survey',
