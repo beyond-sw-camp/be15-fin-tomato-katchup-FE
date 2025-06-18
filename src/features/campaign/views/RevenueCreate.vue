@@ -149,11 +149,20 @@ const groups = [
 ];
 
 // 저장
-const save = () => {
-    console.log('신규 저장할 값:', form);
-    // postRevenue(form).then(() => router.push('/sales/revenue'));
-    //! 가능하면 저장하고 revenue/12312 형태의 url로 redirect 시키기
-    isEditing.value = false;
+const save = async () => {
+    const payload = {
+        ...form,
+        opinions: opinions.value,
+    };
+
+    try {
+        // 예: postContract(payload); 와 같은 API 호출
+        console.log('전송 데이터:', payload);
+        // await postContract(payload);
+        await router.push('/sales/revenue'); // 저장 후 목록으로 이동
+    } catch (e) {
+        console.error('저장 실패:', e);
+    }
 };
 
 // 초기화
@@ -169,6 +178,15 @@ const cancel = () => {
     form.totalRevenue = 0;
     form.attachments = [];
     isEditing.value = true;
+};
+
+const handleSubmit = (newComment) => {
+    opinions.value.push({
+        id: Date.now(),
+        author: '나',
+        content: newComment,
+        createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    });
 };
 
 // 참조 선택 시 폼 매핑

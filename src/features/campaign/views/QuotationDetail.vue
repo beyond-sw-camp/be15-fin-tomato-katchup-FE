@@ -95,7 +95,12 @@ const groups = [
     {
         type: 'horizontal',
         fields: [
-            { key: 'pipeline', label: '해당 파이프라인', type: 'input' },
+            {
+                key: 'pipeline',
+                label: '해당 파이프라인',
+                type: 'search-pipeline',
+                searchType: 'pipeline',
+            },
             { key: 'username', label: '담당자', type: 'search-user', searchType: 'user' },
         ],
     },

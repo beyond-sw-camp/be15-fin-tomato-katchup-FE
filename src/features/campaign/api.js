@@ -110,3 +110,7 @@ export const getQuotationReference = async () => {
 export const getContractReference = async () => {
     return await api.get('/contract/reference');
 };
+
+export const getInfluencerDetail = async (ids) => {
+    return await api.post('influencer/detail', ids);
+};
