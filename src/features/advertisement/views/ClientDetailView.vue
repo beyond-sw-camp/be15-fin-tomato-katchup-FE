@@ -21,7 +21,7 @@ const clientList = [
     address2: '3층',
     employees: [
       {
-        name: '김동영',
+        name: '이관호',
         position: '재직',
         client: 'ABC 화장품',
         mobile: '010-1234-5678',
@@ -144,7 +144,7 @@ const contractList = [
   {
     campaignName: '닭가슴살 증식 캠페인',
     productName: '닭가슴살 3종 세트',
-    influencer: '양팡',
+    influencerName: '말왕',
     revenue: 12200000,
     period: '2025.05.02 ~ 2025.05.31',
     resultLink: '#'
@@ -152,7 +152,7 @@ const contractList = [
   {
     campaignName: '어뜰추가 라라쿠라 캠페인',
     productName: '3탄 집어라 라라쿠라',
-    influencer: '매미킴',
+    influencerName: '매미킴',
     revenue: 5000000,
     period: '2025.05.15 ~ 2025.06.01',
     resultLink: '#'
@@ -512,22 +512,41 @@ const editEmployee = (index) => {
   <div class="w-full flex justify-center px-4 mt-12">
     <div class="container bg-white pt-4 pb-6">
       <p class="font-bold mb-2">캠페인 계약 목록</p>
-      <div class="blue-line mb-4"/>
-      <table class="w-full text-sm">
-        <thead class="bg-primary/20 h-[38px]">
-        <tr>
-          <th>캠페인명</th><th>상품명</th><th>인플루언서</th>
-          <th>수익</th><th>기간</th><th>성과</th>
+      <div class="blue-line mb-4" />
+
+      <table class="w-full table-auto border-collapse text-sm">
+        <!-- 헤더 -->
+        <thead class="text-white text-center text-sm">
+        <tr class="bg-btn-blue rounded-lg overflow-hidden">
+          <th class="px-4 py-2 rounded-l-lg">캠페인명</th>
+          <th class="px-4 py-2">상품명</th>
+          <th class="px-4 py-2">인플루언서</th>
+          <th class="px-4 py-2">수익</th>
+          <th class="px-4 py-2">기간</th>
+          <th class="px-4 py-2 rounded-r-lg">성과</th>
         </tr>
         </thead>
+
+        <!-- 본문 -->
         <tbody>
-        <tr v-for="c in contractList" :key="c.campaignName" class="h-[38px] text-center even:bg-gray-50">
-          <td>{{ c.campaignName }}</td>
-          <td>{{ c.productName }}</td>
-          <td>{{ c.influencer }}</td>
-          <td>{{ c.revenue.toLocaleString() }} ₩</td>
-          <td>{{ c.period }}</td>
-          <td><a :href="c.resultLink" class="text-primary underline">보러가기</a></td>
+        <tr
+          v-for="(c, i) in contractList"
+          :key="i"
+          class="h-[46px] text-center border-b border-gray-200   even:bg-gray-50"
+        >
+          <td class="px-4 whitespace-nowrap">{{ c.campaignName }}</td>
+          <td class="px-4 whitespace-nowrap">{{ c.productName }}</td>
+          <td class="px-4 whitespace-nowrap">{{ c.influencerName }}</td>
+          <td class="px-4 whitespace-nowrap">{{ c.revenue.toLocaleString() }} ₩</td>
+          <td class="px-4 whitespace-nowrap">{{ c.period }}</td>
+          <td class="px-4 whitespace-nowrap">
+            <a
+              :href="c.resultLink"
+              class="text-primary underline hover:font-medium"
+            >
+              보러가기
+            </a>
+          </td>
         </tr>
         </tbody>
       </table>
