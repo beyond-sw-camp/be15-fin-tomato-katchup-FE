@@ -38,7 +38,7 @@ export const campaignRoutes = [
         component: () => import('@/features/campaign/views/ProposalList.vue'),
     },
     {
-        path: '/sales/proposal/:proposalDetail',
+        path: '/sales/proposal/:proposalId',
         name: 'ProposalDetail',
         component: () => import('@/features/campaign/views/ProposalDetail.vue'),
     },

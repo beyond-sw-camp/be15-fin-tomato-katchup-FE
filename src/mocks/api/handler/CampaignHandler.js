@@ -9,6 +9,29 @@ const formatDate = (date) => {
 
 const baseDate = new Date();
 
+const pipelinePopupList = [
+    {
+        id: 1,
+        name: 'UVW 뷰티 디바이스 캠페인',
+    },
+    {
+        id: 2,
+        name: ' XYZ 썸머룩 캠페인',
+    },
+    {
+        id: 3,
+        name: 'ABC 스마트워치 캠페인',
+    },
+    {
+        id: 4,
+        name: ' 카카오 웹툰 프로모션',
+    },
+    {
+        id: 5,
+        name: 'CJ ENM 드라마 캠페인',
+    },
+];
+
 const eventList = [
     {
         title: '워크샵',
@@ -160,9 +183,8 @@ const campaignDetail = {
     id: 1,
     status: '진행중',
     title: 'Campaign 1',
-    clientCompany: 'Company 1',
-    clientManagerName: '김동영',
-    clientManagerPosition: '팀장',
+    clientCompany: { id: 1, name: 'Company 1' },
+    clientManager: { id: 1, name: '김동영' },
     productName: 'COMPACT 폴딩백 하이킹 경량 백팩 20L',
     adPrice: 9300000,
     productPrice: 16300,
@@ -172,7 +194,10 @@ const campaignDetail = {
     endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
     address: '서울특별시 동작구 보라매로 87길 (신대방동)',
     addressDetail: '3층 강의실 15기',
-    username: ['차은우', '김민수'],
+    username: [
+        { id: 100, name: '차은우' },
+        { id: 101, name: '김민재' },
+    ],
     awarenessPath: '지인 소개',
     notes: '1231231212123123',
     pipeLine: {
@@ -219,15 +244,761 @@ const clientManagerList = [
 ];
 
 const influencerList = [
-    { id: 201, name: '나연' },
-    { id: 202, name: '제니' },
-    { id: 203, name: '장원영' },
-    { id: 204, name: '윈터' },
-    { id: 205, name: '아이유' },
-    { id: 206, name: '수지' },
-    { id: 207, name: '조이' },
-    { id: 208, name: '유나' },
-    { id: 209, name: '솔라' },
+    {
+        id: 201,
+        name: '나연',
+    },
+    {
+        id: 202,
+        name: '제니',
+    },
+    {
+        id: 203,
+        name: '장원영',
+    },
+    {
+        id: 204,
+        name: '윈터',
+    },
+    {
+        id: 205,
+        name: '아이유',
+    },
+    {
+        id: 206,
+        name: '수지',
+    },
+    {
+        id: 207,
+        name: '조이',
+    },
+    {
+        id: 208,
+        name: '유나',
+    },
+    {
+        id: 209,
+        name: '솔라',
+    },
+];
+
+const influencerDetail = [
+    {
+        id: 201,
+        name: '나연',
+        nickname: 'Nayeon_Official',
+        description: '상큼한 매력의 K-POP 아이콘',
+        imageUrl: '/images/influencer/nayeon.jpg',
+        strength: '팬들과의 소통이 활발하고 밝은 이미지',
+        note: '콘서트 중심 활동',
+        platform: {
+            instagram: {
+                averageView: 120000,
+                averageLike: 8000,
+                averageComment: 320,
+                followers: 3100000,
+                category: '패션',
+                ageTop1: { label: '20대', rate: '45%' },
+                ageTop2: { label: '10대', rate: '30%' },
+                ageTop3: { label: '30대', rate: '15%' },
+                genderTop1: { label: '여성', rate: '70%' },
+                genderTop2: { label: '남성', rate: '30%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 202,
+        name: '제니',
+        nickname: 'jennierubyjane',
+        description: '글로벌 럭셔리 브랜드 앰버서더',
+        imageUrl: '/images/influencer/jennie.jpg',
+        strength: '브랜드 파급력 뛰어남',
+        note: '해외 광고 다수',
+        platform: {
+            instagram: {
+                averageView: 250000,
+                averageLike: 15000,
+                averageComment: 500,
+                followers: 8000000,
+                category: '럭셔리',
+                ageTop1: { label: '20대', rate: '50%' },
+                ageTop2: { label: '10대', rate: '25%' },
+                ageTop3: { label: '30대', rate: '20%' },
+                genderTop1: { label: '여성', rate: '60%' },
+                genderTop2: { label: '남성', rate: '40%' },
+            },
+            youtube: {
+                averageView: 600000,
+                averageLike: 42000,
+                averageComment: 1700,
+                subscribers: 2300000,
+                category: '뷰티',
+                ageTop1: { label: '20대', rate: '55%' },
+                ageTop2: { label: '30대', rate: '25%' },
+                ageTop3: { label: '10대', rate: '15%' },
+                genderTop1: { label: '여성', rate: '68%' },
+                genderTop2: { label: '남성', rate: '32%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 203,
+        name: '장원영',
+        nickname: 'wo0young',
+        description: '비주얼과 춤선이 아름다운 모델형 아이돌',
+        imageUrl: '/images/influencer/wonyoung.jpg',
+        strength: '광고 적합성 매우 높음',
+        note: '잡지 화보 다수 진행',
+        platform: {
+            instagram: {
+                averageView: 180000,
+                averageLike: 14000,
+                averageComment: 400,
+                followers: 4000000,
+                category: '뷰티',
+                ageTop1: { label: '20대', rate: '60%' },
+                ageTop2: { label: '10대', rate: '25%' },
+                ageTop3: { label: '30대', rate: '10%' },
+                genderTop1: { label: '여성', rate: '75%' },
+                genderTop2: { label: '남성', rate: '25%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 204,
+        name: '윈터',
+        nickname: 'winter_ae',
+        description: '시크한 매력과 감성 보컬',
+        imageUrl: '/images/influencer/winter.jpg',
+        strength: '음악 콘텐츠에 강점',
+        note: '',
+        platform: {
+            youtube: {
+                averageView: 320000,
+                averageLike: 26000,
+                averageComment: 800,
+                subscribers: 1500000,
+                category: '음악',
+                ageTop1: { label: '20대', rate: '52%' },
+                ageTop2: { label: '30대', rate: '28%' },
+                ageTop3: { label: '10대', rate: '12%' },
+                genderTop1: { label: '여성', rate: '66%' },
+                genderTop2: { label: '남성', rate: '34%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 205,
+        name: '아이유',
+        nickname: 'dlwlrma',
+        description: '싱어송라이터이자 배우로 활동',
+        imageUrl: '/images/influencer/iu.jpg',
+        strength: '전 세대를 아우르는 인지도',
+        note: '콘서트, 드라마 활동 병행',
+        platform: {
+            youtube: {
+                averageView: 800000,
+                averageLike: 60000,
+                averageComment: 2500,
+                subscribers: 5500000,
+                category: '음악',
+                ageTop1: { label: '20대', rate: '40%' },
+                ageTop2: { label: '30대', rate: '35%' },
+                ageTop3: { label: '40대', rate: '15%' },
+                genderTop1: { label: '여성', rate: '55%' },
+                genderTop2: { label: '남성', rate: '45%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 206,
+        name: '수지',
+        nickname: 'skuukzky',
+        description: '배우 겸 가수로 폭넓은 팬층 보유',
+        imageUrl: '/images/influencer/suzy.jpg',
+        strength: 'CF 퀸으로 브랜드 친화도 높음',
+        note: '광고 모델 중심 활동',
+        platform: {
+            instagram: {
+                averageView: 210000,
+                averageLike: 17000,
+                averageComment: 600,
+                followers: 7200000,
+                category: '라이프스타일',
+                ageTop1: { label: '30대', rate: '40%' },
+                ageTop2: { label: '20대', rate: '35%' },
+                ageTop3: { label: '40대', rate: '15%' },
+                genderTop1: { label: '여성', rate: '58%' },
+                genderTop2: { label: '남성', rate: '42%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 207,
+        name: '조이',
+        nickname: 'joyful_joy',
+        description: '밝고 발랄한 이미지로 다양한 예능 출연',
+        imageUrl: '/images/influencer/joy.jpg',
+        strength: '예능·광고 모두 소화 가능',
+        note: '라이프 브랜드에 적합',
+        platform: {
+            instagram: {
+                averageView: 110000,
+                averageLike: 9500,
+                averageComment: 310,
+                followers: 2800000,
+                category: '엔터테인먼트',
+                ageTop1: { label: '20대', rate: '48%' },
+                ageTop2: { label: '10대', rate: '30%' },
+                ageTop3: { label: '30대', rate: '12%' },
+                genderTop1: { label: '여성', rate: '65%' },
+                genderTop2: { label: '남성', rate: '35%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 208,
+        name: '유나',
+        nickname: 'im_yuna',
+        description: '에너제틱한 무대 퍼포먼스의 아이콘',
+        imageUrl: '/images/influencer/yuna.jpg',
+        strength: 'Z세대 타겟 적합',
+        note: '소셜미디어 반응 우수',
+        platform: {
+            instagram: {
+                averageView: 100000,
+                averageLike: 7800,
+                averageComment: 260,
+                followers: 1900000,
+                category: '댄스',
+                ageTop1: { label: '10대', rate: '55%' },
+                ageTop2: { label: '20대', rate: '30%' },
+                ageTop3: { label: '30대', rate: '10%' },
+                genderTop1: { label: '여성', rate: '72%' },
+                genderTop2: { label: '남성', rate: '28%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 209,
+        name: '솔라',
+        nickname: 'solarsido',
+        description: '보컬과 유쾌한 성격으로 예능까지 섭렵',
+        imageUrl: '/images/influencer/solar.jpg',
+        strength: '다채로운 콘텐츠 제작 가능',
+        note: '개인 유튜브도 운영 중',
+        platform: {
+            youtube: {
+                averageView: 270000,
+                averageLike: 23000,
+                averageComment: 900,
+                subscribers: 2000000,
+                category: '일상 Vlog',
+                ageTop1: { label: '20대', rate: '42%' },
+                ageTop2: { label: '30대', rate: '30%' },
+                ageTop3: { label: '10대', rate: '15%' },
+                genderTop1: { label: '여성', rate: '60%' },
+                genderTop2: { label: '남성', rate: '40%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+    {
+        id: 210,
+        name: '채원',
+        nickname: 'chaewon_k',
+        description: '차분하면서도 강단 있는 퍼포먼스',
+        imageUrl: '/images/influencer/chaewon.jpg',
+        strength: '음악·패션 콘텐츠 모두 어울림',
+        note: '',
+        platform: {
+            instagram: {
+                averageView: 95000,
+                averageLike: 6700,
+                averageComment: 240,
+                followers: 1600000,
+                category: 'K-POP',
+                ageTop1: { label: '10대', rate: '50%' },
+                ageTop2: { label: '20대', rate: '35%' },
+                ageTop3: { label: '30대', rate: '10%' },
+                genderTop1: { label: '여성', rate: '68%' },
+                genderTop2: { label: '남성', rate: '32%' },
+            },
+        },
+        campaignHistory: [
+            {
+                id: 1,
+                name: 'UVW 뷰티 디바이스 언박싱 캠페인',
+                url: '/sales/proposal/1',
+            },
+            {
+                id: 2,
+                name: 'ABC 샴푸 브랜드 체험 캠페인',
+                url: '/sales/proposal/2',
+            },
+            {
+                id: 3,
+                name: 'XYZ 립스틱 스타일링 영상 캠페인',
+                url: '/sales/proposal/3',
+            },
+            {
+                id: 4,
+                name: 'QRT 패션 브랜드 협업 캠페인',
+                url: '/sales/proposal/4',
+            },
+            {
+                id: 5,
+                name: 'Glow 스킨케어 제품 사용 후기 캠페인',
+                url: '/sales/proposal/5',
+            },
+            {
+                id: 6,
+                name: 'LUNA 쿠션 데일리 메이크업 캠페인',
+                url: '/sales/proposal/6',
+            },
+            {
+                id: 7,
+                name: 'VEIL 향수와 함께한 하루 캠페인',
+                url: '/sales/proposal/7',
+            },
+            {
+                id: 8,
+                name: 'FLO 브랜드 썸머 스타일링 캠페인',
+                url: '/sales/proposal/8',
+            },
+        ],
+    },
+];
+const listupReferenceList = [
+    {
+        id: 1,
+        title: '[1차] UVW 뷰티 리스트업',
+        clientCompany: { id: 1, name: 'UVW 뷰티2' },
+        influencer: [
+            { id: 201, name: '나연', strength: '잘함' },
+            { id: 208, name: '유나', strength: '훌륭함' },
+            { id: 209, name: '솔라', strength: '팬들과의 소통이 활발하고 밝은 이미지' },
+        ],
+    },
+    {
+        id: 2,
+        title: '[2차] XYZ 패션 캠페인',
+        clientCompany: { id: 2, name: 'XYZ 패션' },
+        influencer: [
+            { id: 202, name: '제니', strength: '카리스마 있고 트렌디함' },
+            { id: 203, name: '장원영', strength: '모델 같은 비주얼' },
+        ],
+    },
+    {
+        id: 3,
+        title: '[3차] ABC 푸드 프로젝트',
+        clientCompany: { id: 3, name: 'ABC 푸드' },
+        influencer: [
+            { id: 204, name: '윈터', strength: '밝고 에너지 넘침' },
+            { id: 205, name: '아이유', strength: '모든 세대에게 인기 있는 호감형' },
+        ],
+    },
+    {
+        id: 4,
+        title: '[4차] LMN 디바이스 론칭',
+        clientCompany: { id: 4, name: 'LMN 디지털' },
+        influencer: [{ id: 206, name: '수지', strength: '고급스럽고 차분한 이미지' }],
+    },
+    {
+        id: 5,
+        title: '[5차] QRS 라이프스타일 제안',
+        clientCompany: { id: 5, name: 'QRS 라이프' },
+        influencer: [
+            { id: 207, name: '조이', strength: '밝고 친근한 이미지' },
+            { id: 208, name: '유나', strength: '자연스럽고 건강한 느낌' },
+        ],
+    },
+    {
+        id: 6,
+        title: '[6차] OPQ 뷰티 브랜드 협업',
+        clientCompany: { id: 6, name: 'OPQ 코스메틱' },
+        influencer: [
+            { id: 209, name: '솔라', strength: '강한 개성과 자신감 있는 표현력' },
+            { id: 202, name: '제니', strength: '하이엔드 브랜드 이미지와 어울림' },
+        ],
+    },
 ];
 
 const proposalReferenceList = [
@@ -332,6 +1103,107 @@ const proposalReferenceList = [
         endDate: '2025-06-20',
     },
 ];
+
+const proposalDetail = {
+    id: 6,
+    title: '맛있는 감자탕 광고 제안',
+    requestDate: '2025-06-20',
+    startDate: '2025-06-09',
+    endDate: '2025-06-13',
+    announcementDate: '2025-06-07',
+    clientCompany: { id: 1, name: 'UVW 뷰티' },
+    clientManager: { id: 101, name: '송강' },
+    pipeline: { id: 2, name: '[2차] XYZ 썸머룩 캠페인' },
+    influencer: [
+        {
+            id: 201,
+            name: '나연',
+            nickname: 'Nayeon_Official',
+            description: '상큼한 매력의 K-POP 아이콘',
+            imageUrl: '/images/influencer/nayeon.jpg',
+            strength: '팬들과의 소통이 활발하고 밝은 이미지',
+            note: '콘서트 중심 활동',
+            platform: {
+                instagram: {
+                    averageView: 120000,
+                    averageLike: 8000,
+                    averageComment: 320,
+                    followers: 3100000,
+                    category: '패션',
+                    ageTop1: { label: '20대', rate: '45%' },
+                    ageTop2: { label: '10대', rate: '30%' },
+                    ageTop3: { label: '30대', rate: '15%' },
+                    genderTop1: { label: '여성', rate: '70%' },
+                    genderTop2: { label: '남성', rate: '30%' },
+                },
+            },
+            campaignHistory: [
+                { id: 1, name: 'UVW 뷰티 디바이스 언박싱 캠페인', url: '/sales/proposal/1' },
+                { id: 2, name: 'ABC 샴푸 브랜드 체험 캠페인', url: '/sales/proposal/2' },
+                { id: 3, name: 'XYZ 립스틱 스타일링 영상 캠페인', url: '/sales/proposal/3' },
+                { id: 4, name: 'QRT 패션 브랜드 협업 캠페인', url: '/sales/proposal/4' },
+                { id: 5, name: 'Glow 스킨케어 제품 사용 후기 캠페인', url: '/sales/proposal/5' },
+                { id: 6, name: 'LUNA 쿠션 데일리 메이크업 캠페인', url: '/sales/proposal/6' },
+                { id: 7, name: 'VEIL 향수와 함께한 하루 캠페인', url: '/sales/proposal/7' },
+                { id: 8, name: 'FLO 브랜드 썸머 스타일링 캠페인', url: '/sales/proposal/8' },
+            ],
+        },
+        {
+            id: 202,
+            name: '제니',
+            nickname: 'jennierubyjane',
+            description: '글로벌 럭셔리 브랜드 앰버서더',
+            imageUrl: '/images/influencer/jennie.jpg',
+            strength: '브랜드 파급력 뛰어남',
+            note: '해외 광고 다수',
+            platform: {
+                instagram: {
+                    averageView: 250000,
+                    averageLike: 15000,
+                    averageComment: 500,
+                    followers: 8000000,
+                    category: '럭셔리',
+                    ageTop1: { label: '20대', rate: '50%' },
+                    ageTop2: { label: '10대', rate: '25%' },
+                    ageTop3: { label: '30대', rate: '20%' },
+                    genderTop1: { label: '여성', rate: '60%' },
+                    genderTop2: { label: '남성', rate: '40%' },
+                },
+                youtube: {
+                    averageView: 600000,
+                    averageLike: 42000,
+                    averageComment: 1700,
+                    subscribers: 2300000,
+                    category: '뷰티',
+                    ageTop1: { label: '20대', rate: '55%' },
+                    ageTop2: { label: '30대', rate: '25%' },
+                    ageTop3: { label: '10대', rate: '15%' },
+                    genderTop1: { label: '여성', rate: '68%' },
+                    genderTop2: { label: '남성', rate: '32%' },
+                },
+            },
+            campaignHistory: [
+                { id: 1, name: 'UVW 뷰티 디바이스 언박싱 캠페인', url: '/sales/proposal/1' },
+                { id: 2, name: 'ABC 샴푸 브랜드 체험 캠페인', url: '/sales/proposal/2' },
+                { id: 3, name: 'XYZ 립스틱 스타일링 영상 캠페인', url: '/sales/proposal/3' },
+                { id: 4, name: 'QRT 패션 브랜드 협업 캠페인', url: '/sales/proposal/4' },
+                { id: 5, name: 'Glow 스킨케어 제품 사용 후기 캠페인', url: '/sales/proposal/5' },
+                { id: 6, name: 'LUNA 쿠션 데일리 메이크업 캠페인', url: '/sales/proposal/6' },
+                { id: 7, name: 'VEIL 향수와 함께한 하루 캠페인', url: '/sales/proposal/7' },
+                { id: 8, name: 'FLO 브랜드 썸머 스타일링 캠페인', url: '/sales/proposal/8' },
+            ],
+        },
+    ],
+    username: [
+        { id: 2, name: '아이유' },
+        { id: 3, name: '김수현' },
+        { id: 4, name: '장원영' },
+    ],
+    status: '보류',
+    content: '내용~',
+    notes: '비고고',
+    opinions: [],
+};
 
 const quotationReferenceList = [
     {
@@ -662,11 +1534,9 @@ const ListUpList = Array.from({ length: 50 }, (_, index) => {
     const baseDate = new Date();
     baseDate.setFullYear(baseDate.getFullYear() + index);
 
-    const statusArr = ['승인완료', '승인요청', '보류/대기', '승인거절'];
-
     return {
         id: index + 1,
-        status: statusArr[Math.floor(Math.random() * 4)],
+        // status: statusArr[Math.floor(Math.random() * 4)],
         title: `ListUp ${index + 1}`,
         createdDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
         campaignTitle: `XYZ 패션 브랜드 시즌 프로모션 계약`,
@@ -816,6 +1686,12 @@ const CampaignHandler = [
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
+    http.get('/api/v1/popup/pipeline', async () => {
+        return HttpResponse.json(
+            { data: pipelinePopupList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
     http.get('/api/v1/proposal/reference', async () => {
         return HttpResponse.json(
             { data: proposalReferenceList },
@@ -865,6 +1741,17 @@ const CampaignHandler = [
                 page,
                 size,
                 total: proposalList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/sales/proposal/:id', async () => {
+        return HttpResponse.json(
+            {
+                data: proposalDetail,
             },
             {
                 status: 200,
@@ -933,6 +1820,12 @@ const CampaignHandler = [
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
+    http.get('/api/v1/listup/reference', async () => {
+        return HttpResponse.json(
+            { data: listupReferenceList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
     http.get('/api/v1/sales/revenue', async ({ request }) => {
         const url = new URL(request.url);
         const page = parseInt(url.searchParams.get('page')) || 1;
@@ -959,6 +1852,23 @@ const CampaignHandler = [
         return HttpResponse.json(
             {
                 data: revenueDetail,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.post('/api/v1/influencer/detail', async (req) => {
+        const ids = await req.request.json();
+
+        console.log('받은 ids:', ids);
+
+        const result = influencerDetail.filter((item) => ids.includes(item.id));
+
+        return HttpResponse.json(
+            {
+                data: result,
             },
             {
                 status: 200,

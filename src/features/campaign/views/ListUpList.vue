@@ -60,7 +60,7 @@ const handleSearch = () => {
 };
 
 const goDetail = (id) => {
-    router.push(`/sales/listup/${id}`);
+    router.push(`/influencer/recommendation/${id}`);
 };
 
 const handleDelete = (id) => {

@@ -8,6 +8,7 @@
 
             <div class="flex items-center gap-2">
                 <div
+                    v-if="managementOption.status"
                     :class="[
                         'px-2 py-1 rounded text-white text-sm',
                         statusColor(managementOption.status),

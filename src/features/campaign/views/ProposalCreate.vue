@@ -5,7 +5,8 @@ import OpinionBar from '@/components/layout/OpinionBar.vue';
 import { Icon } from '@iconify/vue';
 import SalesForm from '@/features/campaign/components/SalesForm.vue';
 import ProposalAccordionItem from '@/features/campaign/components/ProposalAccordionItem.vue';
-import { getInfluencerDetail } from '@/features/campaign/api.js';
+import { getInfluencerDetail, getListupReference } from '@/features/campaign/api.js';
+import DetailReferenceList from '@/features/campaign/components/DetailReferenceList.vue';
 const router = useRouter();
 
 const opinions = ref([]);
@@ -103,6 +104,7 @@ const save = async () => {
 
     try {
         console.log('전송 데이터:', payload);
+        await getInfluencerDetail(payload);
         await router.push('/sales/proposal');
     } catch (e) {
         console.error('저장 실패:', e);
@@ -118,6 +120,16 @@ const fetchInfluencerDetail = async (ids) => {
     const res = await getInfluencerDetail(ids);
     console.log('??', res);
     return res.data.data;
+};
+
+// 실제 개발 시에는 파이프 라인 아이디 보내줘야함!
+const fetchListupReference = async () => {
+    try {
+        const res = await getListupReference();
+        listUpReferences.value = res.data.data;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 watch(
@@ -170,9 +182,19 @@ const handleDelete = (id) => {
     opinions.value = opinions.value.filter((opinion) => opinion.id !== id);
 };
 
+const handleReferenceSelect = (item) => {
+    if (!isEditing.value) {
+        alert('수정 모드가 아닙니다!');
+        return;
+    }
+
+    form.clientCompany = item.clientCompany;
+    form.influencer = item.influencer;
+};
+
 onMounted(async () => {
     /* TODO 댓글, 래퍼런스, 상세 정보 불러와야 함!*/
-    await Promise.all([]);
+    await fetchListupReference();
 });
 </script>
 
@@ -204,10 +226,9 @@ onMounted(async () => {
                 <SalesForm v-model="form" :groups="groups" :isEditing="isEditing" />
             </div>
 
-            <!-- 하단: 참조 리스트 -->
-            <!--            <div class="container">-->
-            <!--                <DetailReferenceList :items="proposalReferences" @select="handleReferenceSelect" />-->
-            <!--            </div>-->
+            <div class="container">
+                <DetailReferenceList :items="listUpReferences" @select="handleReferenceSelect" />
+            </div>
             <div class="w-full mx-auto">
                 <div
                     v-for="(item, index) in accordionItems"

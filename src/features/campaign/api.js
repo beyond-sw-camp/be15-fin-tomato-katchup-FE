@@ -44,10 +44,6 @@ export const getListUpList = async (page, size, filters = {}) => {
     });
 };
 
-export const getListUpDetail = async (listUpId) => {
-    return await api.get(`/sales/listup/${listUpId}`);
-};
-
 export const getQuotationList = async (page, size, filters = {}) => {
     return await api.get('/sales/quotation', {
         params: { page, size, ...filters },
@@ -99,6 +95,11 @@ export const getInfluencer = async () => {
 export const getPipeline = async () => {
     return await api.get('/popup/pipeline');
 };
+
+export const getListupReference = async () => {
+    return await api.get('/listup/reference');
+};
+
 export const getProposalReference = async () => {
     return await api.get('/proposal/reference');
 };
