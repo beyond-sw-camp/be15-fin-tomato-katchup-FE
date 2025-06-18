@@ -81,13 +81,8 @@ const groups = [
                 label: '광고 단가',
                 type: 'input',
                 inputType: 'number',
+                width: 50,
             },
-            { key: 'content', label: '내용', type: 'input', inputType: 'textarea' },
-        ],
-    },
-    {
-        type: 'horizontal',
-        fields: [
             {
                 key: 'productPrice',
                 label: '상품 가격',
@@ -102,13 +97,19 @@ const groups = [
                 inputType: 'number',
                 width: 24,
             },
+        ],
+    },
+    {
+        type: 'horizontal',
+        fields: [
+            { key: 'platform', label: '컨텐츠 목록', type: 'platform', width: 24 },
             {
                 key: 'totalRevenue',
                 label: '총 수익',
                 type: 'input',
                 inputType: 'number',
                 disabled: true,
-                width: 50,
+                width: 25,
             },
         ],
     },
@@ -171,24 +172,36 @@ const handleReferenceSelect = (item) => {
         return;
     }
 
-    // contract -> revenue 변환 매핑
+    // 기존 값 초기화
+    Object.keys(form).forEach((key) => {
+        if (Array.isArray(form[key])) {
+            form[key] = [];
+        } else if (typeof form[key] === 'object' && form[key] !== null) {
+            form[key] = {};
+        } else {
+            form[key] = '';
+        }
+    });
+
+    // 매핑
     form.title = item.title;
     form.requestDate = item.requestDate;
-    form.clientCompany = item.clientCompany;
-    form.clientManager = item.clientManager;
+    form.clientCompany = { ...(item.clientCompany ?? {}) };
+    form.clientManager = { ...(item.clientManager ?? {}) };
     form.period = item.period;
     form.announcementDate = item.announcementDate;
     form.pipeline = item.pipeline;
-    form.username = item.username;
-    form.influencer = item.influencer;
-    form.status = item.status; // 상태도 그대로 넣을거면 포함
-    form.adPrice = item.price;
-    form.productPrice = item.supplyAmount;
-    form.salesQuantity = item.extraProfit;
+    form.username = { ...(item.username ?? {}) };
+    form.influencer = [...(item.influencer ?? [])];
+    form.status = item.status;
+    form.adPrice = item.adPrice;
+    form.productPrice = item.productPrice;
+    form.salesQuantity = item.salesQuantity;
     form.content = item.content;
     form.notes = item.notes;
     form.startDate = item.startDate;
     form.endDate = item.endDate;
+    form.showInfluencerContentInput = item.showInfluencerContentInput ?? false;
 };
 
 // 저장 및 취소
@@ -198,10 +211,19 @@ const save = () => {
 };
 
 const cancel = () => {
-    Object.assign(form, revenueForm.value);
+    Object.keys(form).forEach((key) => {
+        const original = revenueForm.value?.[key];
+
+        if (Array.isArray(original)) {
+            form[key] = [...original];
+        } else if (typeof original === 'object' && original !== null) {
+            form[key] = { ...original };
+        } else {
+            form[key] = original ?? '';
+        }
+    });
     isEditing.value = false;
 };
-
 watch(
     () => [form.productPrice, form.salesQuantity],
     ([productPrice, salesQuantity]) => {
@@ -209,6 +231,31 @@ watch(
         const quantity = parseInt(salesQuantity) || 0;
         form.totalRevenue = price * quantity;
     },
+);
+
+// 인플루언서 선택 변경 시 자동 생성
+watch(
+    () => form.influencer,
+    (influencers) => {
+        if (!Array.isArray(influencers)) return;
+
+        form.influencerContents =
+            form.influencerContents?.filter((item) =>
+                influencers.some((inf) => inf.id === item.influencerId),
+            ) ?? [];
+
+        for (const inf of influencers) {
+            if (!form.influencerContents.some((i) => i.influencerId === inf.id)) {
+                form.influencerContents.push({
+                    influencerId: inf.id,
+                    name: inf.name,
+                    platform: 'youtube',
+                    url: '',
+                });
+            }
+        }
+    },
+    { immediate: true },
 );
 
 onMounted(async () => {
