@@ -36,11 +36,9 @@ const goToDetail = () => {
         <p
           class="text-xs font-semibold px-2 py-1 rounded-md"
           :class="{
-        'bg-gray-300 text-white': client.status === '시작전',
-        'bg-blue-400 text-white': client.status === '진행중',
-        'bg-green-500 text-white': client.status === '종료',
-        'bg-yellow-400 text-white': client.status === '보류',
-        'bg-red-500 text-white': client.status === '거절'
+        'bg-blue-400 text-white': client.status === '잠재고객',
+        'bg-green-400 text-white': client.status === '신규고객',
+        'bg-yellow-400 text-white': client.status === '기존고객'
       }"
         >
           {{ client.status }}
