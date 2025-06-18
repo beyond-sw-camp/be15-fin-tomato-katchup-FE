@@ -19,7 +19,7 @@ const chartData = {
             label: '응답 비율',
             data: [50, 50],
             backgroundColor: ['#5F38E9', '#EAEAEA'],
-            hoverOffset: 20,
+            hoverOffset: 12,
         },
     ],
 }
@@ -27,6 +27,9 @@ const chartData = {
 const chartOptions = {
     responsive: true,
     cutout: '45%', // 도넛 두께 조절
+    layout: {
+        padding: 12,
+    },
     plugins: {
         legend: {
             position: 'right',
@@ -50,7 +53,7 @@ const chartOptions = {
 </script>
 
 <template>
-    <div style="width: 280px; height: 275px;">
+    <div style="width: 280px; height: 265px; overflow: visible;">
         <Doughnut :data="chartData" :options="chartOptions" />
     </div>
 </template>
