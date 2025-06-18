@@ -708,6 +708,23 @@ const revenueDetail = {
     showInfluencerContentInput: true,
 };
 
+const eventList = [
+  {
+    title: '워크샵',
+    scheduleDate: '2025-06-04',
+    startTime: '09:00:00',
+    endTime: '18:00:00',
+    hexCode: '#f87171'
+  },
+  {
+    title: '휴가',
+    scheduleDate:'2025-06-04',
+    startTime:'09:00:00',
+    endTime:'18:00:00',
+    hexCode:'#f97316'
+  }
+]
+
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
         const url = new URL(request.url);
@@ -942,6 +959,17 @@ const CampaignHandler = [
         return HttpResponse.json(
             {
                 data: revenueDetail,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/calendar/:date', async () => {
+        return HttpResponse.json(
+            {
+                data: eventList,
             },
             {
                 status: 200,
