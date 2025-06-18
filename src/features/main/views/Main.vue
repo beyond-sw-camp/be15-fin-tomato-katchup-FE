@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import CommonFiltering from '@/components/layout/CommonFiltering.vue'
 import ChatFloatingButton from '@/components/common/ChatFloatingButton.vue'
 import ChatListModal from '@/features/chat/components/ChatListModal.vue'
 import ChatRoom from '@/features/chat/components/ChatRoom.vue'
