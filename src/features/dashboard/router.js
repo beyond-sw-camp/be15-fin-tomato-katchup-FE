@@ -1,7 +1,7 @@
 import InstagramDashboardView from '@/features/dashboard/views/InstagramDashboardView.vue';
 import YoutubeDashboardView from '@/features/dashboard/views/YoutubeDashboardView.vue';
-import CampaginResultDashboardView
-  from '@/features/dashboard/views/CampaginResultDashboardView.vue';
+import CampaignResultDashboardView
+  from '@/features/dashboard/views/CampaignResultDashboardView.vue';
 
 export const dashboardRoutes = [
   {
@@ -17,6 +17,6 @@ export const dashboardRoutes = [
   {
     path: '/campaign/dashboard',
     name: 'campaign-dashboard',
-    component: CampaginResultDashboardView,
+    component: CampaignResultDashboardView,
   },
 ]
