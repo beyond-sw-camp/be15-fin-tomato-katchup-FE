@@ -1,39 +1,39 @@
 <script setup>
-import { ref } from 'vue'
-
+import { ref, watch } from 'vue'
 
 const props = defineProps({
-  selectedBig: Object, // 큰 틀 선택된 값
-  show: Boolean,       // 모달 표시 여부
+  show: Boolean,
+  item: Object // 수정 대상 작은 틀 항목
 })
 
 const emit = defineEmits(['close', 'submit'])
 
 const name = ref('')
 const content = ref('')
-const template = ref('')
+const templateFile = ref('')
+const parentName = ref('')
+
+watch(() => props.item, (val) => {
+  if (val) {
+    name.value = val.name || ''
+    content.value = val.content || ''
+    templateFile.value = val.template || val.templateFile || ''
+    parentName.value = val.parentName || ''
+  }
+}, { immediate: true })
 
 function closeModal() {
-  name.value = ''
-  content.value = ''
-  template.value = ''
   emit('close')
 }
 
-function submitTemplate() {
-  console.log("dd")
-  if (!name.value.trim()) {
-    alert('이름을 입력해주세요.')
-    return
-  }
+function updateTemplate() {
+  if (!name.value.trim()) return alert('이름을 입력해주세요.')
   emit('submit', {
-    id: Date.now(),
+    ...props.item,
     name: name.value,
-    parentId: props.selectedBig?.id,
-    template: template.value,
     content: content.value,
-    createdAt: '2025-06-20',
-    active: false
+    template: templateFile.value,
+    parentName: parentName.value
   })
   closeModal()
 }
@@ -42,12 +42,12 @@ function submitTemplate() {
 <template>
   <div v-if="show" class="fixed inset-0 z-50 bg-black/50 flex justify-center items-center">
     <div class="bg-white w-[400px] rounded-lg shadow-lg p-6">
-      <div class="font-bold text-lg mb-4">작은 틀 등록</div>
+      <div class="font-bold text-lg mb-4">작은 틀 수정</div>
 
       <!-- 큰 틀 (읽기전용) -->
       <div class="mb-4">
         <label class="block font-semibold mb-1">큰 틀</label>
-        <input type="text" :value="selectedBig?.name" class="w-full border px-2 py-1 rounded text-sm bg-gray-100" disabled />
+        <input type="text" :value="parentName" disabled class="w-full border px-2 py-1 rounded text-sm bg-gray-100" />
       </div>
 
       <!-- 이름 -->
@@ -56,10 +56,10 @@ function submitTemplate() {
         <input v-model="name" placeholder="이름 입력" class="w-full border px-2 py-1 rounded text-sm" />
       </div>
 
-      <!-- 템플릿 유형 버튼 (임시버튼 예시용) -->
+      <!-- 템플릿 -->
       <div class="mb-4">
         <label class="block font-semibold mb-1">템플릿 유형</label>
-        <input v-model="template" placeholder="템플릿 입력" class="w-[280px] border px-2 py-1 rounded text-sm mb-1" />
+        <input v-model="templateFile" placeholder="템플릿 입력" class="w-[280px] border px-2 py-1 rounded text-sm mb-1" />
         <button class="px-4 py-1 rounded text-white bg-btn-blue text-sm mx-1.5">입력</button>
       </div>
 
@@ -69,10 +69,9 @@ function submitTemplate() {
         <textarea v-model="content" placeholder="내용 입력" class="w-full border px-2 py-1 rounded text-sm h-24"></textarea>
       </div>
 
-      <!-- 하단 버튼 -->
       <div class="flex justify-end gap-2">
         <button class="btn-delete" @click="closeModal">취소</button>
-        <button class="btn-create" @click="submitTemplate">등록</button>
+        <button class="btn-create" @click="updateTemplate">등록</button>
       </div>
     </div>
   </div>
