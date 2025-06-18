@@ -1,9 +1,9 @@
 import { http, HttpResponse } from 'msw'
-
 const influencerList = [
   {
     id: 1,
     name: '지무비 : G Movie',
+    realName: '박규남',
     subscribers: '400만명',
     instagram: '@gmovie',
     instaFollowers: '76만명',
@@ -20,6 +20,7 @@ const influencerList = [
   {
     id: 2,
     name: 'tzuyang쯔양',
+    realName: '조쯔양',
     subscribers: '1200만명',
     instagram: '정보없음',
     instaFollowers: '',
@@ -32,6 +33,7 @@ const influencerList = [
   {
     id: 3,
     name: '여단오_yeodano',
+    realName: '윤다노',
     subscribers: '30.4만명',
     instagram: '@dano_day',
     instaFollowers: '8.1만명',
@@ -44,28 +46,26 @@ const influencerList = [
   {
     id: 4,
     name: '숏박스',
+    realName: '정광재',
     subscribers: '339만명',
     instagram: '@shortbox.official',
     instaFollowers: '2.8만명',
     targetGender: 'male',
     targetAgeGroup: '18-24',
-    tags: [
-      'Entertainment', 'LifeStyle'
-    ],
+    tags: ['Entertainment', 'LifeStyle'],
     ownerName: '조현승',
     thumbnail: '/src/assets/images/mock/shortbox.png'
   },
   {
     id: 5,
     name: '기우쌤',
+    realName: '기우',
     subscribers: '160만명',
     instagram: '@kiu_design_',
     instaFollowers: '44.7만명',
     targetGender: 'female',
     targetAgeGroup: '18-24',
-    tags: [
-      'Professional', 'Fashion & Beauty'
-    ],
+    tags: ['Professional', 'Fashion & Beauty'],
     ownerName: '조현승',
     thumbnail: '/src/assets/images/mock/kiu.png'
   },
