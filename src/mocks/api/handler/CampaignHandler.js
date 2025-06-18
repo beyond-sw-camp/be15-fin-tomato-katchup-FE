@@ -547,6 +547,24 @@ const campaignList = Array.from({ length: 50 }, (_, index) => {
     };
 });
 
+const campaignResultList = Array.from({ length: 50 }, (_, index) => {
+    baseDate.setFullYear(baseDate.getFullYear() + index); // 기준 연도 설정
+
+    return {
+        id: index + 1,
+        title: `김치 탕후루 캠페인 ${index + 1}`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: `김동영${index + 1}`,
+        clientManagerPosition: '팀장',
+        price: index * 1000,
+        startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
+        userName: '정재현',
+        userPosition: '과장',
+        productName: `Product ${index + 1}`,
+    };
+});
+
 const proposalList = Array.from({ length: 50 }, (_, index) => {
     const baseDate = new Date();
     baseDate.setFullYear(baseDate.getFullYear() + index);
@@ -709,21 +727,21 @@ const revenueDetail = {
 };
 
 const eventList = [
-  {
-    title: '워크샵',
-    scheduleDate: '2025-06-04',
-    startTime: '09:00:00',
-    endTime: '18:00:00',
-    hexCode: '#f87171'
-  },
-  {
-    title: '휴가',
-    scheduleDate:'2025-06-04',
-    startTime:'09:00:00',
-    endTime:'18:00:00',
-    hexCode:'#f97316'
-  }
-]
+    {
+        title: '워크샵',
+        scheduleDate: '2025-06-04',
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        hexCode: '#f87171',
+    },
+    {
+        title: '휴가',
+        scheduleDate: '2025-06-04',
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        hexCode: '#f97316',
+    },
+];
 
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
@@ -741,6 +759,28 @@ const CampaignHandler = [
                 page,
                 size,
                 total: campaignList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/campaign/dashboard', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = campaignResultList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: campaignResultList.length,
             },
             {
                 status: 200,
