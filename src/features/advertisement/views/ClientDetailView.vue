@@ -2,16 +2,18 @@
 import { reactive, ref, nextTick, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
+import PipelineCard from '@/features/campaign/components/PipelineCard.vue'
 
+/* 고객, 사원 더미 데이터 */
 const clientList = [
   {
-    id: 5173,
+    id: 1,
     name: 'ABC 화장품',
     revenue: '130000000',
     employeeCount: '8',
     businessNumber: '123-45-67890',
     note: 'ABC 고객사 비고입니다.',
-    status: '진행중',
+    status: '잠재고객',
     phone: '02-1234-5678',
     fax: '02-8765-4321',
     user: [{ id: 1, name: '오유경' }],
@@ -32,21 +34,145 @@ const clientList = [
     ]
   },
   {
-    id: 5174,
-    name: 'XYZ 미디어',
+    id: 2,
+    name: '아모레퍼시픽',
     revenue: '250000000',
     employeeCount: '5',
     businessNumber: '456-78-12345',
     note: 'XYZ 고객사 메모입니다.',
-    status: '시작전',
+    status: '기존고객',
     phone: '02-9876-5432',
     fax: '02-5432-6789',
-    user: [{ id: 2, name: '조현승' }],
+    user: [{ id: 2, name: '오유경, 이승재' }],
     address1: '서울시 마포구 월드컵북로',
     address2: '10층',
     employees: []
   }
 ]
+
+/* 파이프라인, 계약, 커뮤니케이션용 더미 데이터 */
+const campaignList = [
+  {
+    id: 3,
+    status: '진행중',
+    title: 'UVW 뷰티 디바이스 언박싱 캠페인',
+    clientCompany: 'ABC 화장품',
+    clientManagerName: '김대리',
+    clientManagerPosition: '대리',
+    price: 45000000,
+    startDate: '2025.06.05',
+    endDate: '2025.07.10',
+    username: '소정재',
+    userPosition: '팀장',
+    productName: 'UVW 뷰티 디바이스 PRO-X',
+    pipeLine: {
+      chance: '2025.06.05',
+      listUp: '2025.06.05',
+      proposal: '2025.06.07',
+      quotation: '2025.06.07'
+    }
+  },
+  {
+    id: 4,
+    status: '프로모션완료',
+    title: 'XYZ 패션 브랜드 S/S 프로모션',
+    clientCompany: 'XYZ 패션 베니사',
+    clientManagerName: '최과장',
+    clientManagerPosition: '과장',
+    price: 45000000,
+    startDate: '2025.06.05',
+    endDate: '2025.07.10',
+    username: '노차은',
+    userPosition: '주임',
+    productName: '패션 라인 의류',
+    pipeLine: {
+      chance: '2025.06.05',
+      listUp: '2025.06.05',
+      proposal: '2025.06.07',
+      quotation: '2025.06.07',
+      negotiation: '2025.06.07',
+      contract: '2025.06.07',
+      aftercare: '2025.06.07'
+    }
+  },
+  {
+    id: 1,
+    status: '진행중',
+    title: 'UVW 뷰티 디바이스 언박싱 캠페인',
+    clientCompany: 'ABC 화장품',
+    clientManagerName: '송강',
+    clientManagerPosition: '팀장',
+    productName: '뷰티 디바이스 PRO X',
+    price: 45000000,
+    startDate: '2025-06-05',
+    endDate: '2025-07-10',
+    username: '차은우',
+    userPosition: 'AE',
+    pipeLine: {
+      chance: { date: '2025-06-05' },
+      listUp: { date: '2025-06-06' },
+      proposal: { date: '2025-06-07' },
+      quotation: { date: '2025-06-08' },
+      contract: { date: '2025-06-09' },
+    },
+  },
+  {
+    id: 2,
+    status: '진행중',
+    title: 'XYZ 패션 브랜드 시즌 프로모션',
+    clientCompany: 'ABC 화장품',
+    clientManagerName: '송강',
+    clientManagerPosition: '팀장',
+    productName: '썸머 티셔츠',
+    price: 39000000,
+    startDate: '2025-06-06',
+    endDate: '2025-07-15',
+    username: '정재현',
+    userPosition: '팀장',
+    pipeLine: {
+      chance: { date: '2025-06-05' },
+      listUp: { date: '2025-06-06' },
+      proposal: { date: '2025-06-07' },
+      quotation: { date: '2025-06-08' },
+      negotiation: { date: '2025-06-09' },
+      contract: { date: '2025-06-10' },
+    },
+  }
+]
+
+const contractList = [
+  {
+    campaignName: '닭가슴살 증식 캠페인',
+    productName: '닭가슴살 3종 세트',
+    influencer: '양팡',
+    revenue: 12200000,
+    period: '2025.05.02 ~ 2025.05.31',
+    resultLink: '#'
+  },
+  {
+    campaignName: '어뜰추가 라라쿠라 캠페인',
+    productName: '3탄 집어라 라라쿠라',
+    influencer: '매미킴',
+    revenue: 5000000,
+    period: '2025.05.15 ~ 2025.06.01',
+    resultLink: '#'
+  }
+]
+
+const communicationList = [
+  {
+    id: 1,
+    category: '제안',
+    title: '고구마 맛 닭가슴살 광고 제안',
+    writer: '조현승',
+    createdAt: '2024.02.13',
+    content: '고구마 맛 닭가슴살 광고 제안서 전달 및 문의',
+    feedback: '이후 진행 시, 베타버전 우선 도입',
+    file: '고구마맛 닭가슴살 광고 제안 1차.hwp'
+  }
+]
+const selectedMsg = ref(null)
+
 // 라우터
 const route = useRoute()
 const router = useRouter()
@@ -89,9 +215,7 @@ const newEmployee = reactive({
 })
 
 // 고객사명이 바뀔 때마다 사원 등록에 반영
-watch(() => form.name, (newVal) => {
-  newEmployee.client = newVal
-})
+watch(() => form.name, v => (newEmployee.client = v))
 
 // 상세조회 API 호출
 onMounted(() => {
@@ -99,14 +223,9 @@ onMounted(() => {
   initUserSelectHandler()
 })
 
-const fetchClientDetail = async () => {
+const fetchClientDetail = () => {
   const client = clientList.find(c => c.id === Number(route.params.id))
-
-  if (!client) {
-    console.warn('해당 ID의 클라이언트를 찾을 수 없습니다.')
-    return
-  }
-
+  if (!client) return console.warn('해당 ID의 클라이언트를 찾을 수 없습니다.')
   Object.assign(form, client)
   employeeList.value = client.employees
 }
@@ -135,16 +254,15 @@ onMounted(() => {
   }
 })
 
-const initUserSelectHandler = () => {
-  if (!window.__userSelectHandlerRegistered) {
-    window.handleUserSelect = (selectedItems) => {
-      if (window.__userSelectCallback__) {
-        window.__userSelectCallback__(selectedItems)
-        window.__userSelectCallback__ = null
-      }
+function initUserSelectHandler () {
+  if (window.__userSelectHandlerRegistered) return
+  window.handleUserSelect = sel => {
+    if (window.__userSelectCallback__) {
+      window.__userSelectCallback__(sel)
+      window.__userSelectCallback__ = null
     }
-    window.__userSelectHandlerRegistered = true
   }
+  window.__userSelectHandlerRegistered = true
 }
 
 const openUserSearch = () => {
@@ -250,11 +368,9 @@ const editEmployee = (index) => {
             진행 상태 <span class="text-red-500 ml-1">*</span>
           </label>
           <select class="input-form-box" v-model="form.status" :disabled="!isEditing">
-            <option value="시작전">시작전</option>
-            <option value="진행중">진행중</option>
-            <option value="종료">종료</option>
-            <option value="보류">보류</option>
-            <option value="거절">거절</option>
+            <option value="잠재고객">잠재고객</option>
+            <option value="신규고객">신규고객</option>
+            <option value="기존고객">기존고객</option>
           </select>
           <label class="input-form-label">유선번호</label>
           <input class="input-form-box" v-model="form.phone" :disabled="!isEditing" />
@@ -377,6 +493,96 @@ const editEmployee = (index) => {
         <button class="btn-create !px-5" @click="addEmployee">
           {{ editIndex === -1 ? '등록' : '수정 완료' }}
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 캠페인 진행 현황 -->
+  <div class="w-full flex justify-center px-4 mt-12">
+    <div class="container bg-white pt-4 pb-6">
+      <p class="font-bold mb-2">캠페인 진행 현황 ({{ campaignList.length }})</p>
+      <div class="blue-line mb-4"/>
+      <PipelineCard :campaigns="campaignList" />
+    </div>
+  </div>
+
+  <!-- 캠페인 계약 목록 -->
+  <div class="w-full flex justify-center px-4 mt-12">
+    <div class="container bg-white pt-4 pb-6">
+      <p class="font-bold mb-2">캠페인 계약 목록</p>
+      <div class="blue-line mb-4"/>
+      <table class="w-full text-sm">
+        <thead class="bg-primary/20 h-[38px]">
+        <tr>
+          <th>캠페인명</th><th>상품명</th><th>인플루언서</th>
+          <th>수익</th><th>기간</th><th>성과</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="c in contractList" :key="c.campaignName" class="h-[38px] text-center even:bg-gray-50">
+          <td>{{ c.campaignName }}</td>
+          <td>{{ c.productName }}</td>
+          <td>{{ c.influencer }}</td>
+          <td>{{ c.revenue.toLocaleString() }} ₩</td>
+          <td>{{ c.period }}</td>
+          <td><a :href="c.resultLink" class="text-primary underline">보러가기</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 커뮤니케이션 이력 -->
+  <div class="w-full flex justify-center px-4 mt-12">
+    <div class="container bg-white pt-4 pb-6">
+      <p class="font-bold mb-2">커뮤니케이션 이력</p>
+      <div class="blue-line mb-4"/>
+
+      <div class="grid grid-cols-2 gap-6">
+        <!-- 좌측 리스트 -->
+        <div class="space-y-2 max-h-[340px] overflow-y-auto pr-1">
+          <button
+            v-for="m in communicationList"
+            :key="m.id"
+            @click="selectedMsg = m"
+            class="w-full text-left border rounded p-3 hover:bg-gray-50"
+            :class="{ 'bg-primary/10 border-primary': selectedMsg?.id === m.id }"
+          >
+            <p class="text-xs text-gray-500 mb-1">{{ m.createdAt }}</p>
+            <p class="font-medium truncate">{{ m.title }}</p>
+          </button>
+        </div>
+
+        <!-- 우측 상세 -->
+        <div v-if="selectedMsg" class="border rounded p-4 space-y-3 relative">
+          <span
+            class="absolute top-4 right-4 px-3 py-1 rounded-full text-white text-xs"
+            :class="selectedMsg.category === '제안' ? 'bg-[#ff6d6d]' : 'bg-[#5b8cff]'"
+          >{{ selectedMsg.category }}</span>
+
+          <h3 class="font-semibold text-lg">{{ selectedMsg.title }}</h3>
+          <p class="text-xs text-gray-400">
+            작성일 · {{ selectedMsg.createdAt }} / 작성자 · {{ selectedMsg.writer }}
+          </p>
+
+          <div>
+            <h4 class="font-semibold mb-1">내용</h4>
+            <p class="whitespace-pre-line">{{ selectedMsg.content }}</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-1">피드백</h4>
+            <p class="whitespace-pre-line">{{ selectedMsg.feedback }}</p>
+          </div>
+
+          <div v-if="selectedMsg.file">
+            <h4 class="font-semibold mb-1">첨부파일</h4>
+            <a href="#" class="text-primary underline">{{ selectedMsg.file }}</a>
+          </div>
+        </div>
+        <div v-else class="text-gray-400 flex items-center justify-center">
+          왼쪽에서 이력을 선택해 주세요
+        </div>
       </div>
     </div>
   </div>
