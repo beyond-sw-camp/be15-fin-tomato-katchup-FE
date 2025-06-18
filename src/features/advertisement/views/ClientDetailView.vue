@@ -3,6 +3,7 @@ import { reactive, ref, nextTick, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import PipelineCard from '@/features/campaign/components/PipelineCard.vue'
+import { RouterLink } from 'vue-router'
 
 /* 고객, 사원 더미 데이터 */
 const clientList = [
@@ -142,6 +143,7 @@ const campaignList = [
 
 const contractList = [
   {
+    campaignId: 1,
     campaignName: '닭가슴살 증식 캠페인',
     productName: '닭가슴살 3종 세트',
     influencerName: '말왕',
@@ -150,6 +152,7 @@ const contractList = [
     resultLink: '#'
   },
   {
+    campaignId: 2,
     campaignName: '어뜰추가 라라쿠라 캠페인',
     productName: '3탄 집어라 라라쿠라',
     influencerName: '매미킴',
@@ -540,12 +543,12 @@ const editEmployee = (index) => {
           <td class="px-4 whitespace-nowrap">{{ c.revenue.toLocaleString() }} ₩</td>
           <td class="px-4 whitespace-nowrap">{{ c.period }}</td>
           <td class="px-4 whitespace-nowrap">
-            <a
-              :href="c.resultLink"
+            <RouterLink
+              :to="`/dashboard/campaign-result?id=${c.campaignId}`"
               class="text-primary underline hover:font-medium"
             >
               보러가기
-            </a>
+            </RouterLink>
           </td>
         </tr>
         </tbody>
