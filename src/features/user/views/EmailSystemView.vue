@@ -6,7 +6,7 @@ import EmailCard from '@/features/user/components/EmailCard.vue'
 import { computed, ref } from 'vue';
 
 const currentPage = ref(1)
-const pageSize = 4
+const pageSize = 6
 
 const emailList = ref([
     {
@@ -49,6 +49,14 @@ const emailList = ref([
         artist_name: '인플루언서명',
         campaign_name: '캠페인 명'
     },
+    {
+        client_name: '고객사 직원명_6',
+        clientCompany_name: '고객 회사명',
+        client_email: '고객 이메일',
+        contacts: '담당자',
+        artist_name: '인플루언서명',
+        campaign_name: '캠페인 명'
+    },
 ])
 
 const totalCount = emailList.value.length
@@ -72,7 +80,7 @@ const paginatedEmail = computed(() => {
       </div>
       <div class="blue-line"></div>
 
-      <div class="grid grid-cols-2 gap-x-10 gap-y-20 px-1">
+      <div class="grid grid-cols-2 gap-x-9 gap-y-9 px-1">
           <EmailCard
               v-for="(email, client_name) in paginatedEmail"
               :key="client_name"
