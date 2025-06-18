@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, nextTick, onMounted, watch } from 'vue'
+import { reactive, ref, nextTick, onMounted, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import PipelineCard from '@/features/campaign/components/PipelineCard.vue'
@@ -162,19 +162,81 @@ const contractList = [
   }
 ]
 
-const communicationList = [
+const selectedCampaignId = ref(null)
+const selectedMsg = ref(null)
+
+const communicationList = ref([
   {
     id: 1,
+    campaignId: 3,
     category: '제안',
     title: '고구마 맛 닭가슴살 광고 제안',
     writer: '조현승',
+    department: '영업부',
     createdAt: '2024.02.13',
     content: '고구마 맛 닭가슴살 광고 제안서 전달 및 문의',
     feedback: '이후 진행 시, 베타버전 우선 도입',
-    file: '고구마맛 닭가슴살 광고 제안 1차.hwp'
+    file: '고구마맛 닭가슴살 광고 제안 1차.hwp',
+    date: '2024.02.12',
+    price: 9600000
+  },
+  {
+    id: 2,
+    campaignId: 1,
+    category: '계약',
+    title: '단백질 닭가슴살 유튜브 계약 확정',
+    writer: '김지수',
+    department: '마케팅팀',
+    createdAt: '2024.03.10',
+    content: '단백질 닭가슴살 제품의 캠페인 계약서 체결',
+    feedback: '광고 송출은 3월 말부터 진행 예정',
+    file: '단백질닭_계약서.pdf',
+    date: '2024.03.10',
+    price: 12000000
+  },
+  {
+    id: 3,
+    campaignId: 2,
+    category: '리스트업',
+    title: '패션 브랜드 시즌 캠페인 인플루언서 리스트업',
+    writer: '박서준',
+    department: '제휴팀',
+    createdAt: '2024.04.01',
+    content: '패션 브랜드에 적합한 인플루언서 리스트 정리 완료',
+    feedback: '3명 우선 접촉 예정',
+    file: '',
+    date: '2024.04.01',
+    price: null
+  },
+  {
+    id: 4,
+    campaignId: 3,
+    category: '견적',
+    title: '뷰티 디바이스 인플루언서 견적 제안',
+    writer: '이주연',
+    department: '영업부',
+    createdAt: '2024.04.15',
+    content: '뷰티 인플루언서 2명 대상 견적서 전달',
+    feedback: '추가 인플루언서 검토 요청됨',
+    file: '뷰티_견적서.pdf',
+    date: '2024.04.14',
+    price: 7500000
+  },
+  {
+    id: 5,
+    campaignId: 2,
+    category: '파이프라인 등록',
+    title: '패션 브랜드 신규 파이프라인 등록',
+    writer: '정태호',
+    department: '운영팀',
+    createdAt: '2024.05.03',
+    content: '해당 캠페인을 파이프라인에 신규 등록 완료',
+    feedback: '진행자 배정 및 커뮤니케이션 시작',
+    file: '',
+    date: '2024.05.02',
+    price: null
   }
-]
-const selectedMsg = ref(null)
+])
 
 // 라우터
 const route = useRoute()
@@ -324,6 +386,16 @@ const editEmployee = (index) => {
   Object.assign(newEmployee, employeeList.value[index])
   editIndex.value = index
   isAddingEmployee.value = true
+}
+
+const filteredHistories = computed(() => {
+  if (!selectedCampaignId.value) return communicationList.value
+  return communicationList.value.filter(item => item.campaignId === selectedCampaignId.value)
+})
+
+function selectCampaign(id) {
+  selectedCampaignId.value = id
+  selectedMsg.value = null
 }
 </script>
 
@@ -560,52 +632,124 @@ const editEmployee = (index) => {
   <div class="w-full flex justify-center px-4 mt-12">
     <div class="container bg-white pt-4 pb-6">
       <p class="font-bold mb-2">커뮤니케이션 이력</p>
-      <div class="blue-line mb-4"/>
+      <div class="blue-line mb-4" />
 
-      <div class="grid grid-cols-2 gap-6">
-        <!-- 좌측 리스트 -->
-        <div class="space-y-2 max-h-[340px] overflow-y-auto pr-1">
+      <div class="grid grid-cols-4 gap-6">
+
+        <!-- 1. 캠페인 목록 -->
+        <div class="col-span-1 flex flex-col gap-2">
           <button
-            v-for="m in communicationList"
-            :key="m.id"
-            @click="selectedMsg = m"
-            class="w-full text-left border rounded p-3 hover:bg-gray-50"
-            :class="{ 'bg-primary/10 border-primary': selectedMsg?.id === m.id }"
+            class="px-4 py-1 border rounded bg-gray-100 text-sm font-semibold"
+            :class="{ 'bg-primary/10 border-primary': selectedCampaignId === null }"
+            @click="selectedCampaignId = null"
           >
-            <p class="text-xs text-gray-500 mb-1">{{ m.createdAt }}</p>
-            <p class="font-medium truncate">{{ m.title }}</p>
+            전체
+          </button>
+          <button
+            v-for="c in campaignList"
+            :key="c.id"
+            class="px-4 py-1 border rounded bg-gray-100 text-sm truncate"
+            :class="{ 'bg-primary/10 border-primary': selectedCampaignId === c.id }"
+            @click="selectCampaign(c.id)"
+          >
+            {{ c.title }}
           </button>
         </div>
 
-        <!-- 우측 상세 -->
-        <div v-if="selectedMsg" class="border rounded p-4 space-y-3 relative">
-          <span
-            class="absolute top-4 right-4 px-3 py-1 rounded-full text-white text-xs"
-            :class="selectedMsg.category === '제안' ? 'bg-[#ff6d6d]' : 'bg-[#5b8cff]'"
-          >{{ selectedMsg.category }}</span>
+        <!-- 2. 이력 리스트 (선택된 캠페인에 한해 표시) -->
+        <div class="col-span-1 space-y-2 max-h-[460px] overflow-y-auto pr-1">
+          <button
+            v-for="item in filteredHistories"
+            :key="item.id"
+            @click="selectedMsg = item"
+            class="w-full text-left border rounded p-3 hover:bg-gray-50"
+            :class="{ 'bg-[#e6f0ff] border-[#5b8cff]': selectedMsg?.id === item.id }"
+          >
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-semibold text-sm">{{ item.category }}</span>
+              <span class="text-xs text-gray-500">{{ item.createdAt }}</span>
+            </div>
+            <p class="text-sm font-medium">{{ item.title }}</p>
+            <p class="text-xs text-gray-500">{{ item.writer }} / {{ item.department }}</p>
+            <p class="text-xs text-gray-500">{{ item.date }}</p>
+            <p v-if="item.price" class="text-xs font-semibold">KRW {{ item.price.toLocaleString() }}</p>
+          </button>
+        </div>
 
-          <h3 class="font-semibold text-lg">{{ selectedMsg.title }}</h3>
-          <p class="text-xs text-gray-400">
-            작성일 · {{ selectedMsg.createdAt }} / 작성자 · {{ selectedMsg.writer }}
-          </p>
-
-          <div>
-            <h4 class="font-semibold mb-1">내용</h4>
-            <p class="whitespace-pre-line">{{ selectedMsg.content }}</p>
+        <!-- 3. 상세 보기 -->
+        <!-- 오른쪽 상세보기 패널 -->
+        <div
+          v-if="selectedMsg"
+          class="col-span-2 border rounded-lg px-6 py-4 shadow-sm bg-white space-y-3"
+          style="border-color: var(--color-gray-medium);"
+        >
+          <!-- 상단 제목/카테고리 -->
+          <div class="flex items-start justify-between pb-3">
+            <div class="flex items-center gap-2">
+      <span
+        class="px-3 py-1 rounded-full text-white text-xs font-semibold shadow-sm"
+        :class="{
+          'bg-pipeline-proposal': selectedMsg.category === '제안',
+          'bg-pipeline-negotiation': selectedMsg.category === '협상',
+          'bg-pipeline-contract': selectedMsg.category === '계약',
+          'bg-pipeline-quotation': selectedMsg.category === '견적',
+          'bg-pipeline-list-up': selectedMsg.category === '리스트업',
+          'bg-pipeline-chance': selectedMsg.category === '파이프라인 등록',
+        }"
+      >
+        {{ selectedMsg.category }}
+      </span>
+              <h3 class="text-base font-bold text-[#1A1A1A]">{{ selectedMsg.title }}</h3>
+            </div>
+            <div class="text-xs text-gray-400 mt-1">작성일 : {{ selectedMsg.createdAt }}</div>
           </div>
 
+          <!-- 단 하나의 구분선만 남기고 -->
+          <hr style="border-color: var(--color-gray-medium);" />
+
+          <!-- 담당자 -->
           <div>
-            <h4 class="font-semibold mb-1">피드백</h4>
-            <p class="whitespace-pre-line">{{ selectedMsg.feedback }}</p>
+            <h4 class="text-sm font-medium text-gray-600 mb-1">담당자</h4>
+            <p class="text-sm text-gray-800">{{ selectedMsg.writer }} / {{ selectedMsg.department }}</p>
           </div>
 
+          <!-- 내용 -->
+          <div>
+            <h4 class="text-sm font-medium text-gray-600 mb-1">내용</h4>
+            <div
+              class="rounded px-3 py-2 bg-gray-50 text-sm text-gray-700 whitespace-pre-line"
+              style="border: 1px solid var(--color-gray-medium);"
+            >
+              {{ selectedMsg.content }}
+            </div>
+          </div>
+
+          <!-- 피드백 -->
+          <div>
+            <h4 class="text-sm font-medium text-gray-600 mb-1">피드백</h4>
+            <div
+              class="rounded px-3 py-2 bg-gray-50 text-sm text-gray-700 whitespace-pre-line"
+              style="border: 1px solid var(--color-gray-medium);"
+            >
+              {{ selectedMsg.feedback }}
+            </div>
+          </div>
+
+          <!-- 첨부파일 -->
           <div v-if="selectedMsg.file">
-            <h4 class="font-semibold mb-1">첨부파일</h4>
-            <a href="#" class="text-primary underline">{{ selectedMsg.file }}</a>
+            <h4 class="text-sm font-medium text-gray-600 mb-1">첨부파일</h4>
+            <div
+              class="flex items-center gap-2 rounded px-3 py-2 bg-white text-sm"
+              style="border: 1px solid var(--color-gray-medium);"
+            >
+              📎 <a href="#" class="text-primary underline">{{ selectedMsg.file }}</a>
+            </div>
           </div>
         </div>
-        <div v-else class="text-gray-400 flex items-center justify-center">
-          왼쪽에서 이력을 선택해 주세요
+
+        <!-- 상세 비어 있을 때 -->
+        <div v-else class="col-span-2 flex items-center justify-center text-gray-400 border rounded py-24">
+          가운데 목록에서 항목을 선택해 주세요
         </div>
       </div>
     </div>
