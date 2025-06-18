@@ -79,6 +79,7 @@ const saveInfluencer = (updated) => {
                         :key="card.id"
                         :id="card.id"
                         :name="card.name"
+                        :realName="card.realName"
                         :subscribers="card.subscribers"
                         :instagram="card.instagram"
                         :instaFollowers="card.instaFollowers"

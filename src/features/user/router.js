@@ -8,7 +8,6 @@ export const userRoutes = [
         name: 'InfluencerManagement',
         component: InfluencerManagementView,
     },
-
     {
         path: '/login',
         name: 'login',
@@ -17,7 +16,6 @@ export const userRoutes = [
             useLayout: 'none'
         },
     },
-
     {
         path: '/findPassword',
         name: 'findPassword',
@@ -32,7 +30,6 @@ export const userRoutes = [
     //     name: 'emailSystem',
     //     component: EmailSystemView,
     // },
-
     {
         path: '/management/survey',
         name: 'surveyList',
