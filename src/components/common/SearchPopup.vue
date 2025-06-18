@@ -6,6 +6,7 @@ import {
     getClientCompany,
     getClientManager,
     getInfluencer,
+    getPipeline,
 } from '@/features/campaign/api.js';
 
 const route = useRoute();
@@ -31,6 +32,8 @@ const fetchData = async () => {
             res = await getClientManager();
         } else if (type === 'influencer') {
             res = await getInfluencer();
+        } else if (type === 'pipeline') {
+            res = await getPipeline();
         } else {
             console.error('Unknown search type:', type);
         }

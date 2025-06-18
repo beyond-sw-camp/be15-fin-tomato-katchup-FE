@@ -96,6 +96,9 @@ export const getInfluencer = async () => {
     return await api.get('/popup/influencer');
 };
 
+export const getPipeline = async () => {
+    return await api.get('/popup/pipeline');
+};
 export const getProposalReference = async () => {
     return await api.get('/proposal/reference');
 };
