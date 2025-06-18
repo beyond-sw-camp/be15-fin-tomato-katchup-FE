@@ -1,9 +1,12 @@
 <script setup>
-const { diagramInfo } = defineProps({
+const props = defineProps({
     diagramInfo: {
+        type: Object,
         required: true,
     },
 });
+
+const { diagramInfo } = props;
 
 const pipelineSteps = [
     { key: 'chance', label: '기회인지', colorVar: 'bg-pipeline-chance' },
@@ -20,6 +23,8 @@ const getLastPipelineIndex = (pipeLine) => {
     const lastKey = pipelineSteps.findLast((step) => keys.includes(step.key));
     return pipelineSteps.findIndex((step) => step.key === lastKey?.key);
 };
+
+const lastPipelineIndex = getLastPipelineIndex(diagramInfo);
 </script>
 
 <template>
@@ -28,7 +33,7 @@ const getLastPipelineIndex = (pipeLine) => {
             <div
                 :class="[
                     'pipeline-box w-full text-center p-2 rounded-lg text-white h-[60px]',
-                    index <= getLastPipelineIndex(diagramInfo) ? step.colorVar : 'bg-gray-300',
+                    index <= lastPipelineIndex ? step.colorVar : 'bg-gray-300',
                 ]"
             >
                 <div class="step-label font-semibold">{{ step.label }}</div>
@@ -41,8 +46,8 @@ const getLastPipelineIndex = (pipeLine) => {
         <div
             v-if="index < pipelineSteps.length - 1"
             :class="[
-                `connector w-3 h-3`,
-                index <= getLastPipelineIndex(diagramInfo) ? step.colorVar : 'bg-gray-300',
+                'connector w-3 h-3',
+                index <= lastPipelineIndex ? step.colorVar : 'bg-gray-300',
             ]"
         ></div>
     </template>

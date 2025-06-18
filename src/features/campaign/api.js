@@ -10,6 +10,10 @@ export const getCampaignList = async (page, size, company) => {
     });
 };
 
+export const createCampaign = async (campaignInfo) => {
+    return await api.post('/campaign', campaignInfo);
+};
+
 export const getCampaignDetail = async (campaignId) => {
     return await api.get(`/campaign/${campaignId}`);
 };
@@ -94,4 +98,12 @@ export const getInfluencer = async () => {
 
 export const getProposalReference = async () => {
     return await api.get('/proposal/reference');
+};
+
+export const getQuotationReference = async () => {
+    return await api.get('/quotation/reference');
+};
+
+export const getContractReference = async () => {
+    return await api.get('/contract/reference');
 };
