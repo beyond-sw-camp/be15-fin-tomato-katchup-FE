@@ -25,11 +25,12 @@ export const userRoutes = [
         },
     },
 
-    // {
-    //     path: '/management/email',
-    //     name: 'emailSystem',
-    //     component: EmailSystemView,
-    // },
+    {
+        path: '/management/email',
+        name: 'emailSystem',
+        component: EmailSystemView,
+    },
+
     {
         path: '/management/survey',
         name: 'surveyList',
