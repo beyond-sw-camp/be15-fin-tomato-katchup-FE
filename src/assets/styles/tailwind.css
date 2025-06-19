@@ -80,7 +80,7 @@
   }
 
   .card-style {
-    @apply w-[631px] h-[526px] px-12 pt-7 pb-4 rounded-[24px] bg-white;
+    @apply w-[500px] h-[450px] px-12 pt-7 pb-4 rounded-[24px] bg-white;
     box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
 
@@ -162,6 +162,29 @@
 
   .btn-icon:hover {
     background-color: #a8b9f8; /* hover 시 조금 밝게 */
+  }
+
+  /* === 템플릿 목록 === */
+  .tem-box {
+    @apply bg-white p-6 rounded-lg flex gap-6 w-full h-[300px] mx-3;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+  .editor-tem-box {
+    @apply bg-white p-6 rounded-lg flex gap-6 w-full mx-3;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .editor-wrapper {
+    background: #f9f9f9;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+  #editor {
+    @apply w-full px-3 py-2 rounded-sm border border-gray-dark hover:border-black focus:border-black;
+    min-height: 400px;
+    border-radius: 6px;
   }
 
 }

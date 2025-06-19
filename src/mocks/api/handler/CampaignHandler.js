@@ -32,23 +32,6 @@ const pipelinePopupList = [
     },
 ];
 
-const eventList = [
-    {
-        title: '워크샵',
-        scheduleDate: '2025-06-04',
-        startTime: '09:00:00',
-        endTime: '18:00:00',
-        hexCode: '#f87171',
-    },
-    {
-        title: '휴가',
-        scheduleDate: '2025-06-04',
-        startTime: '09:00:00',
-        endTime: '18:00:00',
-        hexCode: '#f97316',
-    },
-];
-
 const quotationDetail = {
     title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 견적',
     requestDate: '2025-06-05',
@@ -218,6 +201,18 @@ const userList = [
     { id: 7, name: '박보검' },
     { id: 8, name: '손흥민' },
     { id: 9, name: '김정우' },
+];
+
+const userListNameAndEmail = [
+  { id: 1, name: '차은우', email: 'lsj9057@daum.net' },
+  { id: 2, name: '아이유', email: 'lsj9057@namver.com,' },
+  { id: 3, name: '김수현', email: 'lsj9057@google.com' },
+  { id: 4, name: '장원영', email: 'lsj9057@nate.com' },
+  { id: 5, name: '전정국', email: 'dfdfd@naver.com' },
+  { id: 6, name: '박지민', email: 'fdsfasdfads@daum.net' },
+  { id: 7, name: '박보검', email: 'lsjdafdd9057@daum.net' },
+  { id: 8, name: '손흥민', email: 'lsjssfdsd9057@daum.net' },
+  { id: 9, name: '김정우', email: 'lsdfasdfj9057@daum.net' },
 ];
 
 const clientCompanyList = [
@@ -1556,7 +1551,27 @@ const ListUpList = Array.from({ length: 50 }, (_, index) => {
         presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
     };
 });
+const campaignResultList = Array.from({ length: 50 }, (_, index) => {
+    baseDate.setFullYear(baseDate.getFullYear() + index); // 기준 연도 설정
 
+    return {
+        id: index + 1,
+        title: `김치 탕후루 캠페인 ${index + 1}`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: `김동영${index + 1}`,
+        clientManagerPosition: '팀장',
+        influencers: [
+            { id: 201, name: '나연' },
+            { id: 202, name: '정국' },
+        ],
+        price: index * 1000,
+        startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
+        userName: '정재현',
+        userPosition: '과장',
+        productName: `Product ${index + 1}`,
+    };
+});
 const revenueDetail = {
     title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 매출',
     requestDate: '2025-06-05',
@@ -1595,6 +1610,23 @@ const revenueDetail = {
     showInfluencerContentInput: true,
 };
 
+const eventList = [
+    {
+        title: '워크샵',
+        scheduleDate: '2025-06-04',
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        hexCode: '#f87171',
+    },
+    {
+        title: '휴가',
+        scheduleDate: '2025-06-04',
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        hexCode: '#f97316',
+    },
+];
+
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
         const url = new URL(request.url);
@@ -1611,6 +1643,28 @@ const CampaignHandler = [
                 page,
                 size,
                 total: campaignList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/campaign/dashboard', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = campaignResultList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: campaignResultList.length,
             },
             {
                 status: 200,
@@ -1665,6 +1719,12 @@ const CampaignHandler = [
             { data: userList },
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
+    }),
+    http.get('/api/v1/popup/user/email', async () => {
+      return HttpResponse.json(
+        { data: userListNameAndEmail },
+        { status: 200, headers: { 'Cache-Control': 'no-store' } },
+      );
     }),
 
     http.get('/api/v1/popup/client-company', async () => {

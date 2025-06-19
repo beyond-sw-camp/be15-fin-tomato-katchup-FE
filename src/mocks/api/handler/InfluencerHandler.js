@@ -86,7 +86,6 @@ const InfluencerHandler = [
     )
   }),
 
-  // 개별 상세 조회
   http.get('/api/v1/influencer/:id', async ({ params }) => {
     const id = parseInt(params.id);
     const influencer = influencerList.find(item => item.id === id);
