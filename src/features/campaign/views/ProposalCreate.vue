@@ -1,16 +1,11 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { onMounted, reactive, ref, watch } from 'vue';
 import OpinionBar from '@/components/layout/OpinionBar.vue';
 import { Icon } from '@iconify/vue';
 import SalesForm from '@/features/campaign/components/SalesForm.vue';
 import ProposalAccordionItem from '@/features/campaign/components/ProposalAccordionItem.vue';
-import {
-    getInfluencerDetail,
-    getListupReference,
-    getOpinion,
-    getProposalDetail,
-} from '@/features/campaign/api.js';
+import { getInfluencerDetail, getListupReference } from '@/features/campaign/api.js';
 import DetailReferenceList from '@/features/campaign/components/DetailReferenceList.vue';
 const router = useRouter();
 
@@ -20,7 +15,6 @@ const form = reactive({});
 const listUpReferences = ref([]);
 const accordionItems = ref([]);
 const isEditing = ref(true);
-const route = useRoute();
 
 const groups = [
     {
@@ -110,6 +104,7 @@ const save = async () => {
 
     try {
         console.log('전송 데이터:', payload);
+        await getInfluencerDetail(payload);
         await router.push('/sales/proposal');
     } catch (e) {
         console.error('저장 실패:', e);
@@ -127,30 +122,11 @@ const fetchInfluencerDetail = async (ids) => {
     return res.data.data;
 };
 
-const fetchProposalDetail = async () => {
-    try {
-        const res = await getProposalDetail(route.params.proposalId);
-        proposalForm.value = res.data.data;
-        Object.assign(form, res.data.data);
-    } catch (e) {
-        console.log(e);
-    }
-};
 // 실제 개발 시에는 파이프 라인 아이디 보내줘야함!
 const fetchListupReference = async () => {
     try {
         const res = await getListupReference();
         listUpReferences.value = res.data.data;
-    } catch (e) {
-        console.log(e);
-    }
-};
-
-// 의견 호출
-const fetchOpinions = async () => {
-    try {
-        const res = await getOpinion(route.params.proposalId, 'contract');
-        opinions.value = res.data.data;
     } catch (e) {
         console.log(e);
     }
@@ -206,11 +182,19 @@ const handleDelete = (id) => {
     opinions.value = opinions.value.filter((opinion) => opinion.id !== id);
 };
 
+const handleReferenceSelect = (item) => {
+    if (!isEditing.value) {
+        alert('수정 모드가 아닙니다!');
+        return;
+    }
+
+    form.clientCompany = item.clientCompany;
+    form.influencer = item.influencer;
+};
+
 onMounted(async () => {
     /* TODO 댓글, 래퍼런스, 상세 정보 불러와야 함!*/
-    // await fetchOpinions();
-    // await fetchProposalDetail();
-    await Promise.all([fetchOpinions(), fetchProposalDetail(), fetchListupReference()]);
+    await fetchListupReference();
 });
 </script>
 
@@ -242,7 +226,6 @@ onMounted(async () => {
                 <SalesForm v-model="form" :groups="groups" :isEditing="isEditing" />
             </div>
 
-            <!-- 하단: 참조 리스트 -->
             <div class="container">
                 <DetailReferenceList :items="listUpReferences" @select="handleReferenceSelect" />
             </div>
