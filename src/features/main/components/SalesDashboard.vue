@@ -108,6 +108,12 @@ const fetchAllData = async () => {
 onMounted(fetchAllData)
 
 const limitedCompanyList = computed(() => clientCompanyList.value.slice(0, 10));
+
+const formatPrice = (value) => {
+  if (typeof value === 'number') return value.toLocaleString('ko-KR');
+  const num = parseFloat(value);
+  return isNaN(num) ? value : num.toLocaleString('ko-KR');
+};
 </script>
 
 <template>
@@ -172,19 +178,13 @@ const limitedCompanyList = computed(() => clientCompanyList.value.slice(0, 10));
                 <li
                     v-for="(listup, index) in listupList"
                     :key="index"
-                    class="grid w-full grid-cols-10 items-center gap-2 px-5 py-2"
+                    class="grid w-full grid-cols-12 items-center gap-2 px-5 py-2"
                 >
                     <span class="font-bold truncate col-span-2 text-left">{{ listup.clientCompany }}</span>
-                    <span class="text-center col-span-3">{{ listup.campaignTitle }}</span>
-                    <span class="text-center col-span-2">{{ listup.title }}</span>
+                    <span class="text-center col-span-4">{{ listup.campaignTitle }}</span>
+                    <span class="text-center col-span-4">{{ listup.title }}</span>
                     <span class="text-center col-span-1">{{ listup.clientManagerName }}</span>
-                    <span class="text-center col-span-1">{{ listup.clientManagerPosition }}</span>
-                    <span
-                        class="text-white text-center px-1 py-0.5 rounded-lg text-sm col-span-1"
-                        :class="statusClassMap[listup.status] || 'bg-gray-medium'"
-                    >
-                        {{ listup.status }}
-                    </span>
+                    <span class="text-right col-span-1">{{ listup.clientManagerPosition }}</span>
                 </li>
             </ul>
             </div>
@@ -196,9 +196,11 @@ const limitedCompanyList = computed(() => clientCompanyList.value.slice(0, 10));
                             <li
                                 v-for="(company, index) in limitedCompanyList"
                                 :key="index"
-                                class="flex justify-between py-0.5"
+                                class="grid w-full grid-cols-3 items-center gap-2 px-5 py-2"
                             >
-                                <span>{{ company.name }}</span>
+                                <span class="col-span-1">{{ company.name }}</span>
+                                <span class="col-span-1">{{ company.telephone }}</span>
+                                <span class="col-span-1 text-gray-medium">{{ company.createdAt }}</span>
                             </li>
                         </ul>
                 </div>
@@ -212,13 +214,13 @@ const limitedCompanyList = computed(() => clientCompanyList.value.slice(0, 10));
                 <li
                     v-for="(proposal, index) in proposalList"
                     :key="index"
-                    class="grid w-full grid-cols-15 items-center gap-2 px-5 py-2"
+                    class="grid w-full grid-cols-16 items-center gap-2 px-5 py-2"
                 >
                     <span class="font-bold truncate col-span-2 text-left">{{ proposal.clientCompany }}</span>
-                    <span class="text-center col-span-3">{{ proposal.campaignTitle }}</span>
-                    <span class="text-center col-span-3">{{ proposal.title }}</span>
-                    <span class="text-center col-span-2">{{ proposal.clientManagerName }}</span>
-                    <span class="text-center col-span-2">{{ proposal.clientManagerPosition }}</span>
+                    <span class="col-span-4">{{ proposal.campaignTitle }}</span>
+                    <span class="col-span-3">{{ proposal.title }}</span>
+                    <span class="col-span-2">{{ proposal.clientManagerName }}</span>
+                    <span class="col-span-2">{{ proposal.clientManagerPosition }}</span>
                     <span
                         class="text-white text-center px-1 py-0.5 rounded-lg text-sm col-span-1"
                         :class="statusClassMap[proposal.status] || 'bg-gray-medium'"
@@ -243,33 +245,33 @@ const limitedCompanyList = computed(() => clientCompanyList.value.slice(0, 10));
                     >
                         <span class="font-bold truncate col-span-2 text-left">{{ quotation.clientCompany }}</span>
                         <span class="text-center col-span-5">{{ quotation.campaignTitle }}</span>
-                        <span class="text-center col-span-2">{{ quotation.adPrice }}</span>
-                        <span class="text-center col-span-2">{{ quotation.presentDate }}</span>
+                        <span class="text-center col-span-2">{{ formatPrice(quotation.adPrice) }}</span>
+                        <span class="text-center col-span-2 text-gray-medium">{{ quotation.presentDate }}</span>
                     </li>
                 </ul>
             </div>
             <!-- 계약 -->
             <div class="dashboard-section w-1/2">
                 <h2 class="text-xl font-bold mb-2">계약</h2>
-              <div class="h-[1px] bg-gray-light mt-1 mb-3 w-full"></div>
-              <ul class="flex flex-col w-full p-0 m-0 list-none max-h-[200px] overflow-y-auto">
-                <li
-                  v-for="(contract, index) in contractList"
-                  :key="index"
-                  class="grid w-full grid-cols-11 items-center gap-2 px-5 py-2"
-                >
-                  <span class="font-bold truncate col-span-2 text-left">{{ contract.clientCompany }}</span>
-                  <span class="text-center col-span-5">{{ contract.campaignTitle }}</span>
-                  <span class="text-center col-span-2">{{ contract.presentDate }}</span>
-                  <span
-                    class="text-white text-center px-1 py-0.5 rounded-lg text-sm col-span-2"
-                    :class="statusClassMap[contract.status] || 'bg-gray-medium'"
-                  >
-                        {{ contract.status }}
-                    </span>
-                </li>
-              </ul>
-            </div>
+                <div class="h-[1px] bg-gray-light mt-1 mb-3 w-full"></div>
+                <ul class="flex flex-col w-full p-0 m-0 list-none max-h-[200px] overflow-y-auto">
+                    <li
+                        v-for="(contract, index) in contractList"
+                        :key="index"
+                        class="grid w-full grid-cols-14 items-center gap-2 px-5 py-2"
+                    >
+                        <span class="font-bold truncate col-span-3 text-left">{{ contract.clientCompany }}</span>
+                        <span class="text-center col-span-6">{{ contract.campaignTitle }}</span>
+                        <span
+                        class="text-white text-center px-1 py-0.5 rounded-lg text-sm col-span-2"
+                        :class="statusClassMap[contract.status] || 'bg-gray-medium'"
+                        >
+                            {{ contract.status }}
+                        </span>
+                        <span class="text-center col-span-3 text-gray-medium">{{ contract.presentDate }}</span>
+                    </li>
+                </ul>
+              </div>
         </div>
   </div>
 </template>
