@@ -146,7 +146,7 @@ function cancelAddBig() {
 </script>
 
 <template>
-    <div class="container overflow-x-auto">
+    <div class="container">
         <div class="page-header">
             <div class="page-title">템플릿 목록</div>
         </div>
