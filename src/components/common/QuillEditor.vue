@@ -71,22 +71,7 @@ watch(
 </script>
 
 <template>
-  <div class="editor-wrapper">
+  <div class="editor-wrapper ">
     <div id="editor"></div>
   </div>
 </template>
-
-<style scoped>
-.editor-wrapper {
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
-
-#editor {
-  min-height: 400px;
-  background: white;
-  padding: 10px;
-}
-</style>

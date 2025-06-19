@@ -174,4 +174,18 @@
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   }
 
+  .editor-wrapper {
+    background: #f9f9f9;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+  #editor {
+    min-height: 400px;
+    padding: 1px;
+    border: 1px solid black; /* 검정 테두리 */
+    border-radius: 6px;
+  }
+
 }
