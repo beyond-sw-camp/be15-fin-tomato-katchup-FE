@@ -80,6 +80,10 @@ export const getUser = async () => {
     return await api.get('/popup/user');
 };
 
+export const getUserNameAndEmail = async () => {
+  return await api.get('/popup/user/email');
+};
+
 export const getClientCompany = async () => {
     return await api.get('/popup/client-company');
 };

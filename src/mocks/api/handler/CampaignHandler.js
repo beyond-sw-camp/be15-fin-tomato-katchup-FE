@@ -203,6 +203,18 @@ const userList = [
     { id: 9, name: '김정우' },
 ];
 
+const userListNameAndEmail = [
+  { id: 1, name: '차은우', email: 'lsj9057@daum.net' },
+  { id: 2, name: '아이유', email: 'lsj9057@namver.com,' },
+  { id: 3, name: '김수현', email: 'lsj9057@google.com' },
+  { id: 4, name: '장원영', email: 'lsj9057@nate.com' },
+  { id: 5, name: '전정국', email: 'dfdfd@naver.com' },
+  { id: 6, name: '박지민', email: 'fdsfasdfads@daum.net' },
+  { id: 7, name: '박보검', email: 'lsjdafdd9057@daum.net' },
+  { id: 8, name: '손흥민', email: 'lsjssfdsd9057@daum.net' },
+  { id: 9, name: '김정우', email: 'lsdfasdfj9057@daum.net' },
+];
+
 const clientCompanyList = [
     { id: 1, name: 'UVW 뷰티' },
     { id: 2, name: 'XYZ 패션' },
@@ -1707,6 +1719,12 @@ const CampaignHandler = [
             { data: userList },
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
+    }),
+    http.get('/api/v1/popup/user/email', async () => {
+      return HttpResponse.json(
+        { data: userListNameAndEmail },
+        { status: 200, headers: { 'Cache-Control': 'no-store' } },
+      );
     }),
 
     http.get('/api/v1/popup/client-company', async () => {

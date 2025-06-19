@@ -7,6 +7,7 @@ import {
     getClientManager,
     getInfluencer,
     getPipeline,
+    getUserNameAndEmail,
 } from '@/features/campaign/api.js';
 
 const route = useRoute();
@@ -34,6 +35,8 @@ const fetchData = async () => {
             res = await getInfluencer();
         } else if (type === 'pipeline') {
             res = await getPipeline();
+        } else if (type === 'email') {
+          res = await getUserNameAndEmail();
         } else {
             console.error('Unknown search type:', type);
         }
@@ -52,11 +55,18 @@ onMounted(async () => {
 });
 
 const filteredItems = computed(() => {
-    if (!searchKeyword.value) return allItems.value;
-    return allItems.value.filter((item) =>
-        (item[labelKey] ?? '').toLowerCase().includes(searchKeyword.value.toLowerCase()),
-    );
+  if (!searchKeyword.value) return allItems.value;
+
+  return allItems.value.filter((item) => {
+    if (labelKey === 'fullLabel') {
+      const full = `${item.name} - ${item.email}`.toLowerCase();
+      return full.includes(searchKeyword.value.toLowerCase());
+    } else {
+      return (item[labelKey] ?? '').toLowerCase().includes(searchKeyword.value.toLowerCase());
+    }
+  });
 });
+
 
 const isSelected = (item) => selectedItems.value.includes(item[valueKey]);
 
@@ -114,16 +124,19 @@ const closePopup = () => window.close();
                 v-if="filteredItems.length"
                 class="flex flex-col gap-2 max-h-[300px] overflow-y-auto"
             >
-                <div
-                    v-for="item in filteredItems"
-                    :key="item[valueKey]"
-                    class="flex justify-between items-center border border-gray-300 rounded p-3 hover:bg-blue-100 cursor-pointer"
-                    :class="{ 'bg-blue-200': isSelected(item) }"
-                    @click="toggleSelect(item)"
-                >
-                    <span>{{ item[labelKey] }}</span>
-                    <span v-if="isSelected(item)" class="text-blue-500 font-bold">선택됨</span>
-                </div>
+              <div
+                v-for="item in filteredItems"
+                :key="item[valueKey]"
+                class="flex justify-between items-center border border-gray-300 rounded p-3 hover:bg-blue-100 cursor-pointer"
+                :class="{ 'bg-blue-200': isSelected(item) }"
+                @click="toggleSelect(item)"
+              >
+                <span>
+                {{ type === 'email' ? `${item.name} - ${item.email}` : item[labelKey] }}
+                </span>
+                <span v-if="isSelected(item)" class="text-blue-500 font-bold">선택됨</span>
+              </div>
+
             </div>
 
             <div v-else class="text-gray-400 text-sm py-8 text-center">검색 결과가 없습니다.</div>
