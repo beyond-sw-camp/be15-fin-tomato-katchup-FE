@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 
 const props = defineProps({
     modelValue: Object,
@@ -9,15 +9,13 @@ const emit = defineEmits(['update:modelValue', 'submit', 'cancel']);
 
 const popupWidth = 500;
 const popupHeight = 600;
+const currentFieldKey = ref(null);
 
-const form = computed({
-    get: () => props.modelValue,
-    set: (val) => emit('update:modelValue', val),
-});
+const form = props.modelValue;
 
 const expectedProfitAmount = computed(() => {
-    const revenue = Number(form.value.expectedRevenue) || 0;
-    const margin = Number(form.value.expectedProfitMargin) || 0;
+    const revenue = Number(form.expectedRevenue) || 0;
+    const margin = Number(form.expectedProfitMargin) || 0;
     return (revenue * margin) / 100;
 });
 
@@ -47,6 +45,22 @@ function openPostcodeSearch() {
     });
 }
 
+const openSearchPopup = (key, type) => {
+    currentFieldKey.value = key;
+    const currentValue = form[key];
+    const selected = currentValue?.id ?? '';
+
+    const popup = window.open(
+        `/search-popup?type=${type}&selected=${encodeURIComponent(selected)}`,
+        'SearchPopup',
+        'width=500,height=600',
+    );
+
+    window.handleUserSelect = (selectedItem) => {
+        form[currentFieldKey.value] = selectedItem;
+        popup.close();
+    };
+};
 // FormGroups
 const groups = [
     {
@@ -64,18 +78,23 @@ const groups = [
     },
     {
         type: 'single',
-        fields: [{ key: 'clientCompany', label: '고객사', type: 'input', inputType: 'text' }],
+        fields: [
+            {
+                key: 'clientCompany',
+                label: '고객사',
+                type: 'search-company',
+                searchType: 'company',
+            },
+        ],
     },
     {
-        type: 'horizontal',
+        type: 'single',
         fields: [
-            { key: 'clientManagerName', label: '광고 담당자', type: 'input', inputType: 'text' },
             {
-                key: 'clientManagerPosition',
-                label: '직책',
-                type: 'input',
-                inputType: 'text',
-                width: 'w-40',
+                key: 'clientManager',
+                label: '광고 담당자',
+                type: 'search-manager',
+                searchType: 'manager',
             },
         ],
     },
@@ -106,7 +125,7 @@ const groups = [
             { key: 'endDate', label: '종료일', type: 'input', inputType: 'date' },
             { key: 'address', label: '주소 검색', type: 'address-search' },
             { key: 'addressDetail', label: '상세 주소', type: 'input', inputType: 'text' },
-            { key: 'username', label: '담당자', type: 'input', inputType: 'text' },
+            { key: 'username', label: '담당자', type: 'search-user', searchType: 'user' },
             { key: 'awarenessPath', label: '인지 경로', type: 'input', inputType: 'text' },
             { key: 'notes', label: '비고', type: 'textarea' },
         ],
@@ -168,7 +187,7 @@ const groups = [
                                 />
                                 <button
                                     type="button"
-                                    class="border bg-gray-300 rounded px-3 py-1 text-sm shadow hover:brightness-95 active:brightness-90 transition"
+                                    class="btn-open-popup"
                                     @click="openPostcodeSearch"
                                     v-if="isEditing"
                                 >
@@ -176,7 +195,26 @@ const groups = [
                                 </button>
                             </div>
                         </div>
-
+                        <div v-else-if="field.type?.startsWith('search-')" class="flex gap-2">
+                            <input
+                                type="text"
+                                :value="
+                                    Array.isArray(form[field.key])
+                                        ? form[field.key].map((u) => u.name).join(', ')
+                                        : (form[field.key]?.name ?? '')
+                                "
+                                readonly
+                                class="input-form-box flex-1"
+                            />
+                            <button
+                                type="button"
+                                v-if="isEditing"
+                                class="btn-open-popup"
+                                @click="openSearchPopup(field.key, field.searchType)"
+                            >
+                                검색
+                            </button>
+                        </div>
                         <textarea
                             v-else-if="field.type === 'textarea'"
                             v-model="form[field.key]"

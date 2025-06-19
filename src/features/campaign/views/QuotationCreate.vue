@@ -10,20 +10,13 @@
                 <div class="page-header">
                     <div class="page-title">견적</div>
                     <div class="flex justify-end gap-2">
-                        <button class="btn-delete" @click="isEditing ? cancel() : remove()">
-                            {{ isEditing ? '취소' : '삭제' }}
-                        </button>
-
-                        <button class="btn-create" @click="isEditing ? save() : (isEditing = true)">
-                            {{ isEditing ? '저장' : '수정' }}
-                        </button>
-
+                        <button class="btn-create" @click="save">저장</button>
                         <Icon
                             icon="material-symbols:lists-rounded"
                             width="32"
                             height="32"
                             class="text-btn-gray"
-                            @click="router.push('/sales/quotation')"
+                            @click="router.push('/sales/revenue')"
                         />
                     </div>
                 </div>
@@ -45,19 +38,18 @@
 import { onMounted, reactive, ref } from 'vue';
 import OpinionBar from '@/components/layout/OpinionBar.vue';
 import SalesForm from '@/features/campaign/components/SalesForm.vue';
-import { getOpinion, getProposalReference, getQuotationDetail } from '@/features/campaign/api.js';
-import { useRoute, useRouter } from 'vue-router';
+import { getProposalReference } from '@/features/campaign/api.js';
+import { useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import DetailReferenceList from '@/features/campaign/components/DetailReferenceList.vue';
 
-const route = useRoute();
 const router = useRouter();
 
 const opinions = ref([]);
 const quotationForm = ref(null);
 const form = reactive({});
 const proposalReferences = ref([]);
-const isEditing = ref(false);
+const isEditing = ref(true);
 
 // form 그룹 정의
 const groups = [
@@ -144,18 +136,6 @@ const groups = [
     },
 ];
 
-// API 데이터 로딩 함수
-const fetchOpinions = async () => {
-    const res = await getOpinion(route.params.quotationId, 'quotation');
-    opinions.value = res.data.data;
-};
-
-const fetchQuotationDetail = async () => {
-    const res = await getQuotationDetail(route.params.quotationId);
-    quotationForm.value = res.data.data;
-    Object.assign(form, res.data.data);
-};
-
 const fetchProposalReferences = async () => {
     const res = await getProposalReference();
     proposalReferences.value = res.data.data;
@@ -163,7 +143,7 @@ const fetchProposalReferences = async () => {
 
 // 마운트 시 전부 패칭
 onMounted(async () => {
-    await Promise.all([fetchQuotationDetail(), fetchOpinions(), fetchProposalReferences()]);
+    await Promise.all([fetchProposalReferences()]);
 });
 
 // 의견 등록
@@ -205,9 +185,20 @@ const handleReferenceSelect = (item) => {
 };
 
 // 저장 및 취소
-const save = () => {
-    console.log('저장할 값:', form);
-    isEditing.value = false;
+const save = async () => {
+    const payload = {
+        ...form,
+        opinions: opinions.value,
+    };
+
+    try {
+        // 예: postContract(payload); 와 같은 API 호출
+        console.log('전송 데이터:', payload);
+        // await postContract(payload);
+        await router.push('/sales/quotation'); // 저장 후 목록으로 이동
+    } catch (e) {
+        console.error('저장 실패:', e);
+    }
 };
 
 const cancel = () => {
