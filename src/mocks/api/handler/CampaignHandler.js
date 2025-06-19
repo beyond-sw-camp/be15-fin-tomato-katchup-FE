@@ -225,14 +225,14 @@ const userListNameAndEmail = [
 ];
 
 const clientCompanyList = [
-    { id: 1, name: 'UVW 뷰티' },
-    { id: 2, name: 'XYZ 패션' },
-    { id: 3, name: 'ABC 전자' },
-    { id: 4, name: '카카오 엔터' },
-    { id: 5, name: 'CJ ENM' },
-    { id: 6, name: '네이버 쇼핑' },
-    { id: 7, name: '하이마트' },
-    { id: 8, name: '삼성전자' },
+    { id: 1, name: 'UVW 뷰티', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 2, name: 'XYZ 패션', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 3, name: 'ABC 전자', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 4, name: '카카오 엔터', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 5, name: 'CJ ENM', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 6, name: '네이버 쇼핑', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 7, name: '하이마트', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 8, name: '삼성전자', telephone: '02-123-4567', createdAt: '2025-06-08' },
 ];
 
 const clientManagerList = [
@@ -1622,17 +1622,31 @@ const revenueDetail = {
 const eventList = [
     {
         title: '워크샵',
-        scheduleDate: '2025-06-04',
+        scheduleDate: '2025-06-19',
         startTime: '09:00:00',
         endTime: '18:00:00',
         hexCode: '#f87171',
     },
     {
         title: '휴가',
-        scheduleDate: '2025-06-04',
+        scheduleDate: '2025-06-19',
         startTime: '09:00:00',
         endTime: '18:00:00',
         hexCode: '#f97316',
+    },
+    {
+      title: '출장',
+      scheduleDate: '2025-06-19',
+      startTime: '09:00:00',
+      endTime: '18:00:00',
+      hexCode: '#FFD863',
+    },
+    {
+      title: '외출',
+      scheduleDate: '2025-06-19',
+      startTime: '09:00:00',
+      endTime: '18:00:00',
+      hexCode: '#83D4FF',
     },
 ];
 
