@@ -6,7 +6,9 @@ import {
   getProposalList,
   getQuotationList
 } from '@/features/campaign/api.js';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const page = ref(1);
 const size = ref(10);
 
@@ -16,8 +18,8 @@ const proposalList = ref([]);
 const listupList = ref([]);
 const contractList = ref([]);
 const quotationList = ref([]);
-const isLoading = ref(true)
-const isError = ref(false)
+const isLoading = ref(true);
+const isError = ref(false);
 
 const searchFilters = ref({
   category: '',
@@ -40,7 +42,7 @@ const fetchClientCompany = async () => {
   const res = await fetch('/api/v1/popup/client-company');
   const data = await res.json();
   clientCompanyList.value = data.data;
-}
+};
 
 const fetchListupList = async () => {
   try {
@@ -67,7 +69,7 @@ const fetchQuotationList = async () => {
   } catch (e) {
     console.error(e);
   }
-}
+};
 
 const fetchContractList = async () => {
   try {
@@ -76,11 +78,10 @@ const fetchContractList = async () => {
   } catch (e) {
     console.error(e);
   }
-}
+};
 
 const fetchEvent = async () => {
-  // const date = new Date().toISOString().split('T')[0];
-  const date = '2025-06-04';
+  const date = new Date().toISOString().split('T')[0];
   const res = await fetch(`/api/v1/calendar/${date}`);
   const data = await res.json();
   eventList.value = data.data;
@@ -103,7 +104,7 @@ const fetchAllData = async () => {
   } finally {
     isLoading.value = false
   }
-}
+};
 
 onMounted(fetchAllData)
 
@@ -113,6 +114,18 @@ const formatPrice = (value) => {
   if (typeof value === 'number') return value.toLocaleString('ko-KR');
   const num = parseFloat(value);
   return isNaN(num) ? value : num.toLocaleString('ko-KR');
+};
+
+const goToDetail = (type, id) => {
+  router.push(`/${type}/${id}`);
+};
+
+const goToList = (type) => {
+  router.push(`/${type}`);
+}
+
+const goToCalendar = () => {
+  router.push(`/calendar`);
 };
 </script>
 
@@ -124,27 +137,39 @@ const formatPrice = (value) => {
                 <h2 class="text-xl font-bold">신규 영업 활동</h2>
                 <div class="h-[1px] bg-gray-light mt-1 mb-5 w-full"></div>
                 <div class="flex space-x-7 my-9 h-[70%]">
-                    <div class="flex-1 text-center border border-gray-light rounded-2xl py-3">
-                        <div class="text-lg font-bold bg-btn-sky rounded-md py-1.5 mx-4 text-white">
-                          잠재고객
-                        </div>
-                        <div class="text-5xl font-semibold pt-10">12</div>
-                    </div>
-                    <div class="flex-1 text-center border border-gray-light rounded-2xl py-3">
-                        <div class="text-lg font-bold bg-btn-sky rounded-md py-1.5 mx-4 text-white">
-                          고객
-                        </div>
-                        <div class="text-5xl font-semibold pt-10">12</div>
-                    </div>
-                    <div class="flex-1 text-center border border-gray-light rounded-2xl py-3">
+                    <div
+                        class="flex-1 text-center border border-gray-light rounded-2xl py-3"
+                        @click="goToList('management/client')"
+                    >
                         <div class="text-lg font-bold bg-btn-sky rounded-md py-1.5 mx-4 text-white">
                           고객사
                         </div>
                         <div class="text-5xl font-semibold pt-10">12</div>
                     </div>
-                    <div class="flex-1 text-center border border-gray-light rounded-2xl py-3">
+                    <div
+                        class="flex-1 text-center border border-gray-light rounded-2xl py-3"
+                        @click="goToList('influencer/list')"
+                    >
                         <div class="text-lg font-bold bg-btn-sky rounded-md py-1.5 mx-4 text-white">
-                          영업기회
+                          인플루언서
+                        </div>
+                        <div class="text-5xl font-semibold pt-10">12</div>
+                    </div>
+                    <div
+                        class="flex-1 text-center border border-gray-light rounded-2xl py-3"
+                        @click="goToList('sales/contract')"
+                    >
+                        <div class="text-lg font-bold bg-btn-sky rounded-md py-1.5 mx-4 text-white">
+                          계약
+                        </div>
+                        <div class="text-5xl font-semibold pt-10">12</div>
+                    </div>
+                    <div
+                        class="flex-1 text-center border border-gray-light rounded-2xl py-3"
+                        @click="goToList('campaign')"
+                    >
+                        <div class="text-lg font-bold bg-btn-sky rounded-md py-1.5 mx-4 text-white">
+                          파이프라인
                         </div>
                         <div class="text-5xl font-semibold pt-10">12</div>
                     </div>
@@ -158,7 +183,8 @@ const formatPrice = (value) => {
                         <li
                             v-for="(event, index) in eventList"
                             :key="index"
-                            class="flex items-center gap-2 py-0.5 border border-gray-medium rounded p-3 mb-2"
+                            class="flex items-center gap-2 py-0.5 border border-gray-medium rounded p-3 mb-2 cursor-pointer hover:bg-btn-gray/20 transition-colors"
+                            @click="goToCalendar"
                         >
                             <div class="w-2 h-5 rounded-sm" :style="{ backgroundColor: event.hexCode || event.hexCode }"></div>
                             <span class="text-gray-medium">{{ event.startTime.slice(0, 5) }} ~</span>
@@ -178,7 +204,8 @@ const formatPrice = (value) => {
                 <li
                     v-for="(listup, index) in listupList"
                     :key="index"
-                    class="grid w-full grid-cols-12 items-center gap-2 px-5 py-2"
+                    class="grid w-full grid-cols-12 items-center gap-2 px-5 py-2 cursor-pointer hover:bg-btn-gray/20 transition-colors"
+                    @click="goToDetail('influencer/recommendation', listup.id)"
                 >
                     <span class="font-bold truncate col-span-2 text-left">{{ listup.clientCompany }}</span>
                     <span class="text-center col-span-4">{{ listup.campaignTitle }}</span>
@@ -196,7 +223,8 @@ const formatPrice = (value) => {
                             <li
                                 v-for="(company, index) in limitedCompanyList"
                                 :key="index"
-                                class="grid w-full grid-cols-3 items-center gap-2 px-5 py-2"
+                                class="grid w-full grid-cols-3 items-center gap-2 px-5 py-2 cursor-pointer hover:bg-btn-gray/20 transition-colors"
+                                @click="goToDetail('management/client', company.id)"
                             >
                                 <span class="col-span-1">{{ company.name }}</span>
                                 <span class="col-span-1">{{ company.telephone }}</span>
@@ -214,7 +242,8 @@ const formatPrice = (value) => {
                 <li
                     v-for="(proposal, index) in proposalList"
                     :key="index"
-                    class="grid w-full grid-cols-16 items-center gap-2 px-5 py-2"
+                    class="grid w-full grid-cols-16 items-center gap-2 px-5 py-2 cursor-pointer hover:bg-btn-gray/20 transition-colors"
+                    @click="goToDetail('sales/proposal', proposal.id)"
                 >
                     <span class="font-bold truncate col-span-2 text-left">{{ proposal.clientCompany }}</span>
                     <span class="col-span-4">{{ proposal.campaignTitle }}</span>
@@ -241,7 +270,8 @@ const formatPrice = (value) => {
                     <li
                       v-for="(quotation, index) in quotationList"
                       :key="index"
-                      class="grid w-full grid-cols-11 items-center gap-2 px-5 py-2"
+                      class="grid w-full grid-cols-11 items-center gap-2 px-5 py-2 cursor-pointer hover:bg-btn-gray/20 transition-colors"
+                      @click="goToDetail('sales/quotation', quotation.id)"
                     >
                         <span class="font-bold truncate col-span-2 text-left">{{ quotation.clientCompany }}</span>
                         <span class="text-center col-span-5">{{ quotation.campaignTitle }}</span>
@@ -258,7 +288,8 @@ const formatPrice = (value) => {
                     <li
                         v-for="(contract, index) in contractList"
                         :key="index"
-                        class="grid w-full grid-cols-14 items-center gap-2 px-5 py-2"
+                        class="grid w-full grid-cols-14 items-center gap-2 px-5 py-2 cursor-pointer hover:bg-btn-gray/20 transition-colors"
+                        @click="goToDetail('sales/contract', contract.id)"
                     >
                         <span class="font-bold truncate col-span-3 text-left">{{ contract.clientCompany }}</span>
                         <span class="text-center col-span-6">{{ contract.campaignTitle }}</span>

@@ -1613,17 +1613,31 @@ const revenueDetail = {
 const eventList = [
     {
         title: '워크샵',
-        scheduleDate: '2025-06-04',
+        scheduleDate: '2025-06-19',
         startTime: '09:00:00',
         endTime: '18:00:00',
         hexCode: '#f87171',
     },
     {
         title: '휴가',
-        scheduleDate: '2025-06-04',
+        scheduleDate: '2025-06-19',
         startTime: '09:00:00',
         endTime: '18:00:00',
         hexCode: '#f97316',
+    },
+    {
+      title: '출장',
+      scheduleDate: '2025-06-19',
+      startTime: '09:00:00',
+      endTime: '18:00:00',
+      hexCode: '#FFD863',
+    },
+    {
+      title: '외출',
+      scheduleDate: '2025-06-19',
+      startTime: '09:00:00',
+      endTime: '18:00:00',
+      hexCode: '#83D4FF',
     },
 ];
 
