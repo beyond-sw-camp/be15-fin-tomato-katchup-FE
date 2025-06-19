@@ -1,11 +1,13 @@
 <script setup>
 import { reactive, ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { getCampaignDetail, getCampaignHistory } from '@/features/campaign/api.js';
 import { Icon } from '@iconify/vue';
-import { useRoute, useRouter } from 'vue-router';
+
 import CampaignForm from '@/features/campaign/components/CampaignForm.vue';
 import PipelineDiagram from '@/features/campaign/components/PipelineDiagram.vue';
 import CampaignHistory from '@/features/campaign/components/CampaignHistory.vue';
+
 const route = useRoute();
 const router = useRouter();
 const campaignDetail = ref(null);
@@ -38,6 +40,45 @@ const cancel = () => {
     Object.assign(form, campaignDetail.value);
     isEditing.value = false;
 };
+
+const groups = [
+    {
+        type: 'horizontal',
+        fields: [
+            { key: 'title', label: '캠페인명', type: 'input' },
+            {
+                key: 'status',
+                label: '진행 상태',
+                type: 'select',
+                options: ['진행중', '보류', '완료', '취소'],
+            },
+        ],
+    },
+    {
+        type: 'horizontal',
+        fields: [
+            { key: 'startDate', label: '시작일', inputType: 'date' },
+            { key: 'endDate', label: '종료일', inputType: 'date' },
+        ],
+    },
+    {
+        type: 'horizontal',
+        fields: [
+            {
+                key: 'clientCompany',
+                label: '고객사',
+                type: 'search-company',
+                searchType: 'company',
+            },
+            {
+                key: 'clientManager',
+                label: '광고담당자',
+                type: 'search-manager',
+                searchType: 'manager',
+            },
+        ],
+    },
+];
 </script>
 
 <template>
@@ -48,7 +89,6 @@ const cancel = () => {
                 <button class="btn-delete" @click="isEditing ? cancel() : remove()">
                     {{ isEditing ? '취소' : '삭제' }}
                 </button>
-
                 <button class="btn-create" @click="isEditing ? save() : (isEditing = true)">
                     {{ isEditing ? '저장' : '수정' }}
                 </button>
@@ -67,9 +107,8 @@ const cancel = () => {
         </div>
         <div class="flex">
             <div class="w-1/2">
-                <CampaignForm v-model="form" :isEditing="isEditing" />
+                <CampaignForm v-model="form" :groups="groups" :isEditing="isEditing" />
             </div>
-
             <div class="w-1/2 bg-gray-50 p-4 rounded shadow">
                 <CampaignHistory v-if="campaignHistory" :campaignHistory="campaignHistory" />
             </div>

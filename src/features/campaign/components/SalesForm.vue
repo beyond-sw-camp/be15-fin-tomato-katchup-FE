@@ -104,7 +104,7 @@ const openSearchPopup = (key, type) => {
                             <button
                                 type="button"
                                 v-if="isEditing"
-                                class="px-3 py-1 bg-blue-500 text-white rounded"
+                                class="btn-open-popup"
                                 @click="openSearchPopup(field.key, field.searchType)"
                             >
                                 검색

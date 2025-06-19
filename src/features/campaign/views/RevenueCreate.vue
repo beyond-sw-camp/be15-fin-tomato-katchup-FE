@@ -1,21 +1,42 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { onMounted, reactive, ref, watch } from 'vue';
-import { getContractReference, getOpinion, getRevenueDetail } from '@/features/campaign/api.js';
+import { getContractReference } from '@/features/campaign/api.js';
 import { Icon } from '@iconify/vue';
 import DetailReferenceList from '@/features/campaign/components/DetailReferenceList.vue';
 import OpinionBar from '@/components/layout/OpinionBar.vue';
 import SalesForm from '@/features/campaign/components/SalesForm.vue';
 import FileUploadCard from '@/features/campaign/components/FileUploadCard.vue';
 
-const route = useRoute();
 const router = useRouter();
 
 const opinions = ref([]);
-const revenueForm = ref(null);
-const form = reactive({});
 const contractReferences = ref([]);
-const isEditing = ref(false);
+const isEditing = ref(true);
+
+const form = reactive({
+    title: '',
+    requestDate: '',
+    clientCompany: {},
+    clientManager: {},
+    period: '',
+    announcementDate: '',
+    pipeline: '',
+    username: {},
+    influencer: [],
+    influencerContents: [],
+    status: '승인요청',
+    adPrice: '',
+    productPrice: '',
+    salesQuantity: '',
+    totalRevenue: 0,
+    content: '',
+    notes: '',
+    startDate: '',
+    endDate: '',
+    showInfluencerContentInput: false,
+    attachments: [],
+});
 
 const groups = [
     {
@@ -127,36 +148,38 @@ const groups = [
     },
 ];
 
-// 의견 호출
-const fetchOpinions = async () => {
+// 저장
+const save = async () => {
+    const payload = {
+        ...form,
+        opinions: opinions.value,
+    };
+
     try {
-        const res = await getOpinion(route.params.revenueId, 'revenue');
-        opinions.value = res.data.data;
+        // 예: postContract(payload); 와 같은 API 호출
+        console.log('전송 데이터:', payload);
+        // await postContract(payload);
+        await router.push('/sales/revenue'); // 저장 후 목록으로 이동
     } catch (e) {
-        console.log(e);
+        console.error('저장 실패:', e);
     }
 };
 
-const fetchContractReferences = async () => {
-    try {
-        const res = await getContractReference();
-        contractReferences.value = res.data.data;
-    } catch (e) {
-        console.log(e);
-    }
+// 초기화
+const cancel = () => {
+    Object.keys(form).forEach((key) => {
+        form[key] = Array.isArray(form[key])
+            ? []
+            : typeof form[key] === 'object' && form[key] !== null
+              ? {}
+              : '';
+    });
+    form.status = '승인요청';
+    form.totalRevenue = 0;
+    form.attachments = [];
+    isEditing.value = true;
 };
 
-const fetchRevenueDetail = async () => {
-    try {
-        const res = await getRevenueDetail();
-        revenueForm.value = res.data.data;
-        Object.assign(form, res.data.data);
-    } catch (e) {
-        console.log(e);
-    }
-};
-
-// 의견 등록
 const handleSubmit = (newComment) => {
     opinions.value.push({
         id: Date.now(),
@@ -166,29 +189,17 @@ const handleSubmit = (newComment) => {
     });
 };
 
-// 의견 삭제
-const handleDelete = (id) => {
-    opinions.value = opinions.value.filter((opinion) => opinion.id !== id);
-};
-
+// 참조 선택 시 폼 매핑
 const handleReferenceSelect = (item) => {
     if (!isEditing.value) {
         alert('수정 모드가 아닙니다!');
         return;
     }
 
-    // 기존 값 초기화
     Object.keys(form).forEach((key) => {
-        if (Array.isArray(form[key])) {
-            form[key] = [];
-        } else if (typeof form[key] === 'object' && form[key] !== null) {
-            form[key] = {};
-        } else {
-            form[key] = '';
-        }
+        form[key] = Array.isArray(form[key]) ? [] : typeof form[key] === 'object' ? {} : '';
     });
 
-    // 매핑
     form.title = item.title;
     form.requestDate = item.requestDate;
     form.clientCompany = { ...(item.clientCompany ?? {}) };
@@ -197,48 +208,19 @@ const handleReferenceSelect = (item) => {
     form.announcementDate = item.announcementDate;
     form.pipeline = item.pipeline;
     form.username = { ...(item.username ?? {}) };
-    form.influencer = [...(item.influencer ?? [])];
+    form.influencer = Array.isArray(item.influencer) ? [...item.influencer] : [item.influencer];
     form.status = item.status;
-    form.adPrice = item.adPrice;
-    form.productPrice = item.productPrice;
-    form.salesQuantity = item.salesQuantity;
+    form.adPrice = item.price;
+    form.productPrice = item.supplyAmount;
+    form.salesQuantity = item.extraProfit;
     form.content = item.content;
     form.notes = item.notes;
     form.startDate = item.startDate;
     form.endDate = item.endDate;
-    form.showInfluencerContentInput = item.showInfluencerContentInput ?? false;
+    form.showInfluencerContentInput = true;
 };
 
-// 저장 및 취소
-const save = () => {
-    console.log('저장할 값:', form);
-    isEditing.value = false;
-};
-
-const cancel = () => {
-    Object.keys(form).forEach((key) => {
-        const original = revenueForm.value?.[key];
-
-        if (Array.isArray(original)) {
-            form[key] = [...original];
-        } else if (typeof original === 'object' && original !== null) {
-            form[key] = { ...original };
-        } else {
-            form[key] = original ?? '';
-        }
-    });
-    isEditing.value = false;
-};
-watch(
-    () => [form.productPrice, form.salesQuantity],
-    ([productPrice, salesQuantity]) => {
-        const price = parseInt(productPrice) || 0;
-        const quantity = parseInt(salesQuantity) || 0;
-        form.totalRevenue = price * quantity;
-    },
-);
-
-// 인플루언서 선택 변경 시 자동 생성
+// 인플루언서 선택 시 자동 매핑
 watch(
     () => form.influencer,
     (influencers) => {
@@ -263,8 +245,28 @@ watch(
     { immediate: true },
 );
 
-onMounted(async () => {
-    await Promise.all([fetchRevenueDetail(), fetchOpinions(), fetchContractReferences()]);
+// 총 수익 계산
+watch(
+    () => [form.productPrice, form.salesQuantity],
+    ([productPrice, salesQuantity]) => {
+        const price = parseInt(productPrice) || 0;
+        const quantity = parseInt(salesQuantity) || 0;
+        form.totalRevenue = price * quantity;
+    },
+);
+
+// 계약 참조 불러오기
+const fetchContractReferences = async () => {
+    try {
+        const res = await getContractReference();
+        contractReferences.value = res.data.data;
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+onMounted(() => {
+    fetchContractReferences();
 });
 </script>
 
@@ -275,19 +277,12 @@ onMounted(async () => {
 
         <!-- 본문 영역 -->
         <div class="flex-1 flex flex-col gap-8">
-            <!-- 상단: 견적 폼 -->
+            <!-- 상단: 매출 폼 -->
             <div class="container">
                 <div class="page-header">
-                    <div class="page-title">매출</div>
+                    <div class="page-title">매출 생성</div>
                     <div class="flex justify-end gap-2">
-                        <button class="btn-delete" @click="isEditing ? cancel() : remove()">
-                            {{ isEditing ? '취소' : '삭제' }}
-                        </button>
-
-                        <button class="btn-create" @click="isEditing ? save() : (isEditing = true)">
-                            {{ isEditing ? '저장' : '수정' }}
-                        </button>
-
+                        <button class="btn-create" @click="save">저장</button>
                         <Icon
                             icon="material-symbols:lists-rounded"
                             width="32"
@@ -307,6 +302,7 @@ onMounted(async () => {
             <div class="container">
                 <DetailReferenceList :items="contractReferences" @select="handleReferenceSelect" />
             </div>
+
             <div class="container">
                 <FileUploadCard :isEditing="isEditing" v-model="form.attachments" />
             </div>
