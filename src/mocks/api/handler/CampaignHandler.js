@@ -1539,7 +1539,23 @@ const ListUpList = Array.from({ length: 50 }, (_, index) => {
         presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
     };
 });
+const campaignResultList = Array.from({ length: 50 }, (_, index) => {
+    baseDate.setFullYear(baseDate.getFullYear() + index); // 기준 연도 설정
 
+    return {
+        id: index + 1,
+        title: `김치 탕후루 캠페인 ${index + 1}`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: `김동영${index + 1}`,
+        clientManagerPosition: '팀장',
+        price: index * 1000,
+        startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
+        userName: '정재현',
+        userPosition: '과장',
+        productName: `Product ${index + 1}`,
+    };
+});
 const revenueDetail = {
     title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 매출',
     requestDate: '2025-06-05',
