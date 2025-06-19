@@ -114,16 +114,16 @@ function cancelAddBig() {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container overflow-x-auto">
     <div class="page-header">
       <div class="page-title">템플릿 목록</div>
     </div>
     <div class="blue-line mb-6"></div>
 
     <!-- 전체 콘텐츠 박스 -->
-    <div class="tem-box">
+    <div class="tem-box w-full max-w-full" >
       <!-- 상단 영역: 큰틀, 작은틀, 정보 -->
-      <div class="flex gap-6">
+      <div class="flex gap-6 min-w-0">
         <!-- 큰 틀 -->
         <div class="w-[300px] border rounded bg-white flex flex-col">
           <div class="flex items-center justify-between px-4 pt-4 pb-2">

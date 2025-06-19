@@ -170,7 +170,7 @@
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   }
   .editor-tem-box {
-    @apply bg-white p-6 rounded-lg flex gap-6 w-full mx-auto;
+    @apply bg-white p-6 rounded-lg flex gap-6 w-full mx-3;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   }
 

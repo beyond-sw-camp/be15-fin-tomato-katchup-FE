@@ -50,7 +50,7 @@ const openSearchPopup = (key, type) => {
 
     <!-- 이메일 -->
     <div class="mb-4 flex items-center gap-2">
-      <label class="w-[74px] font-semibold">이메일</label>
+      <label class="w-[75px] font-semibold">이메일</label>
       <input
         type="email"
         :value="form.email?.email ?? ''"
