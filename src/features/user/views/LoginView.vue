@@ -29,27 +29,27 @@ const handleLogin = () => {
 
     <div class = "card-style">
       <div class="title text-center mb-8">
-        <h1 class="text-[40px] font-semibold mb-4">로그인</h1>
+        <h1 class="text-[36px] font-bold mb-3">로그인</h1>
       </div>
 
       <form class="login-form flex flex-col" @submit.prevent="handleLogin">
         <label class="input-box-label text-click text-md py-1">사원코드</label>
-        <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
+        <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
 
 
-        <label class="input-box-label text-click text-md pt-6 pb-1">비밀번호</label>
-        <input v-model="password" type="password" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4 w-full" />
+        <label class="input-box-label text-click text-md pt-5.5 pb-1">비밀번호</label>
+        <input v-model="password" type="password" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
 
 
-        <div class="flex justify-between mt-2 text-[1rem] pt-0.5 pb-10 text-gray-medium">
+        <div class="flex justify-between mt-2 text-[1rem] pt-0.5 pb-5.5 text-gray-medium">
             <RouterLink
                 to="findPassword"
-                class="ml-114 pb-1 text-[0.9rem] text-gray-400 whitespace-nowrap hover:underline"
+                class="ml-81.5 pb-1 text-[0.9rem] text-gray-400 whitespace-nowrap hover:underline"
             >
                 비밀번호 찾기
             </RouterLink>
         </div>
-              <button type = "submit" class="bg-[#A8C1DA] text-white px-60 py-4 text-md rounded ">
+              <button type = "submit" class="bg-[#A8C1DA] text-white px-5 py-3 mb-5 text-md rounded w-full">
                   로그인
               </button>
       </form>

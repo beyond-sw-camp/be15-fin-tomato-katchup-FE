@@ -32,23 +32,6 @@ const pipelinePopupList = [
     },
 ];
 
-const eventList = [
-    {
-        title: '워크샵',
-        scheduleDate: '2025-06-04',
-        startTime: '09:00:00',
-        endTime: '18:00:00',
-        hexCode: '#f87171',
-    },
-    {
-        title: '휴가',
-        scheduleDate: '2025-06-04',
-        startTime: '09:00:00',
-        endTime: '18:00:00',
-        hexCode: '#f97316',
-    },
-];
-
 const quotationDetail = {
     title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 견적',
     requestDate: '2025-06-05',
@@ -106,18 +89,21 @@ const opinionList = [
 
 const pipelineList = [
     {
+        id: 1,
         pipelineStep: 'chance',
         title: 'XYZ 패션 브랜드 시즌 프로모션 계약',
         createdAt: '2025-06-05',
     },
     {
-        pipelineStep: 'listUp',
+        id: 1,
+        pipelineStep: 'listup',
         title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 리스트업',
         createdAt: '2025-06-06',
         clientCompany: 'XYZ 패션',
         ClientManagerName: '송강',
     },
     {
+        id: 1,
         pipelineStep: 'proposal',
         title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 제안',
         createdAt: '2025-06-06',
@@ -128,6 +114,7 @@ const pipelineList = [
         username: '차은우',
     },
     {
+        id: 1,
         pipelineStep: 'quotation',
         title: ' XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (1차)',
         createdAt: '2025-06-07',
@@ -136,6 +123,7 @@ const pipelineList = [
         adPrice: 9600000,
     },
     {
+        id: 2,
         pipelineStep: 'quotation',
         title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차) 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)',
         createdAt: '2025-06-08',
@@ -144,6 +132,7 @@ const pipelineList = [
         adPrice: 9300000,
     },
     {
+        id: 3,
         pipelineStep: 'quotation',
         title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차) 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)',
         createdAt: '2025-06-08',
@@ -152,6 +141,7 @@ const pipelineList = [
         adPrice: 9300000,
     },
     {
+        id: 4,
         pipelineStep: 'quotation',
         title: 'XYZ 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차) 패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)패션 브랜드 시즌 프로모션 캐스팅 견적 (2차)',
         createdAt: '2025-06-08',
@@ -160,6 +150,7 @@ const pipelineList = [
         adPrice: 9300000,
     },
     {
+        id: 1,
         pipelineStep: 'sales',
         title: ' 상품 이름 정보',
         createdAt: '2025-06-09',
@@ -168,6 +159,7 @@ const pipelineList = [
         adPrice: 9300000,
     },
     {
+        id: 1,
         pipelineStep: 'contract',
         title: 'XYZ 패션 브랜드 시즌 프로모션 계약',
         createdAt: '2025-06-11',
@@ -201,10 +193,10 @@ const campaignDetail = {
     awarenessPath: '지인 소개',
     notes: '1231231212123123',
     pipeLine: {
-        chance: { date: formatDate(new Date(baseDate.getFullYear(), 2, 20)) },
-        listUp: { date: formatDate(new Date(baseDate.getFullYear(), 2, 23)) },
-        proposal: { date: formatDate(new Date(baseDate.getFullYear(), 2, 25)) },
-        negotiation: { date: formatDate(new Date(baseDate.getFullYear(), 2, 27)) },
+        chance: { id: 1, date: formatDate(new Date(baseDate.getFullYear(), 2, 20)) },
+        listUp: { id: 2, date: formatDate(new Date(baseDate.getFullYear(), 2, 23)) },
+        proposal: { id: 1, date: formatDate(new Date(baseDate.getFullYear(), 2, 25)) },
+        negotiation: { id: 1, date: formatDate(new Date(baseDate.getFullYear(), 2, 27)) },
     },
     influencerId: 1,
 };
@@ -220,15 +212,27 @@ const userList = [
     { id: 9, name: '김정우' },
 ];
 
+const userListNameAndEmail = [
+    { id: 1, name: '차은우', email: 'lsj9057@daum.net' },
+    { id: 2, name: '아이유', email: 'lsj9057@namver.com,' },
+    { id: 3, name: '김수현', email: 'lsj9057@google.com' },
+    { id: 4, name: '장원영', email: 'lsj9057@nate.com' },
+    { id: 5, name: '전정국', email: 'dfdfd@naver.com' },
+    { id: 6, name: '박지민', email: 'fdsfasdfads@daum.net' },
+    { id: 7, name: '박보검', email: 'lsjdafdd9057@daum.net' },
+    { id: 8, name: '손흥민', email: 'lsjssfdsd9057@daum.net' },
+    { id: 9, name: '김정우', email: 'lsdfasdfj9057@daum.net' },
+];
+
 const clientCompanyList = [
-    { id: 1, name: 'UVW 뷰티' },
-    { id: 2, name: 'XYZ 패션' },
-    { id: 3, name: 'ABC 전자' },
-    { id: 4, name: '카카오 엔터' },
-    { id: 5, name: 'CJ ENM' },
-    { id: 6, name: '네이버 쇼핑' },
-    { id: 7, name: '하이마트' },
-    { id: 8, name: '삼성전자' },
+    { id: 1, name: 'UVW 뷰티', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 2, name: 'XYZ 패션', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 3, name: 'ABC 전자', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 4, name: '카카오 엔터', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 5, name: 'CJ ENM', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 6, name: '네이버 쇼핑', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 7, name: '하이마트', telephone: '02-123-4567', createdAt: '2025-06-08' },
+    { id: 8, name: '삼성전자', telephone: '02-123-4567', createdAt: '2025-06-08' },
 ];
 
 const clientManagerList = [
@@ -1556,7 +1560,27 @@ const ListUpList = Array.from({ length: 50 }, (_, index) => {
         presentDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
     };
 });
+const campaignResultList = Array.from({ length: 50 }, (_, index) => {
+    baseDate.setFullYear(baseDate.getFullYear() + index); // 기준 연도 설정
 
+    return {
+        id: index + 1,
+        title: `김치 탕후루 캠페인 ${index + 1}`,
+        clientCompany: `Company ${index + 1}`,
+        clientManagerName: `김동영${index + 1}`,
+        clientManagerPosition: '팀장',
+        influencers: [
+            { id: 201, name: '나연' },
+            { id: 202, name: '정국' },
+        ],
+        price: index * 1000,
+        startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
+        endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
+        userName: '정재현',
+        userPosition: '과장',
+        productName: `Product ${index + 1}`,
+    };
+});
 const revenueDetail = {
     title: '[2차] UVW 뷰티 디바이스 안멸성 캠페인 인플루언서 매출',
     requestDate: '2025-06-05',
@@ -1595,6 +1619,37 @@ const revenueDetail = {
     showInfluencerContentInput: true,
 };
 
+const eventList = [
+    {
+        title: '워크샵',
+        scheduleDate: '2025-06-19',
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        hexCode: '#f87171',
+    },
+    {
+        title: '휴가',
+        scheduleDate: '2025-06-19',
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        hexCode: '#f97316',
+    },
+    {
+      title: '출장',
+      scheduleDate: '2025-06-19',
+      startTime: '09:00:00',
+      endTime: '18:00:00',
+      hexCode: '#FFD863',
+    },
+    {
+      title: '외출',
+      scheduleDate: '2025-06-19',
+      startTime: '09:00:00',
+      endTime: '18:00:00',
+      hexCode: '#83D4FF',
+    },
+];
+
 const CampaignHandler = [
     http.get('/api/v1/campaign', async ({ request }) => {
         const url = new URL(request.url);
@@ -1611,6 +1666,28 @@ const CampaignHandler = [
                 page,
                 size,
                 total: campaignList.length,
+            },
+            {
+                status: 200,
+                headers: { 'Cache-Control': 'no-store' },
+            },
+        );
+    }),
+    http.get('/api/v1/campaign/dashboard', async ({ request }) => {
+        const url = new URL(request.url);
+        const page = parseInt(url.searchParams.get('page')) || 1;
+        const size = parseInt(url.searchParams.get('size')) || 10;
+
+        const startIndex = (page - 1) * size;
+        const endIndex = startIndex + size;
+        const pagedData = campaignResultList.slice(startIndex, endIndex);
+
+        return HttpResponse.json(
+            {
+                data: pagedData,
+                page,
+                size,
+                total: campaignResultList.length,
             },
             {
                 status: 200,
@@ -1663,6 +1740,12 @@ const CampaignHandler = [
     http.get('/api/v1/popup/user', async () => {
         return HttpResponse.json(
             { data: userList },
+            { status: 200, headers: { 'Cache-Control': 'no-store' } },
+        );
+    }),
+    http.get('/api/v1/popup/user/email', async () => {
+        return HttpResponse.json(
+            { data: userListNameAndEmail },
             { status: 200, headers: { 'Cache-Control': 'no-store' } },
         );
     }),
