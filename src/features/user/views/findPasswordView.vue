@@ -21,29 +21,37 @@ const handleFindPassword = () => {
     const domain = email.value.split('@')[1]
     window.open(`https://${domain}`, '_blank')
 }
+
+const backToLogin = () => {
+    router.push('/login')
+}
+
 </script>
 
 <template>
     <div class = "findPassword-layout bg-[#f5f7fa]">
         <MainLogo />
 
-        <div class = "card-style">
-            <div class="title text-center mb-8">
-                <h1 class="text-[40px] font-semibold mb-2">비밀번호 찾기</h1>
-            </div>
+      <div class = "card-style">
+        <div class="title text-center mb-8">
+          <h1 class="text-[36px] font-bold mb-3">비밀번호 찾기</h1>
+        </div>
 
-            <form class="login-form flex flex-col" @submit.prevent="handleFindPassword">
-                <label class="input-box-label text-click text-md pt-1 pb-1">사원코드</label>
-                <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
-                <label class="input-box-label text-click text-md pt-6 pb-1">이메일</label>
-                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
-
-                <button class="mt-19 bg-[#A8C1DA] text-white w-full py-4 text-md rounded">
-                    비밀번호 찾기
+            <form class="findPassword-form flex flex-col" @submit.prevent="handleFindPassword">
+                <label class="input-box-label text-click text-md py-1">사원코드</label>
+                <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
+                <label class="input-box-label text-click text-md pt-5.5 pb-1">이메일</label>
+                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 mb-6 w-full" />
+              <button class="btn-create w-full">
+                비밀번호 찾기
+              </button>
+              <div class="mt-2">
+                <button class="btn-delete w-full"
+                        @click = "backToLogin">
+                  뒤로가기
                 </button>
+              </div>
             </form>
-            <div>
-            </div>
         </div>
     </div>
 
