@@ -529,7 +529,8 @@ function selectCampaign(id) {
                 <div
                     v-for="(employee, index) in employeeList"
                     :key="index"
-                    class="border rounded-lg p-4 flex items-center justify-between shadow-sm"
+                    class="rounded-lg p-4 flex items-center justify-between shadow-sm border"
+                    style="border-color: var(--color-gray-medium);"
                 >
                     <div>
                         <!-- 사원 목록에서 이름 옆 -->
