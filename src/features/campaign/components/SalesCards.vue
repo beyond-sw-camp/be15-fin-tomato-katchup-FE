@@ -83,7 +83,7 @@
                 <div class="truncate">광고단가 : {{ formatMoney(managementOption.adPrice) }}</div>
             </template>
 
-            <template v-else-if="pageType === 'listup'">
+            <template v-else-if="pageType === 'listup' || pageType === 'campaignResult'">
                 <!-- 상품명 (우측 시작) -->
                 <div class="flex w-full max-w-[60%] justify-start">
                     <div class="truncate text-right">{{ managementOption.productName ?? '-' }}</div>

@@ -1548,6 +1548,10 @@ const campaignResultList = Array.from({ length: 50 }, (_, index) => {
         clientCompany: `Company ${index + 1}`,
         clientManagerName: `김동영${index + 1}`,
         clientManagerPosition: '팀장',
+        influencers: [
+            { id: 201, name: '나연' },
+            { id: 202, name: '정국' },
+        ],
         price: index * 1000,
         startDate: formatDate(new Date(baseDate.getFullYear() + 2, 2, 20)),
         endDate: formatDate(new Date(baseDate.getFullYear() + 2, 3, 20)),
