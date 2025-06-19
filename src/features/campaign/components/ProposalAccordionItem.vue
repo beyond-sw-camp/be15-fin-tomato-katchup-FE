@@ -1,6 +1,6 @@
 <script setup>
 import kittyImg from '@/assets/images/mock/kitty.png';
-defineProps({
+const { influencer, isEditing } = defineProps({
     influencer: Object,
     isEditing: Boolean,
 });
@@ -8,11 +8,6 @@ defineProps({
 const platformLabels = {
     youtube: '유튜브',
     instagram: '인스타그램',
-};
-
-const platformStyles = {
-    youtube: 'bg-[#FF0000] text-white',
-    instagram: 'text-white',
 };
 
 const platformBg = {
