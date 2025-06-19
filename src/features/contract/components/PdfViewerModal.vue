@@ -23,6 +23,5 @@ const props = defineProps({
   contractId: Number
 })
 
-// PDF는 테스트를 위해 동일한 PDF가 보여집니다.
 const pdfUrl = computed(() => `/example.pdf`)
 </script>
