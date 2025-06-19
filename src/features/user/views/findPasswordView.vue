@@ -27,18 +27,26 @@ const handleFindPassword = () => {
     <div class = "findPassword-layout bg-[#f5f7fa]">
         <MainLogo />
 
-        <div class = "card-style">
-            <div class="title text-center mb-8">
-                <h1 class="text-[40px] font-semibold mb-2">비밀번호 찾기</h1>
-            </div>
+      <div class = "card-style">
+        <div class="title text-center mb-8">
+          <h1 class="text-[36px] font-bold mb-3">비밀번호 찾기</h1>
+        </div>
 
-            <form class="login-form flex flex-col" @submit.prevent="handleFindPassword">
-                <label class="input-box-label text-click text-md pt-1 pb-1">사원코드</label>
-                <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
-                <label class="input-box-label text-click text-md pt-6 pb-1">이메일</label>
-                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-6 py-4" />
+            <form class="findPassword-form flex flex-col" @submit.prevent="handleFindPassword">
+                <label class="input-box-label text-click text-md py-1">사원코드</label>
+                <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
+                <label class="input-box-label text-click text-md pt-5.5 pb-1">이메일</label>
+                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
 
-                <button class="mt-19 bg-[#A8C1DA] text-white w-full py-4 text-md rounded">
+              <div class="flex justify-between mt-2 text-[1rem] pt-0.5 pb-5.5 text-gray-medium">
+                <RouterLink
+                  to="login"
+                  class="ml-94.5 pb-1 text-[0.9rem] text-gray-400 whitespace-nowrap hover:underline"
+                >
+                  뒤로
+                </RouterLink>
+              </div>
+                <button class="bg-[#A8C1DA] text-white px-5 py-3 mb-5 text-md rounded w-full">
                     비밀번호 찾기
                 </button>
             </form>
