@@ -195,7 +195,7 @@ function cancelAddBig() {
             <template v-if="selectedSmall">
               <div class="flex items-center gap-4 mb-4">
                 <div class="flex items-center gap-2">
-                  <label class="font-semibold whitespace-nowrap">이름</label>
+                  <label class="font-semibold whitespace-nowrap">계약서명</label>
                   <input v-model="selectedSmall.name" class="border rounded px-2 py-1 text-sm w-[150px]" readonly />
                 </div>
                 <div class="flex items-center gap-2">

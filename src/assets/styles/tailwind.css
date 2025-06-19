@@ -176,15 +176,14 @@
 
   .editor-wrapper {
     background: #f9f9f9;
-    border: 1px solid black;
+    border: 1px solid gray;
     border-radius: 6px;
     margin-bottom: 20px;
   }
 
   #editor {
+    @apply w-full px-3 py-2 rounded-sm border border-gray-dark hover:border-black focus:border-black;
     min-height: 400px;
-    padding: 1px;
-    border: 1px solid black; /* 검정 테두리 */
     border-radius: 6px;
   }
 
