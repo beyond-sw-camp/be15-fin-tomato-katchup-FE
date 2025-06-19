@@ -87,22 +87,22 @@
   /* === 버튼 === */
   /* 등록 버튼*/
   .btn-create {
-    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition cursor-pointer
   }
 
   /* 삭제 버튼 */
   .btn-delete {
-    @apply px-4 py-2 bg-gray-medium text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+    @apply px-4 py-2 bg-gray-medium text-white rounded-lg hover:brightness-95 active:brightness-90 transition cursor-pointer
   }
 
   /* 수정 버튼 */
   .btn-edit {
-    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition
+    @apply px-4 py-2 mr-2 bg-btn-gray text-white rounded-lg hover:brightness-95 active:brightness-90 transition cursor-pointer
   }
 
   /* 팝업 여는 버튼 */
-  .btn-open-popup{
-    @apply px-3 py-1 bg-btn-open-popup text-white rounded hover:brightness-95 active:brightness-90 transition
+  .btn-open-popup {
+    @apply px-3 py-1 bg-btn-open-popup text-white rounded hover:brightness-95 active:brightness-90 transition cursor-pointer;
   }
 
   /* === 페이지 상단 타이틀 === */
@@ -140,7 +140,8 @@
   /* === Dashboard === */
   /* 그래프 영역 */
   .dashboard-section {
-    @apply bg-white rounded-2xl shadow p-7 px-6 mb-10 items-center justify-center
+    @apply bg-white rounded-2xl shadow p-7 px-6 mb-7 items-center justify-center;
+    box-shadow: 0px 4px 20px rgba(124, 124, 124, 0.25);
   }
 
   /* 그래프 제목 */

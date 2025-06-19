@@ -1,5 +1,5 @@
 <template>
-    <div class="custom-sidebar mr-4">
+    <div class="custom-sidebar">
         <div class="flex items-center mb-4">
             <span class="text-sm font-bold mr-2">의견</span>
             <span
