@@ -21,6 +21,11 @@ const handleFindPassword = () => {
     const domain = email.value.split('@')[1]
     window.open(`https://${domain}`, '_blank')
 }
+
+const backToLogin = () => {
+    router.push('/login')
+}
+
 </script>
 
 <template>
@@ -36,18 +41,14 @@ const handleFindPassword = () => {
                 <label class="input-box-label text-click text-md py-1">사원코드</label>
                 <input v-model="emp_number" type="text" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
                 <label class="input-box-label text-click text-md pt-5.5 pb-1">이메일</label>
-                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 w-full" />
+                <input v-model="email" type="email" class="border border-[#D9D9D9] rounded-[10px] px-5 py-3 mb-6 w-full" />
 
-              <div class="flex justify-between mt-2 text-[1rem] pt-0.5 pb-5.5 text-gray-medium">
-                <RouterLink
-                  to="login"
-                  class="ml-94.5 pb-1 text-[0.9rem] text-gray-400 whitespace-nowrap hover:underline"
-                >
-                  뒤로
-                </RouterLink>
-              </div>
-                <button class="bg-[#A8C1DA] text-white px-5 py-3 mb-5 text-md rounded w-full">
+                <button class="bg-[#A8C1DA] text-white px-5 py-3 mb-1.5 text-md rounded w-full">
                     비밀번호 찾기
+                </button>
+                <button class="bg-[#A8C1DA] text-white px-5 py-3 text-md rounded w-full"
+                @click = "backToLogin">
+                    뒤로가기
                 </button>
             </form>
             <div>
